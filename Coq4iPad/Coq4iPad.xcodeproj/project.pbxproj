@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		591C32CF16BE1C53007BA5E9 /* prims.c in Sources */ = {isa = PBXBuildFile; fileRef = 591C32CE16BE1C53007BA5E9 /* prims.c */; };
+		591C32E116BE23D2007BA5E9 /* coq_fix_code.c in Sources */ = {isa = PBXBuildFile; fileRef = 591C32D416BE23D2007BA5E9 /* coq_fix_code.c */; };
+		591C32E216BE23D2007BA5E9 /* coq_interp.c in Sources */ = {isa = PBXBuildFile; fileRef = 591C32D816BE23D2007BA5E9 /* coq_interp.c */; };
+		591C32E316BE23D2007BA5E9 /* coq_memory.c in Sources */ = {isa = PBXBuildFile; fileRef = 591C32DA16BE23D2007BA5E9 /* coq_memory.c */; };
+		591C32E416BE23D2007BA5E9 /* coq_values.c in Sources */ = {isa = PBXBuildFile; fileRef = 591C32DC16BE23D2007BA5E9 /* coq_values.c */; };
 		59F8A7F616BDE9E00096665F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59F8A7F516BDE9E00096665F /* UIKit.framework */; };
 		59F8A7F816BDE9E00096665F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59F8A7F716BDE9E00096665F /* Foundation.framework */; };
 		59F8A7FA16BDE9E00096665F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59F8A7F916BDE9E00096665F /* CoreGraphics.framework */; };
@@ -41,7 +45,6 @@
 		59F8A8C616BE16000096665F /* gc_ctrl.c in Sources */ = {isa = PBXBuildFile; fileRef = 59F8A84516BE16000096665F /* gc_ctrl.c */; };
 		59F8A8C716BE16000096665F /* globroots.c in Sources */ = {isa = PBXBuildFile; fileRef = 59F8A84716BE16000096665F /* globroots.c */; };
 		59F8A8C816BE16000096665F /* hash.c in Sources */ = {isa = PBXBuildFile; fileRef = 59F8A84916BE16000096665F /* hash.c */; };
-		59F8A8C916BE16000096665F /* instrtrace.c in Sources */ = {isa = PBXBuildFile; fileRef = 59F8A84B16BE16000096665F /* instrtrace.c */; };
 		59F8A8CA16BE16000096665F /* intern.c in Sources */ = {isa = PBXBuildFile; fileRef = 59F8A85116BE16000096665F /* intern.c */; };
 		59F8A8CB16BE16000096665F /* interp.c in Sources */ = {isa = PBXBuildFile; fileRef = 59F8A85216BE16000096665F /* interp.c */; };
 		59F8A8CC16BE16000096665F /* ints.c in Sources */ = {isa = PBXBuildFile; fileRef = 59F8A85516BE16000096665F /* ints.c */; };
@@ -74,6 +77,20 @@
 		591C32CE16BE1C53007BA5E9 /* prims.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = prims.c; sourceTree = "<group>"; };
 		591C32D016BE1C61007BA5E9 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 		591C32D116BE1C75007BA5E9 /* opnames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opnames.h; sourceTree = "<group>"; };
+		591C32D416BE23D2007BA5E9 /* coq_fix_code.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = coq_fix_code.c; sourceTree = "<group>"; };
+		591C32D516BE23D2007BA5E9 /* coq_fix_code.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = coq_fix_code.h; sourceTree = "<group>"; };
+		591C32D616BE23D2007BA5E9 /* coq_gc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = coq_gc.h; sourceTree = "<group>"; };
+		591C32D716BE23D2007BA5E9 /* coq_instruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = coq_instruct.h; sourceTree = "<group>"; };
+		591C32D816BE23D2007BA5E9 /* coq_interp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = coq_interp.c; sourceTree = "<group>"; };
+		591C32D916BE23D2007BA5E9 /* coq_interp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = coq_interp.h; sourceTree = "<group>"; };
+		591C32DA16BE23D2007BA5E9 /* coq_memory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = coq_memory.c; sourceTree = "<group>"; };
+		591C32DB16BE23D2007BA5E9 /* coq_memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = coq_memory.h; sourceTree = "<group>"; };
+		591C32DC16BE23D2007BA5E9 /* coq_values.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = coq_values.c; sourceTree = "<group>"; };
+		591C32DD16BE23D2007BA5E9 /* coq_values.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = coq_values.h; sourceTree = "<group>"; };
+		591C32DE16BE23D2007BA5E9 /* int64_emul.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = int64_emul.h; sourceTree = "<group>"; };
+		591C32DF16BE23D2007BA5E9 /* int64_native.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = int64_native.h; sourceTree = "<group>"; };
+		591C32E716BE49A4007BA5E9 /* jumptbl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jumptbl.h; sourceTree = "<group>"; };
+		591C32E916BE4A75007BA5E9 /* coq_jumptbl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = coq_jumptbl.h; sourceTree = "<group>"; };
 		59F8A7F216BDE9E00096665F /* Coq4iPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coq4iPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59F8A7F516BDE9E00096665F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		59F8A7F716BDE9E00096665F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -132,7 +149,6 @@
 		59F8A84816BE16000096665F /* globroots.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = globroots.h; sourceTree = "<group>"; };
 		59F8A84916BE16000096665F /* hash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hash.c; sourceTree = "<group>"; };
 		59F8A84A16BE16000096665F /* hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hash.h; sourceTree = "<group>"; };
-		59F8A84B16BE16000096665F /* instrtrace.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = instrtrace.c; sourceTree = "<group>"; };
 		59F8A84C16BE16000096665F /* instrtrace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = instrtrace.h; sourceTree = "<group>"; };
 		59F8A84D16BE16000096665F /* instruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = instruct.h; sourceTree = "<group>"; };
 		59F8A84E16BE16000096665F /* int64_emul.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = int64_emul.h; sourceTree = "<group>"; };
@@ -203,9 +219,47 @@
 		591C32D216BE2269007BA5E9 /* auto-generated */ = {
 			isa = PBXGroup;
 			children = (
+				591C32E716BE49A4007BA5E9 /* jumptbl.h */,
 				591C32D116BE1C75007BA5E9 /* opnames.h */,
 				591C32CE16BE1C53007BA5E9 /* prims.c */,
 				591C32D016BE1C61007BA5E9 /* version.h */,
+			);
+			name = "auto-generated";
+			sourceTree = "<group>";
+		};
+		591C32D316BE23D2007BA5E9 /* byterun */ = {
+			isa = PBXGroup;
+			children = (
+				591C32E816BE4A6B007BA5E9 /* auto-generated */,
+				591C32D416BE23D2007BA5E9 /* coq_fix_code.c */,
+				591C32D516BE23D2007BA5E9 /* coq_fix_code.h */,
+				591C32D616BE23D2007BA5E9 /* coq_gc.h */,
+				591C32D716BE23D2007BA5E9 /* coq_instruct.h */,
+				591C32D816BE23D2007BA5E9 /* coq_interp.c */,
+				591C32D916BE23D2007BA5E9 /* coq_interp.h */,
+				591C32DA16BE23D2007BA5E9 /* coq_memory.c */,
+				591C32DB16BE23D2007BA5E9 /* coq_memory.h */,
+				591C32DC16BE23D2007BA5E9 /* coq_values.c */,
+				591C32DD16BE23D2007BA5E9 /* coq_values.h */,
+				591C32DE16BE23D2007BA5E9 /* int64_emul.h */,
+				591C32DF16BE23D2007BA5E9 /* int64_native.h */,
+			);
+			name = byterun;
+			path = "../../coq-src/kernel/byterun";
+			sourceTree = "<group>";
+		};
+		591C32E616BE23D8007BA5E9 /* coq */ = {
+			isa = PBXGroup;
+			children = (
+				591C32D316BE23D2007BA5E9 /* byterun */,
+			);
+			name = coq;
+			sourceTree = "<group>";
+		};
+		591C32E816BE4A6B007BA5E9 /* auto-generated */ = {
+			isa = PBXGroup;
+			children = (
+				591C32E916BE4A75007BA5E9 /* coq_jumptbl.h */,
 			);
 			name = "auto-generated";
 			sourceTree = "<group>";
@@ -241,6 +295,7 @@
 		59F8A7FD16BDE9E00096665F /* Coq4iPad */ = {
 			isa = PBXGroup;
 			children = (
+				591C32E616BE23D8007BA5E9 /* coq */,
 				59F8A91216BE16050096665F /* ocaml */,
 				59F8A80616BDE9E00096665F /* CQAppDelegate.h */,
 				59F8A80716BDE9E00096665F /* CQAppDelegate.m */,
@@ -311,7 +366,6 @@
 				59F8A84816BE16000096665F /* globroots.h */,
 				59F8A84916BE16000096665F /* hash.c */,
 				59F8A84A16BE16000096665F /* hash.h */,
-				59F8A84B16BE16000096665F /* instrtrace.c */,
 				59F8A84C16BE16000096665F /* instrtrace.h */,
 				59F8A84D16BE16000096665F /* instruct.h */,
 				59F8A84E16BE16000096665F /* int64_emul.h */,
@@ -393,6 +447,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 59F8A82016BDE9E00096665F /* Build configuration list for PBXNativeTarget "Coq4iPad" */;
 			buildPhases = (
+				591C32EA16BE4B31007BA5E9 /* ShellScript */,
 				59F8A7EE16BDE9E00096665F /* Sources */,
 				59F8A7EF16BDE9E00096665F /* Frameworks */,
 				59F8A7F016BDE9E00096665F /* Resources */,
@@ -449,6 +504,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		591C32EA16BE4B31007BA5E9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = ../prepare_coq.sh;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		59F8A7EE16BDE9E00096665F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -477,7 +548,6 @@
 				59F8A8C616BE16000096665F /* gc_ctrl.c in Sources */,
 				59F8A8C716BE16000096665F /* globroots.c in Sources */,
 				59F8A8C816BE16000096665F /* hash.c in Sources */,
-				59F8A8C916BE16000096665F /* instrtrace.c in Sources */,
 				59F8A8CA16BE16000096665F /* intern.c in Sources */,
 				59F8A8CB16BE16000096665F /* interp.c in Sources */,
 				59F8A8CC16BE16000096665F /* ints.c in Sources */,
@@ -503,6 +573,10 @@
 				59F8A8E416BE16000096665F /* unix.c in Sources */,
 				59F8A8E516BE16000096665F /* weak.c in Sources */,
 				591C32CF16BE1C53007BA5E9 /* prims.c in Sources */,
+				591C32E116BE23D2007BA5E9 /* coq_fix_code.c in Sources */,
+				591C32E216BE23D2007BA5E9 /* coq_interp.c in Sources */,
+				591C32E316BE23D2007BA5E9 /* coq_memory.c in Sources */,
+				591C32E416BE23D2007BA5E9 /* coq_values.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,7 +635,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "../ocaml-src/config";
+				HEADER_SEARCH_PATHS = (
+					Coq4iPad,
+					"../ocaml-src/config",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -587,7 +664,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "../ocaml-src/config";
+				HEADER_SEARCH_PATHS = (
+					Coq4iPad,
+					"../ocaml-src/config",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
@@ -637,6 +717,7 @@
 				59F8A82216BDE9E00096665F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
