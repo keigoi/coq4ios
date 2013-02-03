@@ -3,4 +3,4 @@
 	url = https://github.com/coq/coq.git
 [submodule "ocaml-src"]
 	path = ocaml-src
-	url = https://github.com/ocaml/ocaml.git
+	url = git@github.com:keigoi/ocaml.git
