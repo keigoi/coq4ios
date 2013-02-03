@@ -1,0 +1,3 @@
+[submodule "coq-src"]
+	path = coq-src
+	url = https://github.com/coq/coq.git
