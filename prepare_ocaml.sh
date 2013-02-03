@@ -1,9 +1,18 @@
 #!/bin/sh
+set -e
+
 cd `dirname $0`
 TMP=`pwd`/tmp
 CFG=`pwd`/ocaml-config
 
 mkdir -p $TMP
+
+#########################################################################
+## Enumerate symbol table (OCaml's tools/primreq is required in PATH)
+#########################################################################
+#if [ ! -f $CFG/primitives-coqtop ] || [ coqlib.cma -nt $CFG/primitives-coqtop ]; then
+#  primreq coqlib.cma > $CFG/primitives-coqtop
+#fi
 
 #######################
 ## Generate prims.c
@@ -14,7 +23,7 @@ PRIMS="alloc.c array.c compare.c extern.c floats.c gc_ctrl.c hash.c \
   signals.c str.c sys.c terminfo.c callback.c weak.c finalise.c stacks.c \
   dynlink.c backtrace.c"
 
-if [ ! -f ../tmp/prims.c ]; then
+if [ ! -f $TMP/prims.c ]; then
   cd ocaml-src/byterun
   sed -n -e "s/CAMLprim value \([a-z0-9_][a-z0-9_]*\).*/\1/p" \
 	    $PRIMS > $TMP/primitives
