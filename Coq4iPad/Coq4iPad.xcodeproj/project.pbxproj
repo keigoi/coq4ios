@@ -114,6 +114,8 @@
 		591C347A16BEA75E007BA5E9 /* wait.c in Sources */ = {isa = PBXBuildFile; fileRef = 591C33BE16BEA75E007BA5E9 /* wait.c */; };
 		591C347B16BEA75E007BA5E9 /* write.c in Sources */ = {isa = PBXBuildFile; fileRef = 591C33BF16BEA75E007BA5E9 /* write.c */; };
 		591C348516BEC3B1007BA5E9 /* prims.c in Sources */ = {isa = PBXBuildFile; fileRef = 591C348316BEC3B1007BA5E9 /* prims.c */; };
+		591C348B16BFB93E007BA5E9 /* coqlib.byte in Resources */ = {isa = PBXBuildFile; fileRef = 591C348A16BFB93E007BA5E9 /* coqlib.byte */; };
+		591C348D16BFBC42007BA5E9 /* coq-8.4pl1 in Resources */ = {isa = PBXBuildFile; fileRef = 591C348C16BFBC42007BA5E9 /* coq-8.4pl1 */; };
 		59F8A7F616BDE9E00096665F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59F8A7F516BDE9E00096665F /* UIKit.framework */; };
 		59F8A7F816BDE9E00096665F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59F8A7F716BDE9E00096665F /* Foundation.framework */; };
 		59F8A7FA16BDE9E00096665F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59F8A7F916BDE9E00096665F /* CoreGraphics.framework */; };
@@ -303,6 +305,8 @@
 		591C348216BEC3B1007BA5E9 /* jumptbl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jumptbl.h; path = ../../tmp/jumptbl.h; sourceTree = "<group>"; };
 		591C348316BEC3B1007BA5E9 /* prims.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = prims.c; path = ../../tmp/prims.c; sourceTree = "<group>"; };
 		591C348416BEC3B1007BA5E9 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = version.h; path = ../../tmp/version.h; sourceTree = "<group>"; };
+		591C348A16BFB93E007BA5E9 /* coqlib.byte */ = {isa = PBXFileReference; lastKnownFileType = file; name = coqlib.byte; path = ../../coqlib.byte; sourceTree = "<group>"; };
+		591C348C16BFBC42007BA5E9 /* coq-8.4pl1 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "coq-8.4pl1"; sourceTree = "<group>"; };
 		59F8A7F216BDE9E00096665F /* Coq4iPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coq4iPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59F8A7F516BDE9E00096665F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		59F8A7F716BDE9E00096665F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -699,6 +703,8 @@
 		59F8A7FE16BDE9E00096665F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				591C348C16BFBC42007BA5E9 /* coq-8.4pl1 */,
+				591C348A16BFB93E007BA5E9 /* coqlib.byte */,
 				59F8A7FF16BDE9E00096665F /* Coq4iPad-Info.plist */,
 				59F8A80016BDE9E00096665F /* InfoPlist.strings */,
 				59F8A80316BDE9E00096665F /* main.m */,
@@ -875,6 +881,8 @@
 				59F8A80E16BDE9E00096665F /* Default-568h@2x.png in Resources */,
 				59F8A81A16BDE9E00096665F /* CQMainViewController.xib in Resources */,
 				59F8A81D16BDE9E00096665F /* CQFlipsideViewController.xib in Resources */,
+				591C348B16BFB93E007BA5E9 /* coqlib.byte in Resources */,
+				591C348D16BFBC42007BA5E9 /* coq-8.4pl1 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
