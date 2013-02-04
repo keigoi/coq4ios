@@ -7,9 +7,9 @@ CFG=`pwd`/ocaml-config
 
 mkdir -p $TMP
 
-#########################################################################
-## Enumerate symbol table (OCaml's tools/primreq is required in PATH)
-#########################################################################
+###################################################################################
+## Enumerate primitives used in Coq (OCaml's tools/primreq is required in PATH)
+###################################################################################
 #if [ ! -f $CFG/primitives-coqtop ] || [ coqlib.cma -nt $CFG/primitives-coqtop ]; then
 #  primreq coqlib.cma > $CFG/primitives-coqtop
 #fi
@@ -23,24 +23,21 @@ PRIMS="alloc.c array.c compare.c extern.c floats.c gc_ctrl.c hash.c \
   signals.c str.c sys.c terminfo.c callback.c weak.c finalise.c stacks.c \
   dynlink.c backtrace.c"
 
-if [ ! -f $TMP/prims.c ]; then
-  cd ocaml-src/byterun
-  sed -n -e "s/CAMLprim value \([a-z0-9_][a-z0-9_]*\).*/\1/p" \
-	    $PRIMS > $TMP/primitives
-  cd ../..
-  cat $TMP/primitives $CFG/primitives-coqtop |sort -u >$TMP/primitives-all
+cd ocaml-src/byterun
+sed -n -e "s/CAMLprim value \([a-z0-9_][a-z0-9_]*\).*/\1/p" \
+  $PRIMS > $TMP/primitives
+cd ../..
+cat $TMP/primitives $CFG/primitives-coqtop |sort -u >$TMP/primitives-all
 
-  (echo '#include "mlvalues.h"'; \
-    echo '#include "prims.h"'; \
-    sed -e 's/.*/extern value &();/' $TMP/primitives-all; \
-    echo 'c_primitive caml_builtin_cprim[] = {'; \
-    sed -e 's/.*/	&,/' $TMP/primitives-all; \
-    echo '	 0 };'; \
-    echo 'char * caml_names_of_builtin_cprim[] = {'; \
-    sed -e 's/.*/	"&",/' $TMP/primitives-all; \
-    echo '	 0 };') > $TMP/prims.c
-
-fi
+(echo '#include "mlvalues.h"'; \
+  echo '#include "prims.h"'; \
+  sed -e 's/.*/extern value &();/' $TMP/primitives-all; \
+  echo 'c_primitive caml_builtin_cprim[] = {'; \
+  sed -e 's/.*/	&,/' $TMP/primitives-all; \
+  echo '	 0 };'; \
+  echo 'char * caml_names_of_builtin_cprim[] = {'; \
+  sed -e 's/.*/	"&",/' $TMP/primitives-all; \
+  echo '	 0 };') > $TMP/prims.c
 
 
 #########################
