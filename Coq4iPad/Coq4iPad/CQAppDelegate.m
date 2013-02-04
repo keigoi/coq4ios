@@ -10,6 +10,8 @@
 
 #import "CQMainViewController.h"
 
+#import "CQWrapper.h"
+
 @implementation CQAppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -24,6 +26,13 @@
     self.window.rootViewController = self.mainViewController;
     self.mainViewController.managedObjectContext = self.managedObjectContext;
     [self.window makeKeyAndVisible];
+    
+    [CQWrapper start];
+    NSMutableAttributedString* str = [[NSMutableAttributedString alloc] initWithString:@"abc"];
+    [CQWrapper parse:str match:^(int x, NSRange range) {
+        NSLog(@"%d %d %d", x, range.location, range.length);
+    }];
+    
     return YES;
 }
 

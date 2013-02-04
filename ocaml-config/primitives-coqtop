@@ -12,6 +12,7 @@ caml_get_section_table
 caml_invoke_traced_function
 caml_ml_open_descriptor_in
 caml_ml_open_descriptor_out
+caml_parse_matched
 caml_realloc_global
 caml_register_code_fragment
 caml_reify_bytecode

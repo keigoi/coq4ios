@@ -116,6 +116,10 @@
 		591C348516BEC3B1007BA5E9 /* prims.c in Sources */ = {isa = PBXBuildFile; fileRef = 591C348316BEC3B1007BA5E9 /* prims.c */; };
 		591C348B16BFB93E007BA5E9 /* coqlib.byte in Resources */ = {isa = PBXBuildFile; fileRef = 591C348A16BFB93E007BA5E9 /* coqlib.byte */; };
 		591C348D16BFBC42007BA5E9 /* coq-8.4pl1 in Resources */ = {isa = PBXBuildFile; fileRef = 591C348C16BFBC42007BA5E9 /* coq-8.4pl1 */; };
+		591C349216BFC66A007BA5E9 /* CQUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C349116BFC667007BA5E9 /* CQUtil.m */; };
+		591C349416BFCB8B007BA5E9 /* CQ_stubs.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C349316BFCB8A007BA5E9 /* CQ_stubs.m */; };
+		591C349816BFCC25007BA5E9 /* CQ_convert.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C349716BFCC25007BA5E9 /* CQ_convert.m */; };
+		591C349B16BFD04A007BA5E9 /* CQWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C349A16BFD04A007BA5E9 /* CQWrapper.m */; };
 		59F8A7F616BDE9E00096665F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59F8A7F516BDE9E00096665F /* UIKit.framework */; };
 		59F8A7F816BDE9E00096665F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59F8A7F716BDE9E00096665F /* Foundation.framework */; };
 		59F8A7FA16BDE9E00096665F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59F8A7F916BDE9E00096665F /* CoreGraphics.framework */; };
@@ -307,6 +311,13 @@
 		591C348416BEC3B1007BA5E9 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = version.h; path = ../../tmp/version.h; sourceTree = "<group>"; };
 		591C348A16BFB93E007BA5E9 /* coqlib.byte */ = {isa = PBXFileReference; lastKnownFileType = file; name = coqlib.byte; path = ../../coqlib.byte; sourceTree = "<group>"; };
 		591C348C16BFBC42007BA5E9 /* coq-8.4pl1 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "coq-8.4pl1"; sourceTree = "<group>"; };
+		591C349016BFC665007BA5E9 /* CQUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQUtil.h; sourceTree = "<group>"; };
+		591C349116BFC667007BA5E9 /* CQUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQUtil.m; sourceTree = "<group>"; };
+		591C349316BFCB8A007BA5E9 /* CQ_stubs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQ_stubs.m; sourceTree = "<group>"; };
+		591C349616BFCC25007BA5E9 /* CQ_convert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQ_convert.h; sourceTree = "<group>"; };
+		591C349716BFCC25007BA5E9 /* CQ_convert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQ_convert.m; sourceTree = "<group>"; };
+		591C349916BFD04A007BA5E9 /* CQWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQWrapper.h; sourceTree = "<group>"; };
+		591C349A16BFD04A007BA5E9 /* CQWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQWrapper.m; sourceTree = "<group>"; };
 		59F8A7F216BDE9E00096665F /* Coq4iPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coq4iPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59F8A7F516BDE9E00096665F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		59F8A7F716BDE9E00096665F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -653,6 +664,18 @@
 			name = otherlibs;
 			sourceTree = "<group>";
 		};
+		591C348816BF767C007BA5E9 /* bridge-objc-caml */ = {
+			isa = PBXGroup;
+			children = (
+				591C349916BFD04A007BA5E9 /* CQWrapper.h */,
+				591C349A16BFD04A007BA5E9 /* CQWrapper.m */,
+				591C349316BFCB8A007BA5E9 /* CQ_stubs.m */,
+				591C349616BFCC25007BA5E9 /* CQ_convert.h */,
+				591C349716BFCC25007BA5E9 /* CQ_convert.m */,
+			);
+			name = "bridge-objc-caml";
+			sourceTree = "<group>";
+		};
 		59F8A7E916BDE9E00096665F = {
 			isa = PBXGroup;
 			children = (
@@ -686,12 +709,15 @@
 			children = (
 				591C32E616BE23D8007BA5E9 /* coqrun */,
 				59F8A91216BE16050096665F /* ocaml */,
+				591C348816BF767C007BA5E9 /* bridge-objc-caml */,
 				59F8A80616BDE9E00096665F /* CQAppDelegate.h */,
 				59F8A80716BDE9E00096665F /* CQAppDelegate.m */,
 				59F8A81216BDE9E00096665F /* CQMainViewController.h */,
 				59F8A81316BDE9E00096665F /* CQMainViewController.m */,
 				59F8A81516BDE9E00096665F /* CQFlipsideViewController.h */,
 				59F8A81616BDE9E00096665F /* CQFlipsideViewController.m */,
+				591C349016BFC665007BA5E9 /* CQUtil.h */,
+				591C349116BFC667007BA5E9 /* CQUtil.m */,
 				59F8A81816BDE9E00096665F /* CQMainViewController.xib */,
 				59F8A81B16BDE9E00096665F /* CQFlipsideViewController.xib */,
 				59F8A80F16BDE9E00096665F /* Coq4iPad.xcdatamodeld */,
@@ -1063,6 +1089,10 @@
 				591C347A16BEA75E007BA5E9 /* wait.c in Sources */,
 				591C347B16BEA75E007BA5E9 /* write.c in Sources */,
 				591C348516BEC3B1007BA5E9 /* prims.c in Sources */,
+				591C349216BFC66A007BA5E9 /* CQUtil.m in Sources */,
+				591C349416BFCB8B007BA5E9 /* CQ_stubs.m in Sources */,
+				591C349816BFCC25007BA5E9 /* CQ_convert.m in Sources */,
+				591C349B16BFD04A007BA5E9 /* CQWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
