@@ -1,0 +1,16 @@
+- .vo のサイズが大き過ぎる
+  - 一部のtheoriesだけを入れるようにする? (theories-light: Init, Logic, Arith)
+    実はArithを動かすために
+    Numbers Program Classes Relations Setoids Structures PArith ZArith NArith List 
+    が必要, これだけで約56M
+  - iPad上でコンパイルする
+    対象：各vo.itargetにあるファイル 
+    依存解析 (coqdepに相当) する。 .d ファイルで得られた依存グラフをトポロジカルソートして順にコンパイル？
+    コンパイルは Vernac.compile
+
+- parse: Pcoq.Gram, GramSigについてはcompat.ml4 と　Grammar.S については camlp5
+  Vernacの構文木: Vernacexpr
+  Loc.tの処理：PLoc
+  初期化: Coqtop.init_toplevel (coqcもcoqtopを使っているので結局はこの関数が呼ばれる)
+  例外の処理参考： Toplevel.print_toplevel_error
+  その他eval,compile,loadなど： Vernac
