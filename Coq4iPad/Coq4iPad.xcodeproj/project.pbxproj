@@ -926,7 +926,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "../prepare_ocaml.sh\n../prepare_coq.sh";
+			shellScript = "../prepare_ocaml.sh\n../prepare_coq.sh\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1156,7 +1156,7 @@
 					"Coq4iPad/include-extra/nested/caml",
 					"Coq4iPad/include-extra/nested",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -1186,7 +1186,7 @@
 					"Coq4iPad/include-extra/nested/caml",
 					"Coq4iPad/include-extra/nested",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
