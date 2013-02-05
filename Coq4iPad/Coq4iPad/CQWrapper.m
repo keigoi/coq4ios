@@ -13,9 +13,14 @@
 
 @implementation CQWrapper
 
-+(void) parse:(NSMutableAttributedString*)str match:(void (^)(int, NSRange))match
++(void) parse:(const char*)str match:(void (^)(int, NSRange))match
 {
-    caml_callback2(*caml_named_value("parse"), Val_ObjC_retain(str), Val_ObjC_retain(match));
+    caml_callback2(*caml_named_value("parse"), caml_copy_string(str), Val_ObjC_retain(match));
+}
+
++(void) eval:(const char*)str
+{
+    caml_callback(*caml_named_value("eval"), caml_copy_string(str));
 }
 
 +(void) start

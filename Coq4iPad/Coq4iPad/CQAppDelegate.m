@@ -28,10 +28,10 @@
     [self.window makeKeyAndVisible];
     
     [CQWrapper start];
-    NSMutableAttributedString* str = [[NSMutableAttributedString alloc] initWithString:@"abc"];
-    [CQWrapper parse:str match:^(int x, NSRange range) {
+    [CQWrapper parse:"Qed." match:^(int x, NSRange range) {
         NSLog(@"%d %d %d", x, range.location, range.length);
     }];
+    [CQWrapper eval:"Require Import Arith."];
     
     return YES;
 }

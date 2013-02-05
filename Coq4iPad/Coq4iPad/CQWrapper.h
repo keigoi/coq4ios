@@ -10,5 +10,6 @@
 
 @interface CQWrapper : NSObject
 +(void) start;
-+(void) parse:(NSMutableAttributedString*)str match:(void (^)(int, NSRange))match;
++(void) parse:(const char*)str match:(void (^)(int, NSRange))match;
++(void) eval:(const char*)str;
 @end
