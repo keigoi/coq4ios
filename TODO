@@ -1,5 +1,4 @@
-- .vo のサイズが大き過ぎる
-  - 一部のtheoriesだけを入れるようにする? (theories-light: Init, Logic, Arith)
+- .vo のサイズが大き過ぎ  - 一部のtheoriesだけを入れるようにする? (theories-light: Init, Logic, Arith)
     実はArithを動かすために
     Numbers Program Classes Relations Setoids Structures PArith ZArith NArith List 
     が必要, これだけで約56M
@@ -7,6 +6,16 @@
     対象：各vo.itargetにあるファイル 
     依存解析 (coqdepに相当) する。 .d ファイルで得られた依存グラフをトポロジカルソートして順にコンパイル？
     コンパイルは Vernac.compile
+  - 注意: -boot でないと <coqlib>/theories/ はコンパイルできない.
+  - 全ファイルを Coqdep_lexer で lexingし依存関係を抽出: Coqdep_commonのソース参照
+  - コンパイル：Vernac.compile (toplevel/vernac.ml. toplevel/coqtop.ml参照)
+
+- Logic.v の Inductive の最初の定義で落ちる。 Auto モジュールの初期化に失敗しているようだ
+let _ = Summary.declare_summary "search"
+	  { Summary.freeze_function   = freeze;
+	    Summary.unfreeze_function = unfreeze;
+	    Summary.init_function     = init }
+があり、ここで定義したinit_functionが呼び出されていないにちがいない
 
 - parse: Pcoq.Gram, GramSigについてはcompat.ml4 と　Grammar.S については camlp5
   Vernacの構文木: Vernacexpr
@@ -14,3 +23,5 @@
   初期化: Coqtop.init_toplevel (coqcもcoqtopを使っているので結局はこの関数が呼ばれる)
   例外の処理参考： Toplevel.print_toplevel_error
   その他eval,compile,loadなど： Vernac
+
+- メモ： 環境依存の設定項目が config/coq_config.ml にあるので場合によってはまずいことになるかも

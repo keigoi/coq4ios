@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface CQWrapper : NSObject
-+(void) start;
++(void) startRuntime;
++(void) startCoq:(NSString*)coqlib;
++(void) compile;
 +(void) parse:(const char*)str match:(void (^)(int, NSRange))match;
 +(void) eval:(const char*)str;
 @end

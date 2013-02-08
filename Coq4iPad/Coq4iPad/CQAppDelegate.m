@@ -11,12 +11,31 @@
 #import "CQMainViewController.h"
 
 #import "CQWrapper.h"
+#import "CQUtil.h"
 
 @implementation CQAppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+
+- (NSString*)cacheDir
+{
+    NSFileManager* sharedFM = [NSFileManager defaultManager];
+    NSArray* possibleURLs = [sharedFM URLsForDirectory:NSCachesDirectory
+                                             inDomains:NSUserDomainMask];
+    if ([possibleURLs count] < 1) {
+        @throw @"no cache directory found";
+    }
+    
+    NSURL* cachesUrl = [possibleURLs objectAtIndex:0];
+    NSString* appBundleID = [[NSBundle mainBundle] bundleIdentifier];
+    
+    NSString* dir = [[cachesUrl URLByAppendingPathComponent:appBundleID] path];
+    
+    return dir;
+}
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -27,7 +46,10 @@
     self.mainViewController.managedObjectContext = self.managedObjectContext;
     [self.window makeKeyAndVisible];
     
-    [CQWrapper start];
+    NSString* cacheDir = [self cacheDir];
+    [CQWrapper startRuntime]; // [cacheDir stringByAppendingString:@"/coq-8.4pl1"]
+    [CQWrapper startCoq:[CQUtil fullPathOf:@"coq-8.4pl1"]];
+    [CQWrapper compile]; // At:[CQUtil fullPathOf:@"coq-8.4pl1"] saveTo:cacheDir
     [CQWrapper parse:"Qed." match:^(int x, NSRange range) {
         NSLog(@"%d %d %d", x, range.location, range.length);
     }];
