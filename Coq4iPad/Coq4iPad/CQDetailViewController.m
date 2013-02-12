@@ -7,6 +7,8 @@
 //
 
 #import "CQDetailViewController.h"
+#import "CQWrapper.h"
+#import "CQUtil.h"
 
 @interface CQDetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
@@ -44,7 +46,7 @@
     if (_detailItem != newDetailItem) {
         _detailItem = newDetailItem;
         
-        // Update the view.
+        [CQWrapper reset];
         [self configureView];
     }
 
@@ -100,6 +102,24 @@
     // Called when the view is shown again in the split view, invalidating the button and popover controller.
     [self.navigationItem setLeftBarButtonItem:nil animated:YES];
     self.masterPopoverController = nil;
+}
+
+-(IBAction) onEval:(id)sender
+{
+    NSRange range = [CQWrapper nextPhraseRange:self.console.text];
+    NSString* phrase = [self.console.text substringWithRange:range];
+    [CQWrapper eval:phrase callback:^(NSString* result){
+        [CQUtil showDialogWithMessage:result error:nil];
+    }];
+    
+}
+
+-(IBAction) onUndo:(id)sender
+{
+}
+
+-(IBAction) onReset:(id)sender
+{
 }
 
 @end

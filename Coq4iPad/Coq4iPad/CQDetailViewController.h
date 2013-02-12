@@ -17,4 +17,8 @@
 
 @property (weak, nonatomic) IBOutlet UITextView* console;
 @property (weak, nonatomic) IBOutlet UIProgressView* progress;
+
+-(IBAction) onEval:(id)sender;
+-(IBAction) onUndo:(id)sender;
+-(IBAction) onReset:(id)sender;
 @end

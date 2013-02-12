@@ -2,7 +2,12 @@
 set -e
 set -v
 
-#OCAMLC=ocamlc_cross/ocamlc_cross # for real iPad
+###############################################################
+## XXX Choose whether you run Coq4iPad on iPad or Simulator
+###############################################################
+# for real iPad, use this customized ocaml compiler
+#OCAMLC=ocamlc_arm/ocamlc_arm
+# for simulators
 OCAMLC=ocamlc # for iPad Simulators
 
 cd `dirname $0`
@@ -38,7 +43,7 @@ ocamlc -a -g -o coqlib.cma \
 
 ./prepare_ocaml.sh
 
-$OCAMLC -o coqlib.byte \
+$OCAMLC -g -o coqlib.byte \
   -linkall -noautolink -use-prims tmp/primitives-all \
   str.cma nums.cma unix.cma dynlink.cma \
   camlp5/gramlib.cma \
@@ -61,8 +66,8 @@ mkdir -p $COQLIBDST/states
 pushd $COQTOPDIR
   find plugins -type d -exec mkdir -p $COQLIBDST/{} \;
   find theories -type d -exec mkdir -p $COQLIBDST/{} \;
-  find plugins -name '*.cm[ioa]' -exec cp {} $COQLIBDST/{} \;
-  find theories -name '*.cm[ioa]' -exec cp {} $COQLIBDST/{} \;
+  find plugins \( -name '*.cm[ioa]' -or -name '*.vo' \) -exec cp {} $COQLIBDST/{} \;
+  find theories \( -name '*.cm[ioa]' -or -name '*.vo' \) -exec cp {} $COQLIBDST/{} \;
 popd
 # copy NMake_gen.v
 cp coq-src/theories/Numbers/Natural/BigN/NMake_gen.v $COQLIBDST/theories/Numbers/Natural/BigN/

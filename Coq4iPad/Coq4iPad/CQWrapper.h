@@ -12,9 +12,12 @@
 +(void) startRuntime;
 +(void) startCoq:(NSString*)coqlib callback:(void(^)())callback;
 +(void) loadInitial;
-+(NSArray*) initTheories;
-+(NSArray*) restTheories;
++(NSArray*) libraryTheories;
 +(void) compile:(NSString*)file callback:(void(^)())callback;
 +(void) parse:(const char*)str match:(void (^)(int, NSRange))match;
-+(void) eval:(const char*)str;
++(void) eval:(NSString*)str_ callback:(void(^)(NSString*))callback;
++(void) reset;
++(void) stop;
++(void) undo;
++(NSRange) nextPhraseRange:(NSString*)text;
 @end
