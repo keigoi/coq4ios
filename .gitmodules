@@ -1,6 +1,6 @@
 [submodule "coq-src"]
 	path = coq-src
-	url = https://github.com/keigoi/coq.git
+	url = https://github.com/coq/coq.git
 [submodule "ocaml-src"]
 	path = ocaml-src
 	url = https://github.com/ocaml/ocaml.git

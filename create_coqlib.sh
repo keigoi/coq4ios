@@ -1,18 +1,48 @@
 #!/bin/sh
 set -e
 set -v
+
+#OCAMLC=ocamlc_cross/ocamlc_cross # for real iPad
+OCAMLC=ocamlc # for iPad Simulators
+
 cd `dirname $0`
 PWD=`pwd`
 COQTOPDIR=`coqtop -where`
+OCAMLTOPDIR=`ocamlc -where`
 
-##############################################################
-## Generate Coq bytecode (requires our custom coqmktop -a)
-##############################################################
+############################################
+## Generate custom ocamlc for real iPads
+############################################
+make -C ocamlc_cross ocamlc_cross
+
+###########################
+## Generate coqlib.byte
+###########################
 ocamllex coq-src/tools/coqdep_lexer.mll
-ocamlc -c -I coq-src/tools coq-src/tools/coqdep_lexer.mli coq-src/tools/coqdep_lexer.ml coq-src/tools/coqdep_common.mli coq-src/tools/coqdep_common.ml
-coqmktop -g -a -no-start -I $COQTOPDIR/kernel -I $COQTOPDIR/parsing -I $COQTOPDIR/library -I $COQTOPDIR/interp -I coq-src/tools coqdep_lexer.cmo coqdep_common.cmo main.ml -o coqlib.cma
+ocamlc -c -g -I coq-src/tools \
+  coq-src/tools/coqdep_lexer.mli coq-src/tools/coqdep_common.mli \
+  coq-src/tools/coqdep_lexer.ml coq-src/tools/coqdep_common.ml
+ocamlc -c -g -rectypes \
+  -I $COQTOPDIR/kernel -I $COQTOPDIR/parsing -I $COQTOPDIR/library -I $COQTOPDIR/interp \
+  -I $COQTOPDIR/lib -I $COQTOPDIR/toplevel -I $COQTOPDIR/kernel/byterun \
+  -I +camlp5 \
+  -I coq-src/tools \
+  pathmap.ml main.ml
+ocamlc -a -g -o coqlib.cma \
+  -I $COQTOPDIR \
+  config/coq_config.cmo lib/lib.cma kernel/kernel.cma library/library.cma pretyping/pretyping.cma \
+  interp/interp.cma proofs/proofs.cma parsing/parsing.cma tactics/tactics.cma toplevel/toplevel.cma \
+  parsing/highparsing.cma tactics/hightactics.cma \
+  coq-src/tools/coqdep_lexer.cmo coq-src/tools/coqdep_common.cmo \
+  pathmap.cmo main.cmo
+
 ./prepare_ocaml.sh
-ocamlc -g -I $COQTOPDIR -noautolink -linkall -use-prims tmp/primitives-all coqlib.cma -o coqlib.byte
+
+$OCAMLC -o coqlib.byte \
+  -linkall -noautolink -use-prims tmp/primitives-all \
+  str.cma nums.cma unix.cma dynlink.cma \
+  camlp5/gramlib.cma \
+  coqlib.cma
 
 #######################
 ## make NMake_gen.v
