@@ -1,0 +1,28 @@
+diff --git a/bytecomp/symtable.ml b/bytecomp/symtable.ml
+index 0785316..4f88916 100644
+--- a/bytecomp/symtable.ml
++++ b/bytecomp/symtable.ml
+@@ -198,11 +198,13 @@ let patch_object buff patchlist =
+ 
+ (* Translate structured constants *)
+ 
++external double_for_target_arch : float -> float = "caml_double_for_target_arch"
++
+ let rec transl_const = function
+     Const_base(Const_int i) -> Obj.repr i
+   | Const_base(Const_char c) -> Obj.repr c
+   | Const_base(Const_string s) -> Obj.repr s
+-  | Const_base(Const_float f) -> Obj.repr (float_of_string f)
++  | Const_base(Const_float f) -> Obj.repr (double_for_target_arch (float_of_string f))
+   | Const_base(Const_int32 i) -> Obj.repr i
+   | Const_base(Const_int64 i) -> Obj.repr i
+   | Const_base(Const_nativeint i) -> Obj.repr i
+@@ -216,7 +218,7 @@ let rec transl_const = function
+         fields;
+       block
+   | Const_float_array fields ->
+-      Obj.repr(Array.of_list(List.map (fun f -> float_of_string f) fields))
++      Obj.repr(Array.of_list(List.map (fun f -> double_for_target_arch (float_of_string f)) fields))
+ 
+ (* Build the initial table of globals *)
+ 
