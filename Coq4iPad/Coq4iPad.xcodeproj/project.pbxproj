@@ -119,6 +119,10 @@
 		591C349416BFCB8B007BA5E9 /* CQ_stubs.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C349316BFCB8A007BA5E9 /* CQ_stubs.m */; };
 		591C349816BFCC25007BA5E9 /* CQ_convert.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C349716BFCC25007BA5E9 /* CQ_convert.m */; };
 		591C349B16BFD04A007BA5E9 /* CQWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C349A16BFD04A007BA5E9 /* CQWrapper.m */; };
+		5996424416C7BA9E00121EDE /* CQDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5996424116C7BA9E00121EDE /* CQDetailViewController.m */; };
+		5996424516C7BA9E00121EDE /* CQMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5996424316C7BA9E00121EDE /* CQMasterViewController.m */; };
+		5996424A16C7BAC300121EDE /* CQDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5996424616C7BAC300121EDE /* CQDetailViewController.xib */; };
+		5996424B16C7BAC300121EDE /* CQMasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5996424816C7BAC300121EDE /* CQMasterViewController.xib */; };
 		59F8A7F616BDE9E00096665F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59F8A7F516BDE9E00096665F /* UIKit.framework */; };
 		59F8A7F816BDE9E00096665F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59F8A7F716BDE9E00096665F /* Foundation.framework */; };
 		59F8A7FA16BDE9E00096665F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59F8A7F916BDE9E00096665F /* CoreGraphics.framework */; };
@@ -130,9 +134,7 @@
 		59F8A80C16BDE9E00096665F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59F8A80B16BDE9E00096665F /* Default@2x.png */; };
 		59F8A80E16BDE9E00096665F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59F8A80D16BDE9E00096665F /* Default-568h@2x.png */; };
 		59F8A81116BDE9E00096665F /* Coq4iPad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 59F8A80F16BDE9E00096665F /* Coq4iPad.xcdatamodeld */; };
-		59F8A81416BDE9E00096665F /* CQMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59F8A81316BDE9E00096665F /* CQMainViewController.m */; };
 		59F8A81716BDE9E00096665F /* CQFlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59F8A81616BDE9E00096665F /* CQFlipsideViewController.m */; };
-		59F8A81A16BDE9E00096665F /* CQMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59F8A81816BDE9E00096665F /* CQMainViewController.xib */; };
 		59F8A81D16BDE9E00096665F /* CQFlipsideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59F8A81B16BDE9E00096665F /* CQFlipsideViewController.xib */; };
 		59F8A8B716BE16000096665F /* alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 59F8A82616BE16000096665F /* alloc.c */; };
 		59F8A8B816BE16000096665F /* array.c in Sources */ = {isa = PBXBuildFile; fileRef = 59F8A82816BE16000096665F /* array.c */; };
@@ -315,6 +317,12 @@
 		591C349716BFCC25007BA5E9 /* CQ_convert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQ_convert.m; sourceTree = "<group>"; };
 		591C349916BFD04A007BA5E9 /* CQWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQWrapper.h; sourceTree = "<group>"; };
 		591C349A16BFD04A007BA5E9 /* CQWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQWrapper.m; sourceTree = "<group>"; };
+		5996424016C7BA9D00121EDE /* CQDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQDetailViewController.h; sourceTree = "<group>"; };
+		5996424116C7BA9E00121EDE /* CQDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQDetailViewController.m; sourceTree = "<group>"; };
+		5996424216C7BA9E00121EDE /* CQMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQMasterViewController.h; sourceTree = "<group>"; };
+		5996424316C7BA9E00121EDE /* CQMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQMasterViewController.m; sourceTree = "<group>"; };
+		5996424716C7BAC300121EDE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CQDetailViewController.xib; sourceTree = "<group>"; };
+		5996424916C7BAC300121EDE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CQMasterViewController.xib; sourceTree = "<group>"; };
 		59F8A7F216BDE9E00096665F /* Coq4iPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coq4iPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59F8A7F516BDE9E00096665F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		59F8A7F716BDE9E00096665F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -330,11 +338,8 @@
 		59F8A80B16BDE9E00096665F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		59F8A80D16BDE9E00096665F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		59F8A81016BDE9E00096665F /* Coq4iPad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Coq4iPad.xcdatamodel; sourceTree = "<group>"; };
-		59F8A81216BDE9E00096665F /* CQMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CQMainViewController.h; sourceTree = "<group>"; };
-		59F8A81316BDE9E00096665F /* CQMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CQMainViewController.m; sourceTree = "<group>"; };
 		59F8A81516BDE9E00096665F /* CQFlipsideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CQFlipsideViewController.h; sourceTree = "<group>"; };
 		59F8A81616BDE9E00096665F /* CQFlipsideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CQFlipsideViewController.m; sourceTree = "<group>"; };
-		59F8A81916BDE9E00096665F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CQMainViewController.xib; sourceTree = "<group>"; };
 		59F8A81C16BDE9E00096665F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CQFlipsideViewController.xib; sourceTree = "<group>"; };
 		59F8A82616BE16000096665F /* alloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = alloc.c; sourceTree = "<group>"; };
 		59F8A82716BE16000096665F /* alloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = alloc.h; sourceTree = "<group>"; };
@@ -698,12 +703,15 @@
 				591C348816BF767C007BA5E9 /* bridge-objc-caml */,
 				59F8A80616BDE9E00096665F /* CQAppDelegate.h */,
 				59F8A80716BDE9E00096665F /* CQAppDelegate.m */,
-				59F8A81216BDE9E00096665F /* CQMainViewController.h */,
-				59F8A81316BDE9E00096665F /* CQMainViewController.m */,
-				59F8A81816BDE9E00096665F /* CQMainViewController.xib */,
 				59F8A81516BDE9E00096665F /* CQFlipsideViewController.h */,
 				59F8A81616BDE9E00096665F /* CQFlipsideViewController.m */,
 				59F8A81B16BDE9E00096665F /* CQFlipsideViewController.xib */,
+				5996424216C7BA9E00121EDE /* CQMasterViewController.h */,
+				5996424316C7BA9E00121EDE /* CQMasterViewController.m */,
+				5996424816C7BAC300121EDE /* CQMasterViewController.xib */,
+				5996424016C7BA9D00121EDE /* CQDetailViewController.h */,
+				5996424116C7BA9E00121EDE /* CQDetailViewController.m */,
+				5996424616C7BAC300121EDE /* CQDetailViewController.xib */,
 				591C349016BFC665007BA5E9 /* CQUtil.h */,
 				591C349116BFC667007BA5E9 /* CQUtil.m */,
 				59F8A80F16BDE9E00096665F /* Coq4iPad.xcdatamodeld */,
@@ -891,10 +899,11 @@
 				59F8A80A16BDE9E00096665F /* Default.png in Resources */,
 				59F8A80C16BDE9E00096665F /* Default@2x.png in Resources */,
 				59F8A80E16BDE9E00096665F /* Default-568h@2x.png in Resources */,
-				59F8A81A16BDE9E00096665F /* CQMainViewController.xib in Resources */,
 				59F8A81D16BDE9E00096665F /* CQFlipsideViewController.xib in Resources */,
 				591C348B16BFB93E007BA5E9 /* coqlib.byte in Resources */,
 				591C348D16BFBC42007BA5E9 /* coq-8.4pl1 in Resources */,
+				5996424A16C7BAC300121EDE /* CQDetailViewController.xib in Resources */,
+				5996424B16C7BAC300121EDE /* CQMasterViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -924,7 +933,6 @@
 				59F8A80416BDE9E00096665F /* main.m in Sources */,
 				59F8A80816BDE9E00096665F /* CQAppDelegate.m in Sources */,
 				59F8A81116BDE9E00096665F /* Coq4iPad.xcdatamodeld in Sources */,
-				59F8A81416BDE9E00096665F /* CQMainViewController.m in Sources */,
 				59F8A81716BDE9E00096665F /* CQFlipsideViewController.m in Sources */,
 				59F8A8B716BE16000096665F /* alloc.c in Sources */,
 				59F8A8B816BE16000096665F /* array.c in Sources */,
@@ -1078,26 +1086,36 @@
 				591C349416BFCB8B007BA5E9 /* CQ_stubs.m in Sources */,
 				591C349816BFCC25007BA5E9 /* CQ_convert.m in Sources */,
 				591C349B16BFD04A007BA5E9 /* CQWrapper.m in Sources */,
+				5996424416C7BA9E00121EDE /* CQDetailViewController.m in Sources */,
+				5996424516C7BA9E00121EDE /* CQMasterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		5996424616C7BAC300121EDE /* CQDetailViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5996424716C7BAC300121EDE /* en */,
+			);
+			name = CQDetailViewController.xib;
+			sourceTree = "<group>";
+		};
+		5996424816C7BAC300121EDE /* CQMasterViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5996424916C7BAC300121EDE /* en */,
+			);
+			name = CQMasterViewController.xib;
+			sourceTree = "<group>";
+		};
 		59F8A80016BDE9E00096665F /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				59F8A80116BDE9E00096665F /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		59F8A81816BDE9E00096665F /* CQMainViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				59F8A81916BDE9E00096665F /* en */,
-			);
-			name = CQMainViewController.xib;
 			sourceTree = "<group>";
 		};
 		59F8A81B16BDE9E00096665F /* CQFlipsideViewController.xib */ = {

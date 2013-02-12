@@ -8,7 +8,18 @@
 
 #import "CQAppDelegate.h"
 
-#import "CQMainViewController.h"
+#import "CQMasterViewController.h"
+#import "CQDetailViewController.h"
+#import "CQWrapper.h"
+#import "CQUtil.h"
+
+@interface CQAppDelegate ()
+@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (strong, nonatomic) UISplitViewController *splitViewController;
+@property (strong, nonatomic) CQDetailViewController *detailVC;
+@end
 
 @implementation CQAppDelegate
 
@@ -17,14 +28,79 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 
+- (void)prepare
+{
+    NSString* cacheDir = [CQUtil cacheDir];
+    NSString* target = [cacheDir stringByAppendingString:@"/coq-8.4pl1"];
+    NSError* error;
+    [[NSFileManager defaultManager] removeItemAtPath:target error:&error];
+    if(error) {
+        NSLog(@"%@", [error localizedDescription]);
+        error = nil;
+    }
+    [[NSFileManager defaultManager] createDirectoryAtPath:cacheDir withIntermediateDirectories:TRUE attributes:nil error:&error];
+    if(error) {
+        NSLog(@"%@", [error localizedDescription]);
+        error = nil;
+    }
+    [[NSFileManager defaultManager] copyItemAtPath:[CQUtil fullPathOf:@"coq-8.4pl1"]
+                                            toPath:target
+                                             error:&error];
+    if(error) {
+        NSLog(@"%@", [error localizedDescription]);
+        error = nil;
+    }
+    
+    [CQWrapper startRuntime];
+    [CQWrapper startCoq:target callback:^{
+        NSArray* inits = [CQWrapper initTheories];
+        NSArray* rests = [CQWrapper restTheories];
+        
+        __block int count = 0;
+        int all = inits.count + rests.count;
+        
+        for(NSString* f in inits) {
+            [CQWrapper compile:f callback:^{
+                count++;
+                [self.detailVC.progress setProgress:(float)count/all animated:YES];
+            }];
+        }
+        
+        [CQWrapper loadInitial];
+        
+        for(NSString* f in rests) {
+            [CQWrapper compile:f callback:^{
+                count++;
+                [self.detailVC.progress setProgress:(float)count/all animated:YES];
+            }];
+        }
+    }];
+}
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.mainViewController = [[CQMainViewController alloc] initWithNibName:@"CQMainViewController" bundle:nil];
-    self.window.rootViewController = self.mainViewController;
-    self.mainViewController.managedObjectContext = self.managedObjectContext;
+    
+    
+    CQMasterViewController *masterViewController = [[CQMasterViewController alloc] initWithNibName:@"CQMasterViewController" bundle:nil];
+    UINavigationController *masterNavigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
+    
+    CQDetailViewController *detailViewController = [[CQDetailViewController alloc] initWithNibName:@"CQDetailViewController" bundle:nil];
+    UINavigationController *detailNavigationController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
+    
+    masterViewController.detailViewController = detailViewController;
+    
+    self.splitViewController = [[UISplitViewController alloc] init];
+    self.splitViewController.delegate = detailViewController;
+    self.splitViewController.viewControllers = @[masterNavigationController, detailNavigationController];
+    masterViewController.managedObjectContext = self.managedObjectContext;
+    self.window.rootViewController = self.splitViewController;
     [self.window makeKeyAndVisible];
+    
+    self.detailVC = detailViewController;
+    
+    [self prepare];
     
     return YES;
 }
