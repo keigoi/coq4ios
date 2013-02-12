@@ -16,6 +16,9 @@
 
 @property (strong, nonatomic) UIPopoverController *flipsidePopoverController;
 
+@property (weak, nonatomic) IBOutlet UITextView* console;
+@property (weak, nonatomic) IBOutlet UIProgressView* progress;
+
 - (IBAction)showInfo:(id)sender;
 
 @end

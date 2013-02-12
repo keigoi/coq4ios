@@ -8,16 +8,67 @@
 
 #import "CQMainViewController.h"
 
+#import "CQWrapper.h"
+#import "CQUtil.h"
+
 @interface CQMainViewController ()
 
 @end
 
 @implementation CQMainViewController
 
+#pragma mark ViewController callbacks
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    
+    NSString* cacheDir = [CQUtil cacheDir];
+    NSString* target = [cacheDir stringByAppendingString:@"/coq-8.4pl1"];
+    NSError* error;
+    [[NSFileManager defaultManager] removeItemAtPath:target error:&error];
+    if(error) {
+        NSLog(@"%@", [error localizedDescription]);
+        error = nil;
+    }
+    [[NSFileManager defaultManager] createDirectoryAtPath:cacheDir withIntermediateDirectories:TRUE attributes:nil error:&error];
+    if(error) {
+        NSLog(@"%@", [error localizedDescription]);
+        error = nil;
+    }
+    [[NSFileManager defaultManager] copyItemAtPath:[CQUtil fullPathOf:@"coq-8.4pl1"]
+                                            toPath:target
+                                             error:&error];
+    if(error) {
+        NSLog(@"%@", [error localizedDescription]);
+        error = nil;
+    }
+    
+    [CQWrapper startRuntime];
+    [CQWrapper startCoq:target callback:^{
+        NSArray* inits = [CQWrapper initTheories];
+        NSArray* rests = [CQWrapper restTheories];
+        
+        __block int count = 0;
+        int all = inits.count + rests.count;
+        
+        for(NSString* f in inits) {
+            [CQWrapper compile:f callback:^{
+                count++;
+                [self.progress setProgress:(float)count/all animated:YES];
+            }];
+        }
+        
+        [CQWrapper loadInitial];
+        
+        for(NSString* f in rests) {
+            [CQWrapper compile:f callback:^{
+                count++;
+                [self.progress setProgress:(float)count/all animated:YES];
+            }];
+        }
+    }];
+
 }
 
 - (void)didReceiveMemoryWarning
