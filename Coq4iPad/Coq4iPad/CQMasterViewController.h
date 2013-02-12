@@ -12,11 +12,8 @@
 
 #import <CoreData/CoreData.h>
 
-@interface CQMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+@interface CQMasterViewController : UITableViewController
 
 @property (strong, nonatomic) CQDetailViewController *detailViewController;
-
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

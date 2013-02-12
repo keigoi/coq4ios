@@ -133,7 +133,6 @@
 		59F8A80A16BDE9E00096665F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 59F8A80916BDE9E00096665F /* Default.png */; };
 		59F8A80C16BDE9E00096665F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59F8A80B16BDE9E00096665F /* Default@2x.png */; };
 		59F8A80E16BDE9E00096665F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59F8A80D16BDE9E00096665F /* Default-568h@2x.png */; };
-		59F8A81116BDE9E00096665F /* Coq4iPad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 59F8A80F16BDE9E00096665F /* Coq4iPad.xcdatamodeld */; };
 		59F8A81716BDE9E00096665F /* CQFlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59F8A81616BDE9E00096665F /* CQFlipsideViewController.m */; };
 		59F8A81D16BDE9E00096665F /* CQFlipsideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59F8A81B16BDE9E00096665F /* CQFlipsideViewController.xib */; };
 		59F8A8B716BE16000096665F /* alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 59F8A82616BE16000096665F /* alloc.c */; };
@@ -337,7 +336,6 @@
 		59F8A80916BDE9E00096665F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		59F8A80B16BDE9E00096665F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		59F8A80D16BDE9E00096665F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		59F8A81016BDE9E00096665F /* Coq4iPad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Coq4iPad.xcdatamodel; sourceTree = "<group>"; };
 		59F8A81516BDE9E00096665F /* CQFlipsideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CQFlipsideViewController.h; sourceTree = "<group>"; };
 		59F8A81616BDE9E00096665F /* CQFlipsideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CQFlipsideViewController.m; sourceTree = "<group>"; };
 		59F8A81C16BDE9E00096665F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CQFlipsideViewController.xib; sourceTree = "<group>"; };
@@ -714,7 +712,6 @@
 				5996424616C7BAC300121EDE /* CQDetailViewController.xib */,
 				591C349016BFC665007BA5E9 /* CQUtil.h */,
 				591C349116BFC667007BA5E9 /* CQUtil.m */,
-				59F8A80F16BDE9E00096665F /* Coq4iPad.xcdatamodeld */,
 				59F8A7FE16BDE9E00096665F /* Supporting Files */,
 			);
 			path = Coq4iPad;
@@ -932,7 +929,6 @@
 			files = (
 				59F8A80416BDE9E00096665F /* main.m in Sources */,
 				59F8A80816BDE9E00096665F /* CQAppDelegate.m in Sources */,
-				59F8A81116BDE9E00096665F /* Coq4iPad.xcdatamodeld in Sources */,
 				59F8A81716BDE9E00096665F /* CQFlipsideViewController.m in Sources */,
 				59F8A8B716BE16000096665F /* alloc.c in Sources */,
 				59F8A8B816BE16000096665F /* array.c in Sources */,
@@ -1241,19 +1237,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		59F8A80F16BDE9E00096665F /* Coq4iPad.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				59F8A81016BDE9E00096665F /* Coq4iPad.xcdatamodel */,
-			);
-			currentVersion = 59F8A81016BDE9E00096665F /* Coq4iPad.xcdatamodel */;
-			path = Coq4iPad.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 59F8A7EA16BDE9E00096665F /* Project object */;
 }
