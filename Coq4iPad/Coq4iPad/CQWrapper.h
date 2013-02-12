@@ -10,11 +10,11 @@
 
 @interface CQWrapper : NSObject
 +(void) startRuntime;
-+(void) startCoq:(NSString*)coqlib;
++(void) startCoq:(NSString*)coqlib callback:(void(^)())callback;
 +(void) loadInitial;
 +(NSArray*) initTheories;
 +(NSArray*) restTheories;
-+(void) compile:(NSString*)file;
++(void) compile:(NSString*)file callback:(void(^)())callback;
 +(void) parse:(const char*)str match:(void (^)(int, NSRange))match;
 +(void) eval:(const char*)str;
 @end

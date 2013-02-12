@@ -16,6 +16,9 @@
 #include <caml/fail.h>
 #include <caml/memory.h>
 #include <caml/callback.h>
+#include <threads.h>
+#undef callback
+#undef initialize
 
 // ObjC obj <-> OCaml value
 #define ObjC_val(v) (__bridge id)(*((void**) Data_custom_val(v)))

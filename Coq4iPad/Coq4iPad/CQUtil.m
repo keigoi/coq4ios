@@ -35,4 +35,22 @@
     return [[NSBundle mainBundle] pathForResource:[self basenameOf:path] ofType:nil inDirectory:[self dirnameOf:path]];
 }
 
+
++(NSString*)cacheDir
+{
+    NSFileManager* sharedFM = [NSFileManager defaultManager];
+    NSArray* possibleURLs = [sharedFM URLsForDirectory:NSCachesDirectory
+                                             inDomains:NSUserDomainMask];
+    if ([possibleURLs count] < 1) {
+        @throw @"no cache directory found";
+    }
+    
+    NSURL* cachesUrl = [possibleURLs objectAtIndex:0];
+    NSString* appBundleID = [[NSBundle mainBundle] bundleIdentifier];
+    
+    NSString* dir = [[cachesUrl URLByAppendingPathComponent:appBundleID] path];
+    
+    return dir;
+}
+
 @end

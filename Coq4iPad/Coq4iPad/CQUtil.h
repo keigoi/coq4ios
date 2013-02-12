@@ -12,4 +12,5 @@
 +(NSString*)dirnameOf:(NSString*)path;
 +(NSString*)basenameOf:(NSString*)path;
 +(NSString*)fullPathOf:(NSString*)path;
++(NSString*)cacheDir;
 @end
