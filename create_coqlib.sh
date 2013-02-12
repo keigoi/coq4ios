@@ -13,7 +13,7 @@ OCAMLTOPDIR=`ocamlc -where`
 ############################################
 ## Generate custom ocamlc for real iPads
 ############################################
-make -C ocamlc_cross ocamlc_cross
+make -C ocamlc_arm ocamlc_arm
 
 ###########################
 ## Generate coqlib.byte
