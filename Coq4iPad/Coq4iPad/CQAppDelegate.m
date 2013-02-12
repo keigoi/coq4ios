@@ -46,10 +46,42 @@
     self.mainViewController.managedObjectContext = self.managedObjectContext;
     [self.window makeKeyAndVisible];
     
+
     NSString* cacheDir = [self cacheDir];
-    [CQWrapper startRuntime]; // [cacheDir stringByAppendingString:@"/coq-8.4pl1"]
-    [CQWrapper startCoq:[CQUtil fullPathOf:@"coq-8.4pl1"]];
-    [CQWrapper compile]; // At:[CQUtil fullPathOf:@"coq-8.4pl1"] saveTo:cacheDir
+    NSString* target = [cacheDir stringByAppendingString:@"/coq-8.4pl1"];
+    NSError* error;
+    [[NSFileManager defaultManager] removeItemAtPath:target error:&error];
+    if(error) {
+        NSLog(@"%@", [error localizedDescription]);
+        error = nil;
+    }
+    [[NSFileManager defaultManager] createDirectoryAtPath:cacheDir withIntermediateDirectories:TRUE attributes:nil error:&error];
+    if(error) {
+        NSLog(@"%@", [error localizedDescription]);
+        error = nil;
+    }    
+    [[NSFileManager defaultManager] copyItemAtPath:[CQUtil fullPathOf:@"coq-8.4pl1"]
+                                            toPath:target
+                                             error:&error];
+    if(error) {
+        NSLog(@"%@", [error localizedDescription]);
+        error = nil;
+    }
+
+    [CQWrapper startRuntime];
+    [CQWrapper startCoq:target];
+    //[CQWrapper startCoq:[CQUtil fullPathOf:@"coq-8.4pl1"]];
+    NSArray* inits = [CQWrapper initTheories];
+    for(NSString* f in inits) {
+        [CQWrapper compile:f];
+    }
+    
+    [CQWrapper loadInitial];
+    
+    NSArray* rests = [CQWrapper restTheories];
+    for(NSString* f in rests) {
+        [CQWrapper compile:f];
+    }
     [CQWrapper parse:"Qed." match:^(int x, NSRange range) {
         NSLog(@"%d %d %d", x, range.location, range.length);
     }];

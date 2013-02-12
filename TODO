@@ -10,13 +10,6 @@
   - 全ファイルを Coqdep_lexer で lexingし依存関係を抽出: Coqdep_commonのソース参照
   - コンパイル：Vernac.compile (toplevel/vernac.ml. toplevel/coqtop.ml参照)
 
-- Logic.v の Inductive の最初の定義で落ちる。 Auto モジュールの初期化に失敗しているようだ
-let _ = Summary.declare_summary "search"
-	  { Summary.freeze_function   = freeze;
-	    Summary.unfreeze_function = unfreeze;
-	    Summary.init_function     = init }
-があり、ここで定義したinit_functionが呼び出されていないにちがいない
-
 - parse: Pcoq.Gram, GramSigについてはcompat.ml4 と　Grammar.S については camlp5
   Vernacの構文木: Vernacexpr
   Loc.tの処理：PLoc
@@ -25,3 +18,9 @@ let _ = Summary.declare_summary "search"
   その他eval,compile,loadなど： Vernac
 
 - メモ： 環境依存の設定項目が config/coq_config.ml にあるので場合によってはまずいことになるかも
+- Mac OS X x86_64(clang?) と iOS ARM で double の バイトオーダが異なるようだ…。 浮動小数リテラルが全て上下真逆になってしまう。
+  参考：
+  Symtable.transl_const 内,
+  | Const_base(Const_float f) -> Obj.repr (float_of_string f)
+  float型の値は、.cmoにはOCamlの値としてmarshalされているが、リンク時の定数の再配置(Symtable.patch_objects)によりマシン固有の値に化けてしまう。
+  .cmoの動的ロードにも同様の問題がある (DynlinkがSymtableを使っている)
