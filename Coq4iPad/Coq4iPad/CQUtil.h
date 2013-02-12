@@ -13,4 +13,12 @@
 +(NSString*)basenameOf:(NSString*)path;
 +(NSString*)fullPathOf:(NSString*)path;
 +(NSString*)cacheDir;
++(NSString *)docDir;
+
+// ダイアログを表示
++(void) showDialogWithMessage:(NSString*)message error:(NSError*)error;
+// ダイアログを表示 (閉じた時のコールバック付き)
++(void) showDialogWithMessage:(NSString*)message error:(NSError*)error callback:(void(^)(void))callback;
+// テキストボックス付きダイアログを表示 (閉じた時のコールバック付き, キャンセルの時nil)
++(void) showDialogWithMessage:(NSString*)message textboxWithString:(NSString*)text callback:(void(^)(NSString*))callback;
 @end

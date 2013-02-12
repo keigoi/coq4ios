@@ -15,5 +15,4 @@
 @interface CQMasterViewController : UITableViewController
 
 @property (strong, nonatomic) CQDetailViewController *detailViewController;
-
 @end
