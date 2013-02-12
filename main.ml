@@ -80,8 +80,8 @@ let start root =
   let init = Pathmap.all_dep_files [initfile] in
   init_theories := Array.of_list init;
 
-  let rest = List.filter (fun f -> not (List.mem f init)) all_theories in
-  let rest = Pathmap.all_dep_files rest in
+  let rest = Pathmap.all_dep_files all_theories in
+  let rest = List.filter (fun f -> not (List.mem f init)) rest in
   rest_theories := Array.of_list rest
 ;;
 
