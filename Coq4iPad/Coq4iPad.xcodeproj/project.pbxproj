@@ -17,7 +17,6 @@
 		591C33E016BEA75E007BA5E9 /* nat_stubs.c in Sources */ = {isa = PBXBuildFile; fileRef = 591C331816BEA75A007BA5E9 /* nat_stubs.c */; };
 		591C33EE16BEA75E007BA5E9 /* strstubs.c in Sources */ = {isa = PBXBuildFile; fileRef = 591C332816BEA75B007BA5E9 /* strstubs.c */; };
 		591C33FA16BEA75E007BA5E9 /* st_stubs.c in Sources */ = {isa = PBXBuildFile; fileRef = 591C333616BEA75C007BA5E9 /* st_stubs.c */; };
-		591C340C16BEA75E007BA5E9 /* scheduler.c in Sources */ = {isa = PBXBuildFile; fileRef = 591C334B16BEA75D007BA5E9 /* scheduler.c */; };
 		591C341616BEA75E007BA5E9 /* accept.c in Sources */ = {isa = PBXBuildFile; fileRef = 591C335716BEA75D007BA5E9 /* accept.c */; };
 		591C341716BEA75E007BA5E9 /* access.c in Sources */ = {isa = PBXBuildFile; fileRef = 591C335816BEA75D007BA5E9 /* access.c */; };
 		591C341816BEA75E007BA5E9 /* addrofstr.c in Sources */ = {isa = PBXBuildFile; fileRef = 591C335916BEA75D007BA5E9 /* addrofstr.c */; };
@@ -204,9 +203,7 @@
 		591C332816BEA75B007BA5E9 /* strstubs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = strstubs.c; sourceTree = "<group>"; };
 		591C333516BEA75C007BA5E9 /* st_posix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = st_posix.h; sourceTree = "<group>"; };
 		591C333616BEA75C007BA5E9 /* st_stubs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = st_stubs.c; sourceTree = "<group>"; };
-		591C333716BEA75C007BA5E9 /* st_win32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = st_win32.h; sourceTree = "<group>"; };
 		591C333A16BEA75C007BA5E9 /* threads.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = threads.h; sourceTree = "<group>"; };
-		591C334B16BEA75D007BA5E9 /* scheduler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = scheduler.c; sourceTree = "<group>"; };
 		591C335716BEA75D007BA5E9 /* accept.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = accept.c; sourceTree = "<group>"; };
 		591C335816BEA75D007BA5E9 /* access.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = access.c; sourceTree = "<group>"; };
 		591C335916BEA75D007BA5E9 /* addrofstr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = addrofstr.c; sourceTree = "<group>"; };
@@ -529,20 +526,10 @@
 			children = (
 				591C333516BEA75C007BA5E9 /* st_posix.h */,
 				591C333616BEA75C007BA5E9 /* st_stubs.c */,
-				591C333716BEA75C007BA5E9 /* st_win32.h */,
 				591C333A16BEA75C007BA5E9 /* threads.h */,
 			);
 			name = systhreads;
 			path = "../../ocaml-src/otherlibs/systhreads";
-			sourceTree = "<group>";
-		};
-		591C333E16BEA75C007BA5E9 /* threads */ = {
-			isa = PBXGroup;
-			children = (
-				591C334B16BEA75D007BA5E9 /* scheduler.c */,
-			);
-			name = threads;
-			path = "../../ocaml-src/otherlibs/threads";
 			sourceTree = "<group>";
 		};
 		591C335516BEA75D007BA5E9 /* unix */ = {
@@ -658,7 +645,6 @@
 				591C32FE16BEA75A007BA5E9 /* num */,
 				591C332116BEA75A007BA5E9 /* str */,
 				591C332916BEA75B007BA5E9 /* systhreads */,
-				591C333E16BEA75C007BA5E9 /* threads */,
 				591C335516BEA75D007BA5E9 /* unix */,
 			);
 			name = otherlibs;
@@ -992,7 +978,6 @@
 				591C33E016BEA75E007BA5E9 /* nat_stubs.c in Sources */,
 				591C33EE16BEA75E007BA5E9 /* strstubs.c in Sources */,
 				591C33FA16BEA75E007BA5E9 /* st_stubs.c in Sources */,
-				591C340C16BEA75E007BA5E9 /* scheduler.c in Sources */,
 				591C341616BEA75E007BA5E9 /* accept.c in Sources */,
 				591C341716BEA75E007BA5E9 /* access.c in Sources */,
 				591C341816BEA75E007BA5E9 /* addrofstr.c in Sources */,
