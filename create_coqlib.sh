@@ -49,15 +49,10 @@ $OCAMLC -g -o coqlib.byte \
   camlp5/gramlib.cma \
   coqlib.cma
 
-#######################
-## make NMake_gen.v
-#######################
-make -C coq-src theories/Numbers/Natural/BigN/NMake_gen.v
-
 #####################
 ## copy Coq dirs
 #####################
-COQLIBSRC=coq-src
+COQLIBSRC=`coqtop -where`
 COQLIBDST=$PWD/Coq4iPad/Coq4iPad/coq-8.4pl1
 # clean
 rm -rf $COQLIBDST/plugins $COQLIBDST/states $COQLIBDST/theories
@@ -69,7 +64,6 @@ pushd $COQTOPDIR
   find plugins \( -name '*.cm[ioa]' -or -name '*.vo' \) -exec cp {} $COQLIBDST/{} \;
   find theories \( -name '*.cm[ioa]' -or -name '*.vo' \) -exec cp {} $COQLIBDST/{} \;
 popd
-# copy NMake_gen.v
-cp coq-src/theories/Numbers/Natural/BigN/NMake_gen.v $COQLIBDST/theories/Numbers/Natural/BigN/
+cp coq-src/states/MakeInitial.v $COQLIBDST/states/
 
 
