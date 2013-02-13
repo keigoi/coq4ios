@@ -7,8 +7,11 @@
 //
 
 #import "CQDetailViewController.h"
+#import "CQColoredTextView.h"
 #import "CQWrapper.h"
 #import "CQUtil.h"
+
+#import <CoreText/CoreText.h>
 
 @interface EvalUndo : NSObject
 @property(assign, nonatomic) NSRange range;
@@ -30,6 +33,13 @@
 @end
 
 @implementation CQDetailViewController
+
+-(int) lastPos
+{
+    NSRange lastRange = {.location=0, .length=0};
+    lastRange = self.evalUndoStack.count>0 ? ((EvalUndo*)self.evalUndoStack.lastObject).range : lastRange;
+    return lastRange.location + lastRange.length;
+}
 
 #pragma mark - Flipside View Controller
 
@@ -83,6 +93,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.console.coloringFun = ^(NSMutableAttributedString* str){
+        [self coloringOf:str];
+    };
+    
 	// Do any additional setup after loading the view, typically from a nib.
     [self configureView];
 }
@@ -124,19 +138,22 @@
     UIButton* button = sender;
     [button setEnabled:NO];
     [CQWrapper enqueueCallback:^{
-        NSRange lastRange = {.location=0, .length=0};
-        lastRange = self.evalUndoStack.count>0 ? ((EvalUndo*)self.evalUndoStack.lastObject).range : lastRange;
-        int lastpos = lastRange.location + lastRange.length;
+        int lastpos = [self lastPos];
         
         NSString* unevaluated = [self.console.text substringFromIndex:lastpos];
         
         NSRange range = [CQWrapper nextPhraseRange:unevaluated];
+        if(-1==range.location) {
+            [button setEnabled:YES];
+            return;
+        }
         NSString* phrase = [unevaluated substringWithRange:range];
         [CQWrapper eval:phrase callback:^(BOOL success, NSString* result){
             [CQUtil showDialogWithMessage:result error:nil];
             if(success) {
                 NSRange newRange = {.location=range.location+lastpos, .length=range.length};
                 [self.evalUndoStack addObject:[EvalUndo range:newRange]];
+                [self.console setNeedsDisplay];
             } else {
             }
             [button setEnabled:YES];
@@ -146,6 +163,10 @@
 
 -(IBAction) onUndo:(id)sender
 {
+    if(self.evalUndoStack.count>0) {
+        [self.evalUndoStack removeLastObject];
+        [self.console setNeedsDisplay];
+    }
 }
 
 -(IBAction) onReset:(id)sender
@@ -153,11 +174,31 @@
 }
 
 #pragma mark Console editing
-
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
-    
+- (void)textViewDidChange:(UITextView *)textView {
+    [textView setNeedsDisplay];
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+	[scrollView setNeedsDisplay];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if(range.location < self.lastPos) return NO;
+    
+    //Only update the text if the text changed
+	NSString* newText = [text stringByReplacingOccurrencesOfString:@"\t" withString:@"    "];
+	if(![newText isEqualToString:text]) {
+		textView.text = [textView.text stringByReplacingCharactersInRange:range withString:newText];
+		return NO;
+	}
+	return YES;
+}
+
+
+- (void) coloringOf:(NSMutableAttributedString*)original
+{
+    NSRange coloringRange = {.location=0, .length=MIN([self lastPos], original.length)};
+    [original addAttribute:(NSString*)kCTForegroundColorAttributeName value:(id)[UIColor redColor].CGColor range:coloringRange];
+}
 
 @end

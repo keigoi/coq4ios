@@ -119,6 +119,8 @@
 		591C349416BFCB8B007BA5E9 /* CQ_stubs.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C349316BFCB8A007BA5E9 /* CQ_stubs.m */; };
 		591C349816BFCC25007BA5E9 /* CQ_convert.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C349716BFCC25007BA5E9 /* CQ_convert.m */; };
 		591C349B16BFD04A007BA5E9 /* CQWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C349A16BFD04A007BA5E9 /* CQWrapper.m */; };
+		5953E66116CB8F930013CD34 /* CQColoredTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5953E66016CB8F930013CD34 /* CQColoredTextView.m */; };
+		5953E66316CB90FB0013CD34 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5953E66216CB90FB0013CD34 /* CoreText.framework */; };
 		5996424416C7BA9E00121EDE /* CQDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5996424116C7BA9E00121EDE /* CQDetailViewController.m */; };
 		5996424516C7BA9E00121EDE /* CQMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5996424316C7BA9E00121EDE /* CQMasterViewController.m */; };
 		5996424A16C7BAC300121EDE /* CQDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5996424616C7BAC300121EDE /* CQDetailViewController.xib */; };
@@ -316,6 +318,9 @@
 		591C349716BFCC25007BA5E9 /* CQ_convert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQ_convert.m; sourceTree = "<group>"; };
 		591C349916BFD04A007BA5E9 /* CQWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQWrapper.h; sourceTree = "<group>"; };
 		591C349A16BFD04A007BA5E9 /* CQWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQWrapper.m; sourceTree = "<group>"; };
+		5953E65F16CB8F930013CD34 /* CQColoredTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQColoredTextView.h; sourceTree = "<group>"; };
+		5953E66016CB8F930013CD34 /* CQColoredTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQColoredTextView.m; sourceTree = "<group>"; };
+		5953E66216CB90FB0013CD34 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		5996424016C7BA9D00121EDE /* CQDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQDetailViewController.h; sourceTree = "<group>"; };
 		5996424116C7BA9E00121EDE /* CQDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQDetailViewController.m; sourceTree = "<group>"; };
 		5996424216C7BA9E00121EDE /* CQMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQMasterViewController.h; sourceTree = "<group>"; };
@@ -433,6 +438,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5953E66316CB90FB0013CD34 /* CoreText.framework in Frameworks */,
 				59F8A7F616BDE9E00096665F /* UIKit.framework in Frameworks */,
 				59F8A7F816BDE9E00096665F /* Foundation.framework in Frameworks */,
 				59F8A7FA16BDE9E00096665F /* CoreGraphics.framework in Frameworks */,
@@ -668,6 +674,7 @@
 		59F8A7E916BDE9E00096665F = {
 			isa = PBXGroup;
 			children = (
+				5953E66216CB90FB0013CD34 /* CoreText.framework */,
 				59F8A7FD16BDE9E00096665F /* Coq4iPad */,
 				59F8A7F416BDE9E00096665F /* Frameworks */,
 				59F8A7F316BDE9E00096665F /* Products */,
@@ -712,6 +719,8 @@
 				5996424616C7BAC300121EDE /* CQDetailViewController.xib */,
 				591C349016BFC665007BA5E9 /* CQUtil.h */,
 				591C349116BFC667007BA5E9 /* CQUtil.m */,
+				5953E65F16CB8F930013CD34 /* CQColoredTextView.h */,
+				5953E66016CB8F930013CD34 /* CQColoredTextView.m */,
 				59F8A7FE16BDE9E00096665F /* Supporting Files */,
 			);
 			path = Coq4iPad;
@@ -1084,6 +1093,7 @@
 				591C349B16BFD04A007BA5E9 /* CQWrapper.m in Sources */,
 				5996424416C7BA9E00121EDE /* CQDetailViewController.m in Sources */,
 				5996424516C7BA9E00121EDE /* CQMasterViewController.m in Sources */,
+				5953E66116CB8F930013CD34 /* CQColoredTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CQFlipsideViewController.h"
+@class CQColoredTextView;
 
 @interface CQDetailViewController : UIViewController <UISplitViewControllerDelegate, CQFlipsideViewControllerDelegate, UITextViewDelegate>
 
@@ -15,7 +16,7 @@
 
 @property (strong, nonatomic) UIPopoverController *flipsidePopoverController;
 
-@property (weak, nonatomic) IBOutlet UITextView* console;
+@property (weak, nonatomic) IBOutlet CQColoredTextView* console;
 @property (weak, nonatomic) IBOutlet UIProgressView* progress;
 
 -(IBAction) onEval:(id)sender;
