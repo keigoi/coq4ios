@@ -24,7 +24,7 @@
 {
     [CQWrapper startRuntime];
     [CQWrapper startCoq:[CQUtil fullPathOf:@"coq-8.4pl1"] callback:^{}];
-    [CQWrapper loadInitial];
+    [CQWrapper loadInitialWithCallback:^{}];
 }
 
 

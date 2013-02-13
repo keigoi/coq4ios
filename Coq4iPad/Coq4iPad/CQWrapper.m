@@ -54,11 +54,12 @@ static dispatch_queue_t camlQueue;
     });
 }
 
-+(void) loadInitial
++(void) loadInitialWithCallback:(void(^)())callback
 {
     dispatch_async(camlQueue, ^{
         caml_callback(*caml_named_value("load_initial"), Val_unit);
         NSLog(@"loadInitial done");
+        dispatch_async(dispatch_get_main_queue(), callback);
     });
 }
 
@@ -98,7 +99,7 @@ static id in_caml(id(^fun)(void)) {
     caml_callback2(*caml_named_value("parse"), caml_copy_string(str), Val_ObjC_retain(match));
 }
 
-+(void) eval:(NSString*)str callback:(void(^)(NSString*))callback
++(void) eval:(NSString*)str callback:(void(^)(BOOL, NSString*))callback
 {    
     dispatch_async(camlQueue, ^{
         CAMLparam0();
@@ -106,9 +107,10 @@ static id in_caml(id(^fun)(void)) {
         NSLog(@"eval:%@", str);
         const char* strln = [[str stringByAppendingString:@"\n"] UTF8String];
         result_ = caml_callback(*caml_named_value("eval"), caml_copy_string(strln));
-        NSString* result = [NSString stringWithUTF8String:String_val(result_)];
+        BOOL success = Int_val(Field(result_,0));
+        NSString* msg = [NSString stringWithUTF8String:String_val(Field(result_, 1))];
         dispatch_async(dispatch_get_main_queue(), ^{
-            callback(result);
+            callback(success, msg);
         });
         NSLog(@"eval done");
         CAMLreturn0;
@@ -132,6 +134,13 @@ static id in_caml(id(^fun)(void)) {
     
     NSRange range = {.location=[retval[0] intValue], .length=[retval[1] intValue]};
     return range;
+}
+
++(void) enqueueCallback:(void(^)())callback
+{
+    dispatch_async(camlQueue, ^{
+        dispatch_async(dispatch_get_main_queue(), callback);
+    });
 }
 
 @end

@@ -58,16 +58,18 @@ let next_phrase_range str =
   with
     | V.End_of_input -> -1, -1
 
-let eval (str:string) =
+let eval (str:string) : bool * string =
   let po = parsable_of_string str in
   try
     let last = V.parse_sentence (po, None) in
     V.eval_expr last;
-    read_stdout ();
+    true, read_stdout ();
   with
-    | V.End_of_input -> "end of input"
-    | V.DuringCommandInterp (loc, exn) -> Printf.sprintf "DuringCommandInterp (%d,%d) %s" (L.first_pos loc) (L.last_pos loc) (Pp.string_of_ppcmds (Errors.print exn))
-    | e -> Printexc.print_backtrace stderr; prerr_endline "err"; Printexc.to_string e
+    | V.End_of_input -> (false, "end of input")
+    | V.DuringCommandInterp (loc, exn) -> 
+        let msg = Printf.sprintf "DuringCommandInterp (%d,%d) %s" (L.first_pos loc) (L.last_pos loc) (Pp.string_of_ppcmds (Errors.print exn)) in
+        (false, msg)
+    | e -> Printexc.print_backtrace stderr; prerr_endline "err"; (false, Printexc.to_string e)
 
 let compile file = 
   try

@@ -10,8 +10,22 @@
 #import "CQWrapper.h"
 #import "CQUtil.h"
 
+@interface EvalUndo : NSObject
+@property(assign, nonatomic) NSRange range;
++ (EvalUndo*)range:(NSRange)range;
+@end
+@implementation EvalUndo
++ (EvalUndo*)range:(NSRange)range;
+{
+    EvalUndo* me = [[EvalUndo alloc] init];
+    me.range = range;
+    return me;
+}
+@end
+
 @interface CQDetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
+@property (strong, nonatomic) NSMutableArray* evalUndoStack;
 - (void)configureView;
 @end
 
@@ -84,6 +98,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"Detail", @"Detail");
+        self.evalUndoStack = [NSMutableArray array];
     }
     return self;
 }
@@ -106,12 +121,27 @@
 
 -(IBAction) onEval:(id)sender
 {
-    NSRange range = [CQWrapper nextPhraseRange:self.console.text];
-    NSString* phrase = [self.console.text substringWithRange:range];
-    [CQWrapper eval:phrase callback:^(NSString* result){
-        [CQUtil showDialogWithMessage:result error:nil];
-    }];
-    
+    UIButton* button = sender;
+    [button setEnabled:NO];
+    [CQWrapper enqueueCallback:^{
+        NSRange lastRange = {.location=0, .length=0};
+        lastRange = self.evalUndoStack.count>0 ? ((EvalUndo*)self.evalUndoStack.lastObject).range : lastRange;
+        int lastpos = lastRange.location + lastRange.length;
+        
+        NSString* unevaluated = [self.console.text substringFromIndex:lastpos];
+        
+        NSRange range = [CQWrapper nextPhraseRange:unevaluated];
+        NSString* phrase = [unevaluated substringWithRange:range];
+        [CQWrapper eval:phrase callback:^(BOOL success, NSString* result){
+            [CQUtil showDialogWithMessage:result error:nil];
+            if(success) {
+                NSRange newRange = {.location=range.location+lastpos, .length=range.length};
+                [self.evalUndoStack addObject:[EvalUndo range:newRange]];
+            } else {
+            }
+            [button setEnabled:YES];
+        }];
+    }];    
 }
 
 -(IBAction) onUndo:(id)sender
@@ -121,5 +151,13 @@
 -(IBAction) onReset:(id)sender
 {
 }
+
+#pragma mark Console editing
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    
+}
+
 
 @end

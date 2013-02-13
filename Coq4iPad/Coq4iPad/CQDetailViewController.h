@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CQFlipsideViewController.h"
 
-@interface CQDetailViewController : UIViewController <UISplitViewControllerDelegate, CQFlipsideViewControllerDelegate>
+@interface CQDetailViewController : UIViewController <UISplitViewControllerDelegate, CQFlipsideViewControllerDelegate, UITextViewDelegate>
 
 @property (strong, nonatomic) id detailItem;
 
