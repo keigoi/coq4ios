@@ -11,7 +11,6 @@
 @interface CQWrapper : NSObject
 +(void) startRuntime;
 +(void) startCoq:(NSString*)coqlib callback:(void(^)())callback;
-+(void) loadInitialWithCallback:(void(^)())callback;
 +(NSArray*) libraryTheories;
 +(void) compile:(NSString*)file callback:(void(^)())callback;
 +(void) parse:(const char*)str match:(void (^)(int, NSRange))match;
@@ -21,4 +20,5 @@
 +(void) undo;
 +(void) enqueueCallback:(void(^)())callback;
 +(NSRange) nextPhraseRange:(NSString*)text;
++(void) rewind:(void(^)(int extra))callback;
 @end

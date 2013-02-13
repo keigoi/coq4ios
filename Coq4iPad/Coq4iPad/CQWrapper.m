@@ -54,15 +54,6 @@ static dispatch_queue_t camlQueue;
     });
 }
 
-+(void) loadInitialWithCallback:(void(^)())callback
-{
-    dispatch_async(camlQueue, ^{
-        caml_callback(*caml_named_value("load_initial"), Val_unit);
-        NSLog(@"loadInitial done");
-        dispatch_async(dispatch_get_main_queue(), callback);
-    });
-}
-
 static NSArray* camlArray(value v) {
     NSMutableArray* arr = [NSMutableArray array];
     int len = caml_array_length(v);
@@ -142,6 +133,22 @@ static id in_caml(id(^fun)(void)) {
         dispatch_async(dispatch_get_main_queue(), callback);
     });
 }
+
++(void) rewind:(void(^)(int extra))callback
+{
+    dispatch_async(camlQueue, ^{
+        CAMLparam0();
+        CAMLlocal1(ret_);
+        ret_ = caml_callback(*caml_named_value("rewind"), Val_int(1));
+        int ret = Int_val(ret_);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            callback(ret);
+        });
+        CAMLreturn0;
+    });
+}
+
 
 @end
 

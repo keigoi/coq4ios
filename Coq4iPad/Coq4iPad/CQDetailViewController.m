@@ -165,6 +165,12 @@
 {
     if(self.evalUndoStack.count>0) {
         [self.evalUndoStack removeLastObject];
+        [CQWrapper rewind:^(int extra) {
+            if(0==extra) return;
+            NSRange range = {.location=self.evalUndoStack.count-extra, .length=extra};
+            [self.evalUndoStack removeObjectsInRange:range];
+            [self.console setNeedsDisplay];
+        }];
         [self.console setNeedsDisplay];
     }
 }

@@ -56,7 +56,9 @@ let next_phrase_range str =
     Printf.fprintf stderr "parse range: %d %d" (L.first_pos loc) (L.last_pos loc);
     L.first_pos loc, L.last_pos loc
   with
-    | V.End_of_input -> -1, -1
+    | e -> 
+        prerr_endline (Printexc.to_string e); 
+        -1, -1
 
 let eval (str:string) : bool * string =
   let po = parsable_of_string str in
@@ -69,7 +71,9 @@ let eval (str:string) : bool * string =
     | V.DuringCommandInterp (loc, exn) -> 
         let msg = Printf.sprintf "DuringCommandInterp (%d,%d) %s" (L.first_pos loc) (L.last_pos loc) (Pp.string_of_ppcmds (Errors.print exn)) in
         (false, msg)
-    | e -> Printexc.print_backtrace stderr; prerr_endline "err"; (false, Printexc.to_string e)
+    | e -> 
+        Printexc.print_backtrace stderr; prerr_endline "err"; 
+        (false, Printexc.to_string e)
 
 let compile file = 
   try
@@ -80,13 +84,12 @@ let compile file =
     Printf.printf "Compile Error: (%d, %d) in %s\n" (L.first_pos loc) (L.last_pos loc) file;
     raise exn
 
-(* load MakeInitial and save snapshot, then set -top Top  *)
-let load_initial () =
-  States.unfreeze !saved_state;
-  (* Declaremods.start_library (Names.make_dirpath [Names.id_of_string "Top"]); *)
-  V.load_vernac false (!Flags.coqlib^"/states/MakeInitial.v");
-  saved_state := States.freeze();
-  Declaremods.start_library (Names.make_dirpath [Names.id_of_string "Top"])
+let rewind i = 
+  try
+    Backtrack.back i
+  with 
+    Backtrack.Invalid -> 0
+
 
 
 (* -coqlib <dir> -boot -nois -notop *)
@@ -108,19 +111,35 @@ let start root =
   Syntax_def.set_compat_notations true;
   Coqinit.init_library_roots ();
 
-  saved_state := States.freeze();
-
   (* enumerate all .v files and make the dependency graph *)
   library_theories := Array.of_list (Pathmap.add_load_paths [root^"/theories"; root^"/plugins"; root^"/states"]);
+
+  Declaremods.start_library (Names.make_dirpath [Names.id_of_string "Top"]);
+  V.load_vernac false (!Flags.coqlib^"/states/MakeInitial.v");
+  saved_state := States.freeze();
+
+  ignore (eval "Inductive F:=.\n"); ignore (eval "Reset Initial.\n"); (* without this, Undoing of the first command fails. why?? *)
   ()
 ;;
 
 Callback.register "start" start;
-Callback.register "load_initial" load_initial;
 Callback.register "compile" compile;
 Callback.register "eval" eval;
 Callback.register "library_theories" (fun _ -> !library_theories);
 (* 
 Callback.register "parse" parse;
 *)
-Callback.register "next_phranse_range" next_phrase_range
+Callback.register "next_phranse_range" next_phrase_range;
+Callback.register "rewind" rewind;
+(*
+print_endline "start.";
+start "./coq-src";
+print_endline "loadinitial.";
+load_initial ();
+print_endline "eval.";
+eval "Inductive F:=.\n";
+print_endline "rewrind.";
+(* rewind 1; *)
+Backtrack.sync 0;;
+print_endline "finished.";
+*)
