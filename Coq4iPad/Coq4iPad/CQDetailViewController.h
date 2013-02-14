@@ -16,10 +16,10 @@
 
 @property (strong, nonatomic) UIPopoverController *flipsidePopoverController;
 
+@property (weak, nonatomic) IBOutlet UITextView* status;
 @property (weak, nonatomic) IBOutlet CQColoredTextView* console;
-@property (weak, nonatomic) IBOutlet UIProgressView* progress;
 
 -(IBAction) onEval:(id)sender;
--(IBAction) onUndo:(id)sender;
+-(IBAction) onBack:(id)sender;
 -(IBAction) onReset:(id)sender;
 @end

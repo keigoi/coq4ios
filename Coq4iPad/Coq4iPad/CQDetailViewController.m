@@ -13,31 +13,38 @@
 
 #import <CoreText/CoreText.h>
 
-@interface EvalUndo : NSObject
+/** backstack element */
+@interface BackInfo : NSObject
+// status string
+@property(strong,nonatomic) NSString* status;
+// range of the added line(s) in console
 @property(assign, nonatomic) NSRange range;
-+ (EvalUndo*)range:(NSRange)range;
++ (BackInfo*)range:(NSRange)range;
 @end
-@implementation EvalUndo
-+ (EvalUndo*)range:(NSRange)range;
+
+@implementation BackInfo
++ (BackInfo*)range:(NSRange)range status:(NSString*)status;
 {
-    EvalUndo* me = [[EvalUndo alloc] init];
+    BackInfo* me = [[BackInfo alloc] init];
     me.range = range;
+    me.status = status;
     return me;
 }
 @end
 
 @interface CQDetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
-@property (strong, nonatomic) NSMutableArray* evalUndoStack;
+@property (strong, nonatomic) NSMutableArray* backStack;
 - (void)configureView;
 @end
 
 @implementation CQDetailViewController
 
+// cursor position of the end of the last line accepted by Coq
 -(int) lastPos
 {
     NSRange lastRange = {.location=0, .length=0};
-    lastRange = self.evalUndoStack.count>0 ? ((EvalUndo*)self.evalUndoStack.lastObject).range : lastRange;
+    lastRange = self.backStack.count>0 ? ((BackInfo*)self.backStack.lastObject).range : lastRange;
     return lastRange.location + lastRange.length;
 }
 
@@ -112,7 +119,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"Detail", @"Detail");
-        self.evalUndoStack = [NSMutableArray array];
+        self.backStack = [NSMutableArray array];
     }
     return self;
 }
@@ -144,39 +151,54 @@
         
         NSRange range = [CQWrapper nextPhraseRange:unevaluated];
         if(-1==range.location) {
+            self.status.text = [self.status.text stringByAppendingString:@"Syntax error.\n"];
             [button setEnabled:YES];
             return;
         }
         NSString* phrase = [unevaluated substringWithRange:range];
         [CQWrapper eval:phrase callback:^(BOOL success, NSString* result){
-            [CQUtil showDialogWithMessage:result error:nil];
             if(success) {
+                self.status.text = [result stringByAppendingFormat:@"\n"];
+                // add back stack
                 NSRange newRange = {.location=range.location+lastpos, .length=range.length};
-                [self.evalUndoStack addObject:[EvalUndo range:newRange]];
+                [self.backStack addObject:[BackInfo range:newRange status:result]];
+                // insert newline if we are in bottom
+                if(self.lastPos==self.console.text.length) {
+                    self.console.text = [self.console.text stringByAppendingString:@"\n"];
+                }
                 [self.console setNeedsDisplay];
             } else {
+                self.status.text =
+                    [self.status.text stringByAppendingString:
+                        [result stringByAppendingFormat:@"\n"]];
             }
             [button setEnabled:YES];
         }];
     }];    
 }
 
--(IBAction) onUndo:(id)sender
+-(IBAction) onBack:(id)sender
 {
-    if(self.evalUndoStack.count>0) {
-        [self.evalUndoStack removeLastObject];
+    if(self.backStack.count>0) {
+        [self.backStack removeLastObject];
         [CQWrapper rewind:^(int extra) {
-            if(0==extra) return;
-            NSRange range = {.location=self.evalUndoStack.count-extra, .length=extra};
-            [self.evalUndoStack removeObjectsInRange:range];
+            NSRange range = {.location=self.backStack.count-extra, .length=extra};
+            if(range.length>0) {
+                [self.backStack removeObjectsInRange:range];
+            }
+            self.status.text = self.backStack.count>0 ? ((BackInfo*)self.backStack.lastObject).status : @"BackStack is empty.";
             [self.console setNeedsDisplay];
         }];
-        [self.console setNeedsDisplay];
     }
 }
 
 -(IBAction) onReset:(id)sender
 {
+    [CQWrapper resetInitial:^{
+        [self.backStack removeAllObjects];
+        self.status.text = @"";
+        [self.console setNeedsDisplay];
+    }];
 }
 
 #pragma mark Console editing

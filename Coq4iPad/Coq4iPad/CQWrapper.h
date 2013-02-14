@@ -21,4 +21,5 @@
 +(void) enqueueCallback:(void(^)())callback;
 +(NSRange) nextPhraseRange:(NSString*)text;
 +(void) rewind:(void(^)(int extra))callback;
++(void) resetInitial:(void(^)())callback;
 @end

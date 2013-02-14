@@ -60,16 +60,20 @@ let next_phrase_range str =
         prerr_endline (Printexc.to_string e); 
         -1, -1
 
-let eval (str:string) : bool * string =
+let eval ?(raw=false) (str:string) : bool * string =
   let po = parsable_of_string str in
   try
     let last = V.parse_sentence (po, None) in
-    V.eval_expr last;
-    true, read_stdout ();
+    if not raw && Vernacexpr.is_navigation_vernac (snd last) then
+      false, "Please use navigation buttons instead."
+    else begin
+      V.eval_expr last;
+      true, read_stdout ();
+    end
   with
     | V.End_of_input -> (false, "end of input")
     | V.DuringCommandInterp (loc, exn) -> 
-        let msg = Printf.sprintf "DuringCommandInterp (%d,%d) %s" (L.first_pos loc) (L.last_pos loc) (Pp.string_of_ppcmds (Errors.print exn)) in
+        let msg = Printf.sprintf "error at (%d,%d) %s" (L.first_pos loc) (L.last_pos loc) (Pp.string_of_ppcmds (Errors.print exn)) in
         (false, msg)
     | e -> 
         Printexc.print_backtrace stderr; prerr_endline "err"; 
@@ -90,7 +94,7 @@ let rewind i =
   with 
     Backtrack.Invalid -> 0
 
-
+let reset_initial () = eval ~raw:true "Reset Initial.\n"
 
 (* -coqlib <dir> -boot -nois -notop *)
 let start root =
@@ -118,19 +122,20 @@ let start root =
   V.load_vernac false (!Flags.coqlib^"/states/MakeInitial.v");
   saved_state := States.freeze();
 
-  ignore (eval "Inductive F:=.\n"); ignore (eval "Reset Initial.\n"); (* without this, Undoing of the first command fails. why?? *)
+  ignore (eval ~raw:true "Inductive __:=.\n"); ignore (eval ~raw:true "Reset Initial.\n"); (* without this, Undoing of the first command fails. why?? *)
   ()
 ;;
 
 Callback.register "start" start;
 Callback.register "compile" compile;
-Callback.register "eval" eval;
+Callback.register "eval" (fun str -> eval str);
 Callback.register "library_theories" (fun _ -> !library_theories);
 (* 
 Callback.register "parse" parse;
 *)
 Callback.register "next_phranse_range" next_phrase_range;
 Callback.register "rewind" rewind;
+Callback.register "reset_initial" reset_initial;
 (*
 print_endline "start.";
 start "./coq-src";

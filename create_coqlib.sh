@@ -43,7 +43,7 @@ ocamlc -a -g -o coqlib.cma \
 
 ./prepare_ocaml.sh
 
-$OCAMLC -g -o coqlib.byte \
+$OCAMLC -o coqlib.byte \
   -linkall -noautolink -use-prims tmp/primitives-all \
   str.cma nums.cma unix.cma dynlink.cma \
   camlp5/gramlib.cma \
