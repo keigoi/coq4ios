@@ -19,11 +19,11 @@
 @property(strong,nonatomic) NSString* status;
 // range of the added line(s) in console
 @property(assign, nonatomic) NSRange range;
-+ (BackInfo*)range:(NSRange)range;
++ (BackInfo*)range:(NSRange)range status:(NSString*)status;
 @end
 
 @implementation BackInfo
-+ (BackInfo*)range:(NSRange)range status:(NSString*)status;
++ (BackInfo*)range:(NSRange)range status:(NSString*)status
 {
     BackInfo* me = [[BackInfo alloc] init];
     me.range = range;
@@ -77,7 +77,6 @@
     if (_detailItem != newDetailItem) {
         _detailItem = newDetailItem;
         
-        [CQWrapper reset];
         [self configureView];
     }
 
@@ -106,6 +105,11 @@
     
 	// Do any additional setup after loading the view, typically from a nib.
     [self configureView];
+    
+    [CQWrapper setDelegate:self];
+    self.status.text = @"Initializing..";
+    [CQWrapper startRuntime];
+    [CQWrapper startCoq:[CQUtil fullPathOf:@"coq-8.4pl1"] callback:^{}];
 }
 
 - (void)didReceiveMemoryWarning
@@ -140,10 +144,10 @@
     self.masterPopoverController = nil;
 }
 
+#pragma mark button event handlers
+
 -(IBAction) onEval:(id)sender
 {
-    UIButton* button = sender;
-    [button setEnabled:NO];
     [CQWrapper enqueueCallback:^{
         int lastpos = [self lastPos];
         
@@ -152,7 +156,6 @@
         NSRange range = [CQWrapper nextPhraseRange:unevaluated];
         if(-1==range.location) {
             self.status.text = [self.status.text stringByAppendingString:@"Syntax error.\n"];
-            [button setEnabled:YES];
             return;
         }
         NSString* phrase = [unevaluated substringWithRange:range];
@@ -172,7 +175,6 @@
                     [self.status.text stringByAppendingString:
                         [result stringByAppendingFormat:@"\n"]];
             }
-            [button setEnabled:YES];
         }];
     }];    
 }
@@ -226,7 +228,23 @@
 - (void) coloringOf:(NSMutableAttributedString*)original
 {
     NSRange coloringRange = {.location=0, .length=MIN([self lastPos], original.length)};
-    [original addAttribute:(NSString*)kCTForegroundColorAttributeName value:(id)[UIColor redColor].CGColor range:coloringRange];
+    [original addAttribute:(NSString*)kCTForegroundColorAttributeName value:(id)[UIColor blueColor].CGColor range:coloringRange];
+}
+
+#pragma mark Coq wrapper delegate
+
+- (void) enterBusy
+{
+    self.busyOverlay.hidden = NO;
+    self.backButton.enabled = NO;
+    self.evalButton.enabled = NO;
+}
+
+- (void) exitBusy
+{
+    self.busyOverlay.hidden = YES;
+    self.backButton.enabled = YES;
+    self.evalButton.enabled = YES;
 }
 
 @end

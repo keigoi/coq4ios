@@ -12,6 +12,7 @@
 #import "CQ_convert.h"
 
 static dispatch_queue_t camlQueue;
+id<CQWrapperDelegate> delegate;
 
 
 @implementation CQWrapper
@@ -21,9 +22,31 @@ static dispatch_queue_t camlQueue;
     camlQueue = dispatch_queue_create("jp.keigoimai.Coq4iPad", NULL);
 }
 
-+(void) startRuntime
++(void) setDelegate:(id<CQWrapperDelegate>)delegate_
+{
+    delegate = delegate_;
+}
+
+static void caml_dispatch(dispatch_block_t block)
 {
     dispatch_async(camlQueue, ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if(delegate) {
+                [delegate enterBusy];
+            }
+        });
+        block();
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if(delegate) {
+                [delegate exitBusy];
+            }
+        });
+    });
+}
+
++(void) startRuntime
+{
+    caml_dispatch(^{
         NSLog(@"startRuntime");
         const char* argv[] = {
             "ocamlrun",
@@ -37,7 +60,7 @@ static dispatch_queue_t camlQueue;
 
 +(void) startCoq:(NSString*)coqlib callback:(void(^)())callback
 {
-    dispatch_async(camlQueue, ^{
+    caml_dispatch(^{
         NSLog(@"startCoq:%@", coqlib);
         caml_callback(*caml_named_value("start"), caml_copy_string([[CQUtil fullPathOf:coqlib] UTF8String]));
         dispatch_async(dispatch_get_main_queue(), callback);
@@ -47,7 +70,7 @@ static dispatch_queue_t camlQueue;
 
 +(void) compile:(NSString*)file callback:(void(^)())callback
 {
-    dispatch_async(camlQueue, ^{
+    caml_dispatch(^{
         NSLog(@"compile: %@", file);
         caml_callback(*caml_named_value("compile"), caml_copy_string([file UTF8String]));
         dispatch_async(dispatch_get_main_queue(), callback);
@@ -92,7 +115,7 @@ static id in_caml(id(^fun)(void)) {
 
 +(void) eval:(NSString*)str callback:(void(^)(BOOL, NSString*))callback
 {    
-    dispatch_async(camlQueue, ^{
+    caml_dispatch(^{
         CAMLparam0();
         CAMLlocal1(result_);
         NSLog(@"eval:%@", str);
@@ -129,14 +152,14 @@ static id in_caml(id(^fun)(void)) {
 
 +(void) enqueueCallback:(void(^)())callback
 {
-    dispatch_async(camlQueue, ^{
+    caml_dispatch(^{
         dispatch_async(dispatch_get_main_queue(), callback);
     });
 }
 
 +(void) rewind:(void(^)(int extra))callback
 {
-    dispatch_async(camlQueue, ^{
+    caml_dispatch(^{
         CAMLparam0();
         CAMLlocal1(ret_);
         ret_ = caml_callback(*caml_named_value("rewind"), Val_int(1));
@@ -151,7 +174,7 @@ static id in_caml(id(^fun)(void)) {
 
 +(void) resetInitial:(void(^)())callback
 {
-    dispatch_async(camlQueue, ^{
+    caml_dispatch(^{
         caml_callback(*caml_named_value("reset_initial"), Val_unit);
         dispatch_async(dispatch_get_main_queue(), callback);
     });

@@ -20,13 +20,6 @@
 
 @implementation CQAppDelegate
 
-- (void)prepare
-{
-    [CQWrapper startRuntime];
-    [CQWrapper startCoq:[CQUtil fullPathOf:@"coq-8.4pl1"] callback:^{}];
-}
-
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -47,8 +40,6 @@
     [self.window makeKeyAndVisible];
     
     self.detailVC = detailViewController;
-    
-    [self prepare];
     
     return YES;
 }
