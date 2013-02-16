@@ -15,6 +15,7 @@
 
 @interface CQWrapper : NSObject
 // Coq functions in main.ml
++(BOOL) isReady;
 +(void) startRuntime;
 +(void) startCoq:(NSString*)coqlib callback:(void(^)(BOOL))callback;
 +(NSArray*) libraryTheories;

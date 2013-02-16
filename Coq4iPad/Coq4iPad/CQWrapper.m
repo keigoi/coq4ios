@@ -12,7 +12,8 @@
 #import "CQ_convert.h"
 
 static dispatch_queue_t camlQueue;
-id<CQWrapperDelegate> delegate;
+static id<CQWrapperDelegate> delegate;
+static BOOL ready = NO;
 
 
 @implementation CQWrapper
@@ -25,6 +26,11 @@ id<CQWrapperDelegate> delegate;
 +(void) setDelegate:(id<CQWrapperDelegate>)delegate_
 {
     delegate = delegate_;
+}
+
++(BOOL) isReady
+{
+    return ready;
 }
 
 // wrap async call with [delegate enterBusy] and [delegate exitBusy]
@@ -66,6 +72,8 @@ static void caml_dispatch(dispatch_block_t block)
         CAMLlocal1(res);
         NSLog(@"startCoq:%@", coqlib);
         res = caml_callback(*caml_named_value("start"), caml_copy_string([[CQUtil fullPathOf:coqlib] UTF8String]));
+        ready = YES;
+
         BOOL result = Bool_val(res);
         dispatch_async(dispatch_get_main_queue(), ^{callback(result);});
         NSLog(@"startCoq done");

@@ -160,6 +160,10 @@
     if (self.document != document) {
         // close (and save) old document
         [self.document closeWithCompletionHandler:nil];
+        [self.backStack removeAllObjects];
+        if(CQWrapper.isReady) {
+            [CQWrapper resetInitial:^{}]; // FIXME here we should clear the camlQueue instead            
+        }
         
         // open new document
         NSLog(@"Opening document: %@", document.fileURL.path);
