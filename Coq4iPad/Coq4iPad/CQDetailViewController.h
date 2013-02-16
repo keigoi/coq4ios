@@ -10,6 +10,7 @@
 #import "CQFlipsideViewController.h"
 #import "CQWrapper.h"
 
+@class CQVernacDocument;
 @class CQColoredTextView;
 
 @interface CQDetailViewController
@@ -20,13 +21,13 @@
         CQWrapperDelegate
         >
 
-@property (strong, nonatomic) id detailItem;
+@property (strong, nonatomic) CQVernacDocument* document;
+
 @property (strong, nonatomic) UIPopoverController *flipsidePopoverController;
 
 @property (weak, nonatomic) IBOutlet UIView* busyOverlay;
 @property (weak, nonatomic) IBOutlet UIButton* evalButton;
 @property (weak, nonatomic) IBOutlet UIButton* backButton;
-
 @property (weak, nonatomic) IBOutlet UITextView* status;
 @property (weak, nonatomic) IBOutlet CQColoredTextView* console;
 

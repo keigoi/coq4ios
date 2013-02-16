@@ -8,9 +8,11 @@
 
 #import "CQMasterViewController.h"
 #import "CQDetailViewController.h"
+#import "CQVernacDocument.h"
 #import "CQUtil.h"
 
 @interface CQMasterViewController ()
+@property(assign,nonatomic) BOOL _createFile;
 @property(strong,nonatomic) NSArray* files;
 @end
 
@@ -20,22 +22,88 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Master", @"Master");
+        self.title = NSLocalizedString(@"File list", @"Title label for file list (master) view");
         self.clearsSelectionOnViewWillAppear = NO;
         self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
-        self.files = [NSArray array];
+        self.files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[CQUtil docDir] error:nil];
+        self._createFile = TRUE;
     }
     return self;
 }
-							
+
+- (NSString*)newModuleId
+{
+    return [NSString stringWithFormat:@"NewTheory%d", (self.files.count+1)];
+}
+
+- (NSString*)currentFile
+{
+    return [self.detailViewController.document.fileURL lastPathComponent];
+}
+
+- (void)openDocument:(NSString*)item
+{
+    if([self.currentFile isEqualToString:item]) {
+        // already opened
+        [self dismissModalViewControllerAnimated:TRUE];
+        return;
+    }
+    NSURL* url = [NSURL fileURLWithPath:[[CQUtil docDir] stringByAppendingPathComponent:item]];
+    self.detailViewController.document = [[CQVernacDocument alloc] initWithFileURL:url];
+}
+
+- (void)openNewDocument:(NSString*)newFileName
+{
+    if([self.files containsObject:newFileName]) {
+        NSString* msg = [NSString stringWithFormat:@"File with the same name already exists: %@", newFileName];
+        [CQUtil showDialogWithMessage:msg error:nil];
+        return;
+    }
+    
+    NSURL* newUrl = [NSURL fileURLWithPath:[[CQUtil docDir] stringByAppendingPathComponent:newFileName]];
+    
+    CQVernacDocument* newDoc = [[CQVernacDocument alloc] initWithFileURL:newUrl];
+    
+    // set initial content
+    newDoc.codeText = [NSString stringWithContentsOfFile:[CQUtil fullPathOf:@"InitialVernacConsoleContent.v"]
+                                                encoding:NSUTF8StringEncoding
+                                                   error:nil];
+    
+    [newDoc saveToURL:newDoc.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
+        if (success) {
+            [self refresh];
+            [self openDocument:newFileName];
+        } else {
+            NSString* msg = [NSString stringWithFormat:@"Cannot create new module: %@", newFileName];
+            [CQUtil showDialogWithMessage:msg error:nil];
+        }
+    }];    
+}
+
+#pragma mark initialization
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    // toolbar
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onInsertNewDocument:)];
     self.navigationItem.rightBarButtonItem = addButton;
+    
+    // open most recent document
+    if(self.files.count>0) {
+        [self openDocument:self.files[0]];
+        
+    } else if(self._createFile) { // if there's no file, create an empty one on startup
+
+        self._createFile = FALSE;
+        
+        NSString* newFileName = [[self newModuleId] stringByAppendingPathExtension:@"v"];
+        [self openNewDocument:newFileName];
+    }
     
     [self refresh];
 }
@@ -46,42 +114,40 @@
     // Dispose of any resources that can be recreated.
 }
 
-const NSRange NOT_FOUND = {NSNotFound, 0};
-static BOOL isValidModId(NSString* name) {
-    NSRange range = [name rangeOfString:@"^[A-Za-z_][A-Za-z0-9_]*$" options:NSRegularExpressionSearch];
-    return !(range.length == NOT_FOUND.length && range.location == NOT_FOUND.location);
-}
-
-- (void)insertNewObject:(id)sender
-{
-    CQMasterViewController* wself = self;
-    NSString * newName = [NSString stringWithFormat:@"NewTheory%d", (self.files.count+1)];
-    
-    [CQUtil showDialogWithMessage:@"Input new Vernac module name:"
-                textboxWithString:newName
-                         callback:^(NSString* name) {
-                             if(!name) return;
-                             if(!isValidModId(name)) {
-                                 [CQUtil showDialogWithMessage:@"Invalid module identifier" error:nil];
-                                 return;
-                             }
-                             NSString* path = [[[CQUtil docDir] stringByAppendingPathComponent:name] stringByAppendingPathExtension:@"v"];
-                             NSFileManager* fm = [NSFileManager defaultManager];
-                             BOOL result = [fm createFileAtPath:path contents:[NSData data] attributes:nil];
-                             if(!result) {
-                                 [CQUtil showDialogWithMessage:@"Cannot create module." error:nil];
-                                 return;                                 
-                             }
-                             [wself refresh];
-                         }];
-    
-}
-
 - (void) refresh
 {
     self.files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[CQUtil docDir] error:nil];
     [self.tableView reloadData];
     [self.tableView flashScrollIndicators];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self refresh];
+}
+
+#pragma mark - event handlers
+
+- (void)onInsertNewDocument:(id)sender
+{
+    CQMasterViewController* wself = self;
+    NSString * newName = [self newModuleId];
+    
+    [CQUtil showDialogWithMessage:@"Input new Vernac module name:"
+                textboxWithString:newName
+                         callback:^(NSString* name) {
+                             if(!name) return;
+                             if([CQVernacDocument isValidModuleId:name]) {
+                                 NSString* newFileName = [name stringByAppendingPathExtension:@"v"];
+                                 [self openNewDocument:newFileName];
+                                 [wself refresh];
+                             } else {
+                                 [CQUtil showDialogWithMessage:@"Invalid module identifier" error:nil];
+                                 return;
+                             }
+                         }];
+    
 }
 
 #pragma mark - Table View
@@ -106,13 +172,15 @@ static BOOL isValidModId(NSString* name) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
 
-    cell.textLabel.text = self.files[indexPath.row];
+    NSString* filename = self.files[indexPath.row];
+    cell.textLabel.text = filename;
+    cell.textLabel.textColor = [filename isEqualToString:self.currentFile] ? [UIColor blueColor] : [UIColor blackColor];
     return cell;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return YES;
+    return ![self.currentFile isEqualToString:self.files[indexPath.row]];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -129,15 +197,10 @@ static BOOL isValidModId(NSString* name) {
     }
 }
 
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // The table view should not be re-orderable.
-    return NO;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // self.detailViewController.detailItem = something;
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self openDocument:self.files[indexPath.row]];
 }
 
 @end

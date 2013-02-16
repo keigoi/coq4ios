@@ -7,6 +7,7 @@
 //
 
 #import "CQDetailViewController.h"
+#import "CQVernacDocument.h"
 #import "CQColoredTextView.h"
 #import "CQWrapper.h"
 #import "CQUtil.h"
@@ -14,9 +15,11 @@
 
 #import <CoreText/CoreText.h>
 
-/** backstack element */
+/**
+ * backstack (a.k.a "undo" stack of evaluation) element
+ */
 @interface BackInfo : NSObject
-// status string
+// status string of that time
 @property(strong,nonatomic) NSString* status;
 // range of the added line(s) in console
 @property(assign, nonatomic) NSRange range;
@@ -33,10 +36,11 @@
 }
 @end
 
+#pragma mark - CQDetailViewController
+
 @interface CQDetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
 @property (strong, nonatomic) NSMutableArray* backStack;
-- (void)configureView;
 @end
 
 @implementation CQDetailViewController
@@ -48,6 +52,134 @@
     lastRange = self.backStack.count>0 ? ((BackInfo*)self.backStack.lastObject).range : lastRange;
     return lastRange.location + lastRange.length;
 }
+
+#pragma mark - initialization & finalization
+
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.title = NSLocalizedString(@"Empty Theory", @"Empty Theory (initial title string for editing view)");
+        self.backStack = [NSMutableArray array];
+    }
+    return self;
+}
+
+- (void)configureView
+{
+    // Update the user interface for the detail item.
+
+    if (self.document) {
+        self.title = self.document.fileURL.lastPathComponent;
+        self.console.text = self.document.codeText;
+    }
+}
+
+- (void)startCoqAt:(NSString*)coqroot
+{
+    [CQWrapper setDelegate:self];
+    self.status.text = @"Initializing..";
+    [CQWrapper startRuntime];
+    [CQWrapper startCoq:coqroot callback:^(BOOL result){
+        if(result) {
+            self.status.text = [self.status.text stringByAppendingString:@"Done.\n"];
+        } else {
+            self.status.text = @"Error"; // FIXME more detailed diagnosis message?
+        }
+    }];
+}
+
+- (void)prepareCoq
+{
+    
+    // If stdlib does not exist in cache directory, expand it from the 7z archive
+    NSString* coqroot = [[CQUtil cacheDir] stringByAppendingPathComponent:@"coq-8.4pl1"];
+    NSString* testvo = [coqroot stringByAppendingString:@"/theories/Arith/Arith.vo"];
+    
+    if(![[NSFileManager defaultManager] fileExistsAtPath:testvo]) {
+        
+        self.status.text = @"Installing the Coq standard library...\n";
+        
+        [CQWrapper runInQueue:^{
+            
+            [LZMAExtractor extract7zArchive:[CQUtil fullPathOf:@"coq-8.4pl1-standard-libs-for-coq4ios.7z"] dirName:coqroot preserveDir:TRUE];
+            
+            // and start Coq
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.status.text = [self.status.text stringByAppendingString:@"Done.\n"];
+                [self startCoqAt:coqroot];
+            });
+        }];
+    } else {
+        [self startCoqAt:coqroot];
+    }
+}
+
+- (void)viewDidLoad
+{
+    NSLog(@"detail view: didload");
+    [super viewDidLoad];
+    
+    // status bar
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showInfo:)];
+    self.navigationItem.rightBarButtonItem = addButton;
+    
+    // console (editor view)
+    self.console.coloringFun = ^(NSMutableAttributedString* str){
+        [self coloringOf:str];
+    };
+    
+    [self configureView];
+
+    [self prepareCoq];
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSLog(@"DetailView: will appear");
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self.document closeWithCompletionHandler:nil];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Managing the document
+
+- (void)setDocument:(CQVernacDocument *)document
+{
+    if (self.document != document) {
+        // close (and save) old document
+        [self.document closeWithCompletionHandler:nil];
+        
+        // open new document
+        NSLog(@"Opening document: %@", document.fileURL.path);
+        self->_document = document;
+        
+        __weak CQDetailViewController* wself = self;
+        [self.document openWithCompletionHandler:^(BOOL success){
+            if(success) {
+                [wself configureView];
+            } else {
+                [CQUtil showDialogWithMessage:@"Cannot open document" error:nil];
+            }
+        }];
+    }
+    
+    if (self.masterPopoverController != nil) {
+        [self.masterPopoverController dismissPopoverAnimated:YES];
+    }
+}
+
 
 #pragma mark - Flipside View Controller
 
@@ -71,98 +203,12 @@
     }
 }
 
-#pragma mark - Managing the detail item
 
-- (void)setDetailItem:(id)newDetailItem
-{
-    if (_detailItem != newDetailItem) {
-        _detailItem = newDetailItem;
-        
-        [self configureView];
-    }
-
-    if (self.masterPopoverController != nil) {
-        [self.masterPopoverController dismissPopoverAnimated:YES];
-    }        
-}
-
-#pragma mark - initialization
-
-- (void)configureView
-{
-    // Update the user interface for the detail item.
-
-    if (self.detailItem) {
-    }
-    
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showInfo:)];
-    self.navigationItem.rightBarButtonItem = addButton;
-}
-
-- (void)startCoqAt:(NSString*)coqroot
-{
-    [CQWrapper setDelegate:self];
-    self.status.text = @"Initializing..";
-    [CQWrapper startRuntime];
-    [CQWrapper startCoq:coqroot callback:^(BOOL result){
-        if(!result) {
-            self.status.text = @"Error";
-        }
-    }];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.console.coloringFun = ^(NSMutableAttributedString* str){
-        [self coloringOf:str];
-    };
-    
-	// Do any additional setup after loading the view, typically from a nib.
-    [self configureView];
-    
-    NSString* coqroot = [[CQUtil cacheDir] stringByAppendingPathComponent:@"coq-8.4pl1"];
-    NSString* testvo = [coqroot stringByAppendingString:@"/theories/Arith/Arith.vo"];
-    
-    if(![[NSFileManager defaultManager] fileExistsAtPath:testvo]) {
-        
-        self.status.text = @"Extracting the Coq standard library...\n";
-        
-        [CQWrapper runInQueue:^{
-            
-            [LZMAExtractor extract7zArchive:[CQUtil fullPathOf:@"coq-8.4pl1-standard-libs-for-coq4ios.7z"] dirName:coqroot preserveDir:TRUE];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.status.text = [self.status.text stringByAppendingString:@"Done.\n"];
-                [self startCoqAt:coqroot];
-            });
-        }];
-    } else {
-        [self startCoqAt:coqroot];
-    }
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.title = NSLocalizedString(@"Detail", @"Detail");
-        self.backStack = [NSMutableArray array];
-    }
-    return self;
-}
-							
-#pragma mark - Split view
+#pragma mark Split view
 
 - (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
 {
-    barButtonItem.title = NSLocalizedString(@"Master", @"Master");
+    barButtonItem.title = NSLocalizedString(@"Files", @"File list button label on Console's navibar left");
     [self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
     self.masterPopoverController = popoverController;
 }
@@ -234,7 +280,25 @@
 }
 
 #pragma mark Console editing
+- (void)undoCodeText:(NSString*)codeText
+{
+    self.document.codeText = codeText;
+    self.console.text = codeText;
+}
+
+
 - (void)textViewDidChange:(UITextView *)textView {
+    
+    NSString* currentText = self.document.codeText;
+    
+    // update CQVernacDocument with the latest UITextView content
+    self.document.codeText = textView.text;
+    
+    // this triggers auto-save in CQVernacDocument
+    [_document.undoManager registerUndoWithTarget:self
+                                         selector:@selector(undoCodeText:)
+                                           object:currentText];
+    
     [textView setNeedsDisplay];
 }
 

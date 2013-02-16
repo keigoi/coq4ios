@@ -20,6 +20,11 @@
     return self;
 }
 
+- (void)setText:(NSString *)text
+{
+    [super setText:text];
+    [self setNeedsDisplay];
+}
 
 // from: https://github.com/KayK/RegexHighlightView/
 

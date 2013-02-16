@@ -10,8 +10,6 @@
 
 @class CQDetailViewController;
 
-#import <CoreData/CoreData.h>
-
 @interface CQMasterViewController : UITableViewController
 
 @property (strong, nonatomic) CQDetailViewController *detailViewController;

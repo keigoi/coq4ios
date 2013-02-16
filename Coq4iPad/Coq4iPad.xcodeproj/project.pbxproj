@@ -124,6 +124,8 @@
 		5996424516C7BA9E00121EDE /* CQMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5996424316C7BA9E00121EDE /* CQMasterViewController.m */; };
 		5996424A16C7BAC300121EDE /* CQDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5996424616C7BAC300121EDE /* CQDetailViewController.xib */; };
 		5996424B16C7BAC300121EDE /* CQMasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5996424816C7BAC300121EDE /* CQMasterViewController.xib */; };
+		59C9BCB116CF738D0019F1C6 /* CQVernacDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 59C9BCB016CF738D0019F1C6 /* CQVernacDocument.m */; };
+		59C9BCB316CF95740019F1C6 /* InitialVernacConsoleContent.v in Resources */ = {isa = PBXBuildFile; fileRef = 59C9BCB216CF95740019F1C6 /* InitialVernacConsoleContent.v */; };
 		59F5345316CEEF42004216E8 /* liblzmaSDK-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59F5345216CEEE2C004216E8 /* liblzmaSDK-ios.a */; };
 		59F5345716CEF315004216E8 /* coq-8.4pl1-standard-libs-for-coq4ios.7z in Resources */ = {isa = PBXBuildFile; fileRef = 59F5345616CEF315004216E8 /* coq-8.4pl1-standard-libs-for-coq4ios.7z */; };
 		59F8A7F616BDE9E00096665F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59F8A7F516BDE9E00096665F /* UIKit.framework */; };
@@ -344,6 +346,9 @@
 		5996424316C7BA9E00121EDE /* CQMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQMasterViewController.m; sourceTree = "<group>"; };
 		5996424716C7BAC300121EDE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CQDetailViewController.xib; sourceTree = "<group>"; };
 		5996424916C7BAC300121EDE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CQMasterViewController.xib; sourceTree = "<group>"; };
+		59C9BCAF16CF738D0019F1C6 /* CQVernacDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQVernacDocument.h; sourceTree = "<group>"; };
+		59C9BCB016CF738D0019F1C6 /* CQVernacDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQVernacDocument.m; sourceTree = "<group>"; };
+		59C9BCB216CF95740019F1C6 /* InitialVernacConsoleContent.v */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = InitialVernacConsoleContent.v; sourceTree = "<group>"; };
 		59F5344A16CEEE2C004216E8 /* lzmaSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = lzmaSDK.xcodeproj; path = ../lzmaSDK/lzmaSDK.xcodeproj; sourceTree = "<group>"; };
 		59F5345616CEF315004216E8 /* coq-8.4pl1-standard-libs-for-coq4ios.7z */ = {isa = PBXFileReference; lastKnownFileType = file; name = "coq-8.4pl1-standard-libs-for-coq4ios.7z"; path = "../../coq-8.4pl1-standard-libs-for-coq4ios.7z"; sourceTree = "<group>"; };
 		59F8A7F216BDE9E00096665F /* Coq4iPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coq4iPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -703,7 +708,6 @@
 		59F8A7E916BDE9E00096665F = {
 			isa = PBXGroup;
 			children = (
-				59F5344A16CEEE2C004216E8 /* lzmaSDK.xcodeproj */,
 				59F8A7FD16BDE9E00096665F /* Coq4iPad */,
 				59F8A7F416BDE9E00096665F /* Frameworks */,
 				59F8A7F316BDE9E00096665F /* Products */,
@@ -721,6 +725,7 @@
 		59F8A7F416BDE9E00096665F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				59F5344A16CEEE2C004216E8 /* lzmaSDK.xcodeproj */,
 				5953E66216CB90FB0013CD34 /* CoreText.framework */,
 				59F8A7F516BDE9E00096665F /* UIKit.framework */,
 				59F8A7F716BDE9E00096665F /* Foundation.framework */,
@@ -738,6 +743,8 @@
 				591C348816BF767C007BA5E9 /* bridge-objc-caml */,
 				59F8A80616BDE9E00096665F /* CQAppDelegate.h */,
 				59F8A80716BDE9E00096665F /* CQAppDelegate.m */,
+				59C9BCAF16CF738D0019F1C6 /* CQVernacDocument.h */,
+				59C9BCB016CF738D0019F1C6 /* CQVernacDocument.m */,
 				59F8A81516BDE9E00096665F /* CQFlipsideViewController.h */,
 				59F8A81616BDE9E00096665F /* CQFlipsideViewController.m */,
 				59F8A81B16BDE9E00096665F /* CQFlipsideViewController.xib */,
@@ -768,6 +775,7 @@
 				59F8A80916BDE9E00096665F /* Default.png */,
 				59F8A80B16BDE9E00096665F /* Default@2x.png */,
 				59F8A80D16BDE9E00096665F /* Default-568h@2x.png */,
+				59C9BCB216CF95740019F1C6 /* InitialVernacConsoleContent.v */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -963,6 +971,7 @@
 				5996424A16C7BAC300121EDE /* CQDetailViewController.xib in Resources */,
 				5996424B16C7BAC300121EDE /* CQMasterViewController.xib in Resources */,
 				59F5345716CEF315004216E8 /* coq-8.4pl1-standard-libs-for-coq4ios.7z in Resources */,
+				59C9BCB316CF95740019F1C6 /* InitialVernacConsoleContent.v in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1147,6 +1156,7 @@
 				5996424416C7BA9E00121EDE /* CQDetailViewController.m in Sources */,
 				5996424516C7BA9E00121EDE /* CQMasterViewController.m in Sources */,
 				5953E66116CB8F930013CD34 /* CQColoredTextView.m in Sources */,
+				59C9BCB116CF738D0019F1C6 /* CQVernacDocument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
