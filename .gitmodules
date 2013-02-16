@@ -4,3 +4,6 @@
 [submodule "ocaml-src"]
 	path = ocaml-src
 	url = https://github.com/ocaml/ocaml.git
+[submodule "lzmaSDK"]
+	path = lzmaSDK
+	url = git@github.com:keigoi/lzmaSDK.git
