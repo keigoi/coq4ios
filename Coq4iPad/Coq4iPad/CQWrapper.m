@@ -62,21 +62,25 @@ static void caml_dispatch(dispatch_block_t block)
 +(void) startCoq:(NSString*)coqlib callback:(void(^)(BOOL))callback
 {
     caml_dispatch(^{
+        CAMLparam0();
         CAMLlocal1(res);
         NSLog(@"startCoq:%@", coqlib);
         res = caml_callback(*caml_named_value("start"), caml_copy_string([[CQUtil fullPathOf:coqlib] UTF8String]));
         BOOL result = Bool_val(res);
         dispatch_async(dispatch_get_main_queue(), ^{callback(result);});
         NSLog(@"startCoq done");
+        CAMLreturn0;
     });
 }
 
 +(void) compile:(NSString*)file callback:(void(^)())callback
 {
     caml_dispatch(^{
+        CAMLparam0();
         NSLog(@"compile: %@", file);
         caml_callback(*caml_named_value("compile"), caml_copy_string([file UTF8String]));
         dispatch_async(dispatch_get_main_queue(), callback);
+        CAMLreturn0;
     });
 }
 
@@ -112,6 +116,7 @@ static id in_caml(id(^fun)(void)) {
 
 +(void) parse:(const char*)str match:(void (^)(int, NSRange))match
 {
+    // FIXME put here CAMLparam0(), CAMLreturn0, etc.
     NSLog(@"parse:%s", str);
     caml_callback2(*caml_named_value("parse"), caml_copy_string(str), Val_ObjC_retain(match));
 }
@@ -178,8 +183,10 @@ static id in_caml(id(^fun)(void)) {
 +(void) resetInitial:(void(^)())callback
 {
     caml_dispatch(^{
+        CAMLparam0();
         caml_callback(*caml_named_value("reset_initial"), Val_unit);
         dispatch_async(dispatch_get_main_queue(), callback);
+        CAMLreturn0;
     });
 }
 
