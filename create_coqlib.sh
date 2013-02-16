@@ -52,8 +52,8 @@ $OCAMLC -o coqlib.byte \
 #####################
 ## copy Coq dirs
 #####################
-COQLIBSRC=`coqtop -where`
-COQLIBDST=$PWD/Coq4iPad/Coq4iPad/coq-8.4pl1
+COQLIBSRC=$PWD/coq-src
+COQLIBDST=$PWD/coq-8.4pl1-standard-libs-for-coq4ios
 # clean
 rm -rf $COQLIBDST/plugins $COQLIBDST/states $COQLIBDST/theories
 mkdir -p $COQLIBDST/states
@@ -64,6 +64,12 @@ pushd $COQTOPDIR
   find plugins \( -name '*.cm[ioa]' -or -name '*.vo' \) -exec cp {} $COQLIBDST/{} \;
   find theories \( -name '*.cm[ioa]' -or -name '*.vo' \) -exec cp {} $COQLIBDST/{} \;
 popd
-cp coq-src/states/MakeInitial.v $COQLIBDST/states/
+pushd $COQLIBSRC
+  find plugins -name '*.v' -exec cp {} $COQLIBDST/{} \;
+  find theories -name '*.v' -exec cp {} $COQLIBDST/{} \;
+popd
+cp $COQLIBSRC/states/MakeInitial.v $COQLIBDST/states/
 
+cd $COQLIBDST
+7z a $COQLIBDST.7z .
 

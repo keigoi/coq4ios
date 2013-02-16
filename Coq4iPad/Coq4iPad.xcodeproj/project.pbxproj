@@ -114,7 +114,6 @@
 		591C347B16BEA75E007BA5E9 /* write.c in Sources */ = {isa = PBXBuildFile; fileRef = 591C33BF16BEA75E007BA5E9 /* write.c */; };
 		591C348516BEC3B1007BA5E9 /* prims.c in Sources */ = {isa = PBXBuildFile; fileRef = 591C348316BEC3B1007BA5E9 /* prims.c */; };
 		591C348B16BFB93E007BA5E9 /* coqlib.byte in Resources */ = {isa = PBXBuildFile; fileRef = 591C348A16BFB93E007BA5E9 /* coqlib.byte */; };
-		591C348D16BFBC42007BA5E9 /* coq-8.4pl1 in Resources */ = {isa = PBXBuildFile; fileRef = 591C348C16BFBC42007BA5E9 /* coq-8.4pl1 */; };
 		591C349216BFC66A007BA5E9 /* CQUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C349116BFC667007BA5E9 /* CQUtil.m */; };
 		591C349416BFCB8B007BA5E9 /* CQ_stubs.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C349316BFCB8A007BA5E9 /* CQ_stubs.m */; };
 		591C349816BFCC25007BA5E9 /* CQ_convert.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C349716BFCC25007BA5E9 /* CQ_convert.m */; };
@@ -125,6 +124,8 @@
 		5996424516C7BA9E00121EDE /* CQMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5996424316C7BA9E00121EDE /* CQMasterViewController.m */; };
 		5996424A16C7BAC300121EDE /* CQDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5996424616C7BAC300121EDE /* CQDetailViewController.xib */; };
 		5996424B16C7BAC300121EDE /* CQMasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5996424816C7BAC300121EDE /* CQMasterViewController.xib */; };
+		59F5345316CEEF42004216E8 /* liblzmaSDK-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59F5345216CEEE2C004216E8 /* liblzmaSDK-ios.a */; };
+		59F5345716CEF315004216E8 /* coq-8.4pl1-standard-libs-for-coq4ios.7z in Resources */ = {isa = PBXBuildFile; fileRef = 59F5345616CEF315004216E8 /* coq-8.4pl1-standard-libs-for-coq4ios.7z */; };
 		59F8A7F616BDE9E00096665F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59F8A7F516BDE9E00096665F /* UIKit.framework */; };
 		59F8A7F816BDE9E00096665F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59F8A7F716BDE9E00096665F /* Foundation.framework */; };
 		59F8A7FA16BDE9E00096665F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59F8A7F916BDE9E00096665F /* CoreGraphics.framework */; };
@@ -180,6 +181,23 @@
 		59F8A8E416BE16000096665F /* unix.c in Sources */ = {isa = PBXBuildFile; fileRef = 59F8A87F16BE16000096665F /* unix.c */; };
 		59F8A8E516BE16000096665F /* weak.c in Sources */ = {isa = PBXBuildFile; fileRef = 59F8A88016BE16000096665F /* weak.c */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		59F5344F16CEEE2C004216E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 59F5344A16CEEE2C004216E8 /* lzmaSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1D6058910D05DD3D006BFB54;
+			remoteInfo = lzmaSDK;
+		};
+		59F5345116CEEE2C004216E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 59F5344A16CEEE2C004216E8 /* lzmaSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 59F5342C16CEE92E004216E8;
+			remoteInfo = "lzmaSDK-ios";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		591C32D416BE23D2007BA5E9 /* coq_fix_code.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = coq_fix_code.c; path = "../../coq-src/kernel/byterun/coq_fix_code.c"; sourceTree = "<group>"; };
@@ -310,7 +328,6 @@
 		591C348316BEC3B1007BA5E9 /* prims.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = prims.c; path = ../../tmp/prims.c; sourceTree = "<group>"; };
 		591C348416BEC3B1007BA5E9 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = version.h; path = ../../tmp/version.h; sourceTree = "<group>"; };
 		591C348A16BFB93E007BA5E9 /* coqlib.byte */ = {isa = PBXFileReference; lastKnownFileType = file; name = coqlib.byte; path = ../../coqlib.byte; sourceTree = "<group>"; };
-		591C348C16BFBC42007BA5E9 /* coq-8.4pl1 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "coq-8.4pl1"; sourceTree = "<group>"; };
 		591C349016BFC665007BA5E9 /* CQUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQUtil.h; sourceTree = "<group>"; };
 		591C349116BFC667007BA5E9 /* CQUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQUtil.m; sourceTree = "<group>"; };
 		591C349316BFCB8A007BA5E9 /* CQ_stubs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQ_stubs.m; sourceTree = "<group>"; };
@@ -327,6 +344,8 @@
 		5996424316C7BA9E00121EDE /* CQMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQMasterViewController.m; sourceTree = "<group>"; };
 		5996424716C7BAC300121EDE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CQDetailViewController.xib; sourceTree = "<group>"; };
 		5996424916C7BAC300121EDE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CQMasterViewController.xib; sourceTree = "<group>"; };
+		59F5344A16CEEE2C004216E8 /* lzmaSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = lzmaSDK.xcodeproj; path = ../lzmaSDK/lzmaSDK.xcodeproj; sourceTree = "<group>"; };
+		59F5345616CEF315004216E8 /* coq-8.4pl1-standard-libs-for-coq4ios.7z */ = {isa = PBXFileReference; lastKnownFileType = file; name = "coq-8.4pl1-standard-libs-for-coq4ios.7z"; path = "../../coq-8.4pl1-standard-libs-for-coq4ios.7z"; sourceTree = "<group>"; };
 		59F8A7F216BDE9E00096665F /* Coq4iPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coq4iPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59F8A7F516BDE9E00096665F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		59F8A7F716BDE9E00096665F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -438,6 +457,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59F5345316CEEF42004216E8 /* liblzmaSDK-ios.a in Frameworks */,
 				5953E66316CB90FB0013CD34 /* CoreText.framework in Frameworks */,
 				59F8A7F616BDE9E00096665F /* UIKit.framework in Frameworks */,
 				59F8A7F816BDE9E00096665F /* Foundation.framework in Frameworks */,
@@ -671,10 +691,19 @@
 			name = "bridge-objc-caml";
 			sourceTree = "<group>";
 		};
+		59F5344B16CEEE2C004216E8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				59F5345016CEEE2C004216E8 /* lzmaSDK.app */,
+				59F5345216CEEE2C004216E8 /* liblzmaSDK-ios.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		59F8A7E916BDE9E00096665F = {
 			isa = PBXGroup;
 			children = (
-				5953E66216CB90FB0013CD34 /* CoreText.framework */,
+				59F5344A16CEEE2C004216E8 /* lzmaSDK.xcodeproj */,
 				59F8A7FD16BDE9E00096665F /* Coq4iPad */,
 				59F8A7F416BDE9E00096665F /* Frameworks */,
 				59F8A7F316BDE9E00096665F /* Products */,
@@ -692,6 +721,7 @@
 		59F8A7F416BDE9E00096665F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5953E66216CB90FB0013CD34 /* CoreText.framework */,
 				59F8A7F516BDE9E00096665F /* UIKit.framework */,
 				59F8A7F716BDE9E00096665F /* Foundation.framework */,
 				59F8A7F916BDE9E00096665F /* CoreGraphics.framework */,
@@ -729,7 +759,7 @@
 		59F8A7FE16BDE9E00096665F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				591C348C16BFBC42007BA5E9 /* coq-8.4pl1 */,
+				59F5345616CEF315004216E8 /* coq-8.4pl1-standard-libs-for-coq4ios.7z */,
 				591C348A16BFB93E007BA5E9 /* coqlib.byte */,
 				59F8A7FF16BDE9E00096665F /* Coq4iPad-Info.plist */,
 				59F8A80016BDE9E00096665F /* InfoPlist.strings */,
@@ -889,12 +919,35 @@
 			mainGroup = 59F8A7E916BDE9E00096665F;
 			productRefGroup = 59F8A7F316BDE9E00096665F /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 59F5344B16CEEE2C004216E8 /* Products */;
+					ProjectRef = 59F5344A16CEEE2C004216E8 /* lzmaSDK.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				59F8A7F116BDE9E00096665F /* Coq4iPad */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		59F5345016CEEE2C004216E8 /* lzmaSDK.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = lzmaSDK.app;
+			remoteRef = 59F5344F16CEEE2C004216E8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		59F5345216CEEE2C004216E8 /* liblzmaSDK-ios.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "liblzmaSDK-ios.a";
+			remoteRef = 59F5345116CEEE2C004216E8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		59F8A7F016BDE9E00096665F /* Resources */ = {
@@ -907,9 +960,9 @@
 				59F8A80E16BDE9E00096665F /* Default-568h@2x.png in Resources */,
 				59F8A81D16BDE9E00096665F /* CQFlipsideViewController.xib in Resources */,
 				591C348B16BFB93E007BA5E9 /* coqlib.byte in Resources */,
-				591C348D16BFBC42007BA5E9 /* coq-8.4pl1 in Resources */,
 				5996424A16C7BAC300121EDE /* CQDetailViewController.xib in Resources */,
 				5996424B16C7BAC300121EDE /* CQMasterViewController.xib in Resources */,
+				59F5345716CEF315004216E8 /* coq-8.4pl1-standard-libs-for-coq4ios.7z in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1164,6 +1217,7 @@
 					../tmp,
 					"Coq4iPad/include-extra/nested/caml",
 					"Coq4iPad/include-extra/nested",
+					../lzmaSDK/Classes/LZMASDK/,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1194,6 +1248,7 @@
 					../tmp,
 					"Coq4iPad/include-extra/nested/caml",
 					"Coq4iPad/include-extra/nested",
+					../lzmaSDK/Classes/LZMASDK/,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";

@@ -123,7 +123,16 @@ let start root =
   saved_state := States.freeze();
 
   ignore (eval ~raw:true "Inductive __:=.\n"); ignore (eval ~raw:true "Reset Initial.\n"); (* without this, Undoing of the first command fails. why?? *)
-  ()
+  true
+
+let start root = 
+  try
+    start root
+  with
+    | e -> 
+        Printexc.print_backtrace stderr; prerr_endline "err"; 
+        prerr_endline (Printexc.to_string e);
+        false
 ;;
 
 Callback.register "start" start;

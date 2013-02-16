@@ -10,6 +10,7 @@
 #import "CQColoredTextView.h"
 #import "CQWrapper.h"
 #import "CQUtil.h"
+#import "LZMAExtractor.h"
 
 #import <CoreText/CoreText.h>
 
@@ -85,6 +86,8 @@
     }        
 }
 
+#pragma mark - initialization
+
 - (void)configureView
 {
     // Update the user interface for the detail item.
@@ -94,6 +97,18 @@
     
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showInfo:)];
     self.navigationItem.rightBarButtonItem = addButton;
+}
+
+- (void)startCoqAt:(NSString*)coqroot
+{
+    [CQWrapper setDelegate:self];
+    self.status.text = @"Initializing..";
+    [CQWrapper startRuntime];
+    [CQWrapper startCoq:coqroot callback:^(BOOL result){
+        if(!result) {
+            self.status.text = @"Error";
+        }
+    }];
 }
 
 - (void)viewDidLoad
@@ -106,10 +121,25 @@
 	// Do any additional setup after loading the view, typically from a nib.
     [self configureView];
     
-    [CQWrapper setDelegate:self];
-    self.status.text = @"Initializing..";
-    [CQWrapper startRuntime];
-    [CQWrapper startCoq:[CQUtil fullPathOf:@"coq-8.4pl1"] callback:^{}];
+    NSString* coqroot = [[CQUtil cacheDir] stringByAppendingPathComponent:@"coq-8.4pl1"];
+    NSString* testvo = [coqroot stringByAppendingString:@"/theories/Arith/Arith.vo"];
+    
+    if(![[NSFileManager defaultManager] fileExistsAtPath:testvo]) {
+        
+        self.status.text = @"Extracting the Coq standard library...\n";
+        
+        [CQWrapper runInQueue:^{
+            
+            [LZMAExtractor extract7zArchive:[CQUtil fullPathOf:@"coq-8.4pl1-standard-libs-for-coq4ios.7z"] dirName:coqroot preserveDir:TRUE];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.status.text = [self.status.text stringByAppendingString:@"Done.\n"];
+                [self startCoqAt:coqroot];
+            });
+        }];
+    } else {
+        [self startCoqAt:coqroot];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -148,7 +178,7 @@
 
 -(IBAction) onEval:(id)sender
 {
-    [CQWrapper enqueueCallback:^{
+    [CQWrapper runInQueue:^{
         int lastpos = [self lastPos];
         
         NSString* unevaluated = [self.console.text substringFromIndex:lastpos];

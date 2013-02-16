@@ -27,6 +27,7 @@ id<CQWrapperDelegate> delegate;
     delegate = delegate_;
 }
 
+// wrap async call with [delegate enterBusy] and [delegate exitBusy]
 static void caml_dispatch(dispatch_block_t block)
 {
     dispatch_async(camlQueue, ^{
@@ -58,12 +59,14 @@ static void caml_dispatch(dispatch_block_t block)
     });
 }
 
-+(void) startCoq:(NSString*)coqlib callback:(void(^)())callback
++(void) startCoq:(NSString*)coqlib callback:(void(^)(BOOL))callback
 {
     caml_dispatch(^{
+        CAMLlocal1(res);
         NSLog(@"startCoq:%@", coqlib);
-        caml_callback(*caml_named_value("start"), caml_copy_string([[CQUtil fullPathOf:coqlib] UTF8String]));
-        dispatch_async(dispatch_get_main_queue(), callback);
+        res = caml_callback(*caml_named_value("start"), caml_copy_string([[CQUtil fullPathOf:coqlib] UTF8String]));
+        BOOL result = Bool_val(res);
+        dispatch_async(dispatch_get_main_queue(), ^{callback(result);});
         NSLog(@"startCoq done");
     });
 }
@@ -150,7 +153,7 @@ static id in_caml(id(^fun)(void)) {
     return range;
 }
 
-+(void) enqueueCallback:(void(^)())callback
++(void) runInQueue:(void(^)())callback
 {
     caml_dispatch(^{
         dispatch_async(dispatch_get_main_queue(), callback);

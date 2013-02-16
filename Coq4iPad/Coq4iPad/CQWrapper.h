@@ -14,16 +14,18 @@
 @end
 
 @interface CQWrapper : NSObject
-+(void) setDelegate:(id<CQWrapperDelegate>)delegate;
+// Coq functions in main.ml
 +(void) startRuntime;
-+(void) startCoq:(NSString*)coqlib callback:(void(^)())callback;
++(void) startCoq:(NSString*)coqlib callback:(void(^)(BOOL))callback;
 +(NSArray*) libraryTheories;
 +(void) compile:(NSString*)file callback:(void(^)())callback;
 +(void) parse:(const char*)str match:(void (^)(int, NSRange))match;
 +(void) eval:(NSString*)str callback:(void(^)(BOOL, NSString*))callback;
-+(void) enqueueCallback:(void(^)())callback;
 +(NSRange) nextPhraseRange:(NSString*)text;
 +(void) rewind:(void(^)(int extra))callback;
 +(void) resetInitial:(void(^)())callback;
 +(void) stop;
+// utility methods
++(void) runInQueue:(void(^)())callback;
++(void) setDelegate:(id<CQWrapperDelegate>)delegate;
 @end
