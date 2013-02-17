@@ -1,10 +1,22 @@
-Copyright (C) 2013-
+#Coq4iOS part
+
+Copyright (C) 2013
   Keigo IMAI
 
   email: keigo.imai@gmail.com
 
+(except that coqlib.byte, which is generated from standard libraries of both OCaml 
+and Coq without modification, by ./create_coqlib.sh. 
+Hence that file should be treated under their own licenses.)
+
+#OCaml part
+
+Copyright 1995-2013 INRIA.
+See LICENSE-OCaml.txt for details.
+
+#Coq part
+
 Copyright 1999-2012 The Coq development team, INRIA, CNRS, University
 Paris Sud, University Paris 7, Ecole Polytechnique.
 
-(plugins/**/*.cm[ioa] and theories/**/*.v are derived from Coq-8.4pl1 source tree)
-
+See LICENSE-Coq.txt.
