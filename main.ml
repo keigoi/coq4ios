@@ -12,23 +12,47 @@ let verbose = ref false
 let orig_stdout = ref stdout
 
 let init_stdout,read_stdout =
-  let out_buff = Buffer.create 100 in
+  let out_buff = Buffer.create 1024 (*magic number*) in
   let out_ft = Format.formatter_of_buffer out_buff in
   let deep_out_ft = Format.formatter_of_buffer out_buff in
+  let inp,outp = Unix.pipe () in
+  let inp_chan = Unix.in_channel_of_descr inp in
   let _ = Pp_control.set_gp deep_out_ft Pp_control.deep_gp in
   (fun () ->
      flush_all ();
      orig_stdout := Unix.out_channel_of_descr (Unix.dup Unix.stdout);
-     Unix.dup2 Unix.stderr Unix.stdout;
+     Unix.dup2 outp Unix.stdout;
+     Unix.dup2 outp Unix.stderr;
      Pp_control.std_ft := out_ft;
      Pp_control.err_ft := out_ft;
      Pp_control.deep_ft := deep_out_ft;
      set_binary_mode_out !orig_stdout true;
      set_binary_mode_in stdin true;
   ),
-  (fun () -> Format.pp_print_flush out_ft ();
-             let r = Buffer.contents out_buff in
-             Buffer.clear out_buff; r)
+  (fun () -> 
+    flush_all ();
+    Unix.set_nonblock inp;
+    begin 
+      try
+        let bufstr = String.create 1024 (*magic number*)
+        in
+        let rec loop () = 
+          let count  = input inp_chan bufstr 0 (String.length bufstr) in
+          Buffer.add_string out_buff (String.sub bufstr 0 count);
+          if count = String.length bufstr then 
+            loop () else 
+            ()
+        in loop ()
+      with 
+          End_of_file -> ()
+        | Unix.Unix_error(Unix.EAGAIN,_,_) 
+        | Unix.Unix_error(Unix.EWOULDBLOCK,_,_) 
+        | Sys_blocked_io -> ()
+    end;
+    Unix.clear_nonblock inp;
+    Format.pp_print_flush out_ft ();
+    let r = Buffer.contents out_buff in
+    Buffer.clear out_buff; r)
 
 
 let parsable_of_string str = Pcoq.Gram.parsable (Stream.of_string str)
@@ -53,12 +77,9 @@ let next_phrase_range str =
   let po = parsable_of_string str in
   try
     let loc = fst (V.parse_sentence (po, None)) in
-    Printf.fprintf stderr "parse range: %d %d" (L.first_pos loc) (L.last_pos loc);
     L.first_pos loc, L.last_pos loc
   with
-    | e -> 
-        prerr_endline (Printexc.to_string e); 
-        -1, -1
+    | _ -> (*FIXME return error msg*) -1, -1
 
 let eval ?(raw=false) (str:string) : bool * string =
   let po = parsable_of_string str in
@@ -76,7 +97,6 @@ let eval ?(raw=false) (str:string) : bool * string =
         let msg = Printf.sprintf "error at (%d,%d) %s" (L.first_pos loc) (L.last_pos loc) (Pp.string_of_ppcmds (Errors.print exn)) in
         (false, msg)
     | e -> 
-        Printexc.print_backtrace stderr; prerr_endline "err"; 
         (false, Printexc.to_string e)
 
 let compile file = 
@@ -129,10 +149,7 @@ let start root =
   try
     start root
   with
-    | e -> 
-        Printexc.print_backtrace stderr; prerr_endline "err"; 
-        prerr_endline (Printexc.to_string e);
-        false
+    | _ -> (*FIXME show error*)false
 ;;
 
 Callback.register "start" start;
