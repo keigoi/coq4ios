@@ -31,6 +31,11 @@
 @property (weak, nonatomic) IBOutlet UITextView* status;
 @property (weak, nonatomic) IBOutlet CQColoredTextView* console;
 
+// input accessory view components
+@property (weak, nonatomic) IBOutlet UIView* inputAccessoryView;
+-(IBAction) onInputAccTouched:(id)sender;
+
+
 -(IBAction) onEval:(id)sender;
 -(IBAction) onBack:(id)sender;
 -(IBAction) onReset:(id)sender;

@@ -120,6 +120,7 @@
 		591C349B16BFD04A007BA5E9 /* CQWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C349A16BFD04A007BA5E9 /* CQWrapper.m */; };
 		5953E66116CB8F930013CD34 /* CQColoredTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5953E66016CB8F930013CD34 /* CQColoredTextView.m */; };
 		5953E66316CB90FB0013CD34 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5953E66216CB90FB0013CD34 /* CoreText.framework */; };
+		595428B616D4A5B30084CFA4 /* CQKeyboardAccessories-portlait.xib in Resources */ = {isa = PBXBuildFile; fileRef = 595428B516D4A5B30084CFA4 /* CQKeyboardAccessories-portlait.xib */; };
 		5996424416C7BA9E00121EDE /* CQDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5996424116C7BA9E00121EDE /* CQDetailViewController.m */; };
 		5996424516C7BA9E00121EDE /* CQMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5996424316C7BA9E00121EDE /* CQMasterViewController.m */; };
 		5996424A16C7BAC300121EDE /* CQDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5996424616C7BAC300121EDE /* CQDetailViewController.xib */; };
@@ -340,6 +341,7 @@
 		5953E65F16CB8F930013CD34 /* CQColoredTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQColoredTextView.h; sourceTree = "<group>"; };
 		5953E66016CB8F930013CD34 /* CQColoredTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQColoredTextView.m; sourceTree = "<group>"; };
 		5953E66216CB90FB0013CD34 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		595428B516D4A5B30084CFA4 /* CQKeyboardAccessories-portlait.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CQKeyboardAccessories-portlait.xib"; sourceTree = "<group>"; };
 		5996424016C7BA9D00121EDE /* CQDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQDetailViewController.h; sourceTree = "<group>"; };
 		5996424116C7BA9E00121EDE /* CQDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQDetailViewController.m; sourceTree = "<group>"; };
 		5996424216C7BA9E00121EDE /* CQMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQMasterViewController.h; sourceTree = "<group>"; };
@@ -754,6 +756,7 @@
 				5996424016C7BA9D00121EDE /* CQDetailViewController.h */,
 				5996424116C7BA9E00121EDE /* CQDetailViewController.m */,
 				5996424616C7BAC300121EDE /* CQDetailViewController.xib */,
+				595428B516D4A5B30084CFA4 /* CQKeyboardAccessories-portlait.xib */,
 				591C349016BFC665007BA5E9 /* CQUtil.h */,
 				591C349116BFC667007BA5E9 /* CQUtil.m */,
 				5953E65F16CB8F930013CD34 /* CQColoredTextView.h */,
@@ -972,6 +975,7 @@
 				5996424B16C7BAC300121EDE /* CQMasterViewController.xib in Resources */,
 				59F5345716CEF315004216E8 /* coq-8.4pl1-standard-libs-for-coq4ios.7z in Resources */,
 				59C9BCB316CF95740019F1C6 /* InitialVernacConsoleContent.v in Resources */,
+				595428B616D4A5B30084CFA4 /* CQKeyboardAccessories-portlait.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

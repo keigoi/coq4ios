@@ -114,6 +114,12 @@
     } else {
         [self startCoqAt:coqroot];
     }
+    
+    [[NSBundle mainBundle] loadNibNamed:@"CQKeyboardAccessories-portlait"
+                                                         owner:self
+                                                       options:nil];
+
+    self.console.inputAccessoryView = self.inputAccessoryView;
 }
 
 - (void)viewDidLoad
@@ -343,6 +349,15 @@
     self.busyOverlay.hidden = YES;
     self.backButton.enabled = YES;
     self.evalButton.enabled = YES;
+}
+
+#pragma mark input accessory view button
+
+- (IBAction)onInputAccTouched:(id)sender
+{
+    UIButton* button = sender;
+    NSString* text = [button.titleLabel.text stringByAppendingString:@" "];
+    self.console.text = [self.console.text stringByAppendingString:text];
 }
 
 @end
