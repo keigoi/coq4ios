@@ -99,13 +99,23 @@ let eval ?(raw=false) (str:string) : bool * string =
     | e -> 
         (false, Printexc.to_string e)
 
+let rec string_of_compile_exn (file, (_,_,loc), exn) =
+  let detail = 
+  match exn with
+  | Util.UserError(str,ppcmds) ->
+    Printf.sprintf "UserError(\"%s\",\"%s\")" str (Pp.string_of_ppcmds ppcmds)
+  | Util.Error_in_file (file,info,exn) -> string_of_compile_exn (file,info,exn)
+  | _ -> Printexc.to_string exn
+  in
+  Printf.sprintf "Compile Error: (%d, %d) in %s : %s\n" (L.first_pos loc) (L.last_pos loc) file detail
+
 let compile file = 
   try
     let file = Filename.chop_suffix file ".v" in
     States.unfreeze !saved_state;
     V.compile !verbose file
-  with Util.Error_in_file (file, (_,_,loc), exn) -> 
-    Printf.printf "Compile Error: (%d, %d) in %s\n" (L.first_pos loc) (L.last_pos loc) file;
+  with Util.Error_in_file (file,info,exn) ->
+    print_endline (string_of_compile_exn (file,info,exn));
     raise exn
 
 let rewind i = 
@@ -149,7 +159,15 @@ let start root =
   try
     start root
   with
-    | _ -> (*FIXME show error*)false
+    | Util.UserError(str,ppcmds) ->
+        print_endline(Printf.sprintf "UserError(\"%s\",\"%s\")" str (Pp.string_of_ppcmds ppcmds));
+        false
+    | Util.Error_in_file (file,info,exn) ->
+        print_endline (string_of_compile_exn (file,info,exn));
+        false;
+    | e -> 
+        print_endline (Printexc.to_string e); 
+        false
 ;;
 
 Callback.register "start" start;
@@ -162,15 +180,3 @@ Callback.register "parse" parse;
 Callback.register "next_phranse_range" next_phrase_range;
 Callback.register "rewind" rewind;
 Callback.register "reset_initial" reset_initial;
-(*
-print_endline "start.";
-start "./coq-src";
-print_endline "loadinitial.";
-load_initial ();
-print_endline "eval.";
-eval "Inductive F:=.\n";
-print_endline "rewrind.";
-(* rewind 1; *)
-Backtrack.sync 0;;
-print_endline "finished.";
-*)
