@@ -94,7 +94,7 @@
 {
     
     // If stdlib does not exist in cache directory, expand it from the 7z archive
-    NSString* coqroot = [[CQUtil cacheDir] stringByAppendingPathComponent:@"coq-8.4pl1"];
+    NSString* coqroot = [[CQUtil cacheDir] stringByAppendingPathComponent:@"coq-8.4pl2"];
     NSString* testvo = [coqroot stringByAppendingString:@"/theories/Arith/Arith.vo"];
     
     if(![[NSFileManager defaultManager] fileExistsAtPath:testvo]) {
@@ -103,7 +103,7 @@
         
         [CQWrapper runInQueue:^{
             
-            [LZMAExtractor extract7zArchive:[CQUtil fullPathOf:@"coq-8.4pl1-standard-libs-for-coq4ios.7z"] dirName:coqroot preserveDir:TRUE];
+            [LZMAExtractor extract7zArchive:[CQUtil fullPathOf:@"coq-8.4pl2-standard-libs-for-coq4ios.7z"] dirName:coqroot preserveDir:TRUE];
             
             // and start Coq
             dispatch_async(dispatch_get_main_queue(), ^{

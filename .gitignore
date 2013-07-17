@@ -114,5 +114,14 @@ xcuserdata
 # ...none. Everything is now explained.
 
 # project specific
-tmp
-/*.cm[ioxa]
+coq-8.4pl2-standard-libs-for-coq4ios.7z
+/coq-8.4pl2-standard-libs-for-coq4ios
+/tmp
+/*.cm[ioxat]
+/*.cmti
+/*.cmxa
+/*.annot
+/*.[ao]
+/*.omc
+/.omakedb
+
