@@ -56,8 +56,7 @@ static void caml_dispatch(dispatch_block_t block)
     caml_dispatch(^{
         NSLog(@"startRuntime");
         const char* argv[] = {
-            "ocamlrun",
-            [[CQUtil fullPathOf:@"coqlib.byte"] UTF8String],
+            "coqlib",
             0
         };
         caml_main((char**)argv);
@@ -112,14 +111,6 @@ static id in_caml(id(^fun)(void)) {
             caml_c_thread_unregister();
         }
     }
-}
-
-
-+(NSArray*) libraryTheories
-{
-    return in_caml(^{
-        return camlArray(caml_callback(*caml_named_value("library_theories"), Val_unit));
-    });
 }
 
 +(void) parse:(const char*)str match:(void (^)(int, NSRange))match
@@ -200,23 +191,3 @@ static id in_caml(id(^fun)(void)) {
 
 
 @end
-
-double caml_Double_val2(value val)
-{
-    union { value v[2]; double d; } buffer;
-    
-    Assert(sizeof(double) == 2 * sizeof(value));
-    buffer.v[0] = Field(val, 1);
-    buffer.v[1] = Field(val, 0);
-    return buffer.d;
-}
-
-
-value f(value x) {
-    CAMLparam1(x);
-    double v = Double_val(x);
-    printf("%lf\n", v);
-    double w = caml_Double_val2(x);
-    printf("%lf\n", w);
-    CAMLreturn(caml_copy_double(100));
-}

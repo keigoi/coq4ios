@@ -6,7 +6,6 @@ module V = Vernac
 module VE = Vernacexpr
 
 let saved_state = ref (States.freeze ()(*never used*))
-let library_theories = ref [||]
 let verbose = ref false
 
 let orig_stdout = ref stdout
@@ -126,33 +125,9 @@ let rewind i =
 
 let reset_initial () = eval ~raw:true "Reset Initial.\n"
 
-(* -coqlib <dir> -boot -nois -notop *)
 let start root =
   init_stdout();
-  Lib.init();
-  Goptions.set_string_option_value ["Default";"Proof";"Mode"] "Classic";
-
-  Flags.coqlib_spec:=true; 
-  Flags.coqlib:=root;
-  Flags.boot:=true; 
-
-  Coqinit.init_load_path ();
-  Mltop.init_known_plugins ();
-  Vm.set_transp_values true;
-  Vconv.set_use_vm false;
-  (* engage (); *)
-  Syntax_def.set_verbose_compat_notations false;
-  Syntax_def.set_compat_notations true;
-  Coqinit.init_library_roots ();
-
-  (* enumerate all .v files and make the dependency graph *)
-  library_theories := Array.of_list (Pathmap.add_load_paths [root^"/theories"; root^"/plugins"; root^"/states"]);
-
-  Declaremods.start_library (Names.make_dirpath [Names.id_of_string "Top"]);
-  V.load_vernac false (!Flags.coqlib^"/states/MakeInitial.v");
-  saved_state := States.freeze();
-
-  ignore (eval ~raw:true "Inductive __:=.\n"); ignore (eval ~raw:true "Reset Initial.\n"); (* without this, Undoing of the first command fails. why?? *)
+  Coqtop.init_toplevel ["-coqlib"; root];
   true
 
 let start root = 
@@ -173,7 +148,6 @@ let start root =
 Callback.register "start" start;
 Callback.register "compile" compile;
 Callback.register "eval" (fun str -> eval str);
-Callback.register "library_theories" (fun _ -> !library_theories);
 (* 
 Callback.register "parse" parse;
 *)
