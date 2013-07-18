@@ -11,19 +11,19 @@
 		591C349416BFCB8B007BA5E9 /* CQ_stubs.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C349316BFCB8A007BA5E9 /* CQ_stubs.m */; };
 		591C349816BFCC25007BA5E9 /* CQ_convert.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C349716BFCC25007BA5E9 /* CQ_convert.m */; };
 		591C349B16BFD04A007BA5E9 /* CQWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C349A16BFD04A007BA5E9 /* CQWrapper.m */; };
-		5937F4B61792AE6D00D8A814 /* libcoqrun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5937F4B51792AE6D00D8A814 /* libcoqrun.a */; };
 		5937F4B81792C78400D8A814 /* coq-8.4pl2-standard-libs-for-coq4ios.7z in Resources */ = {isa = PBXBuildFile; fileRef = 5937F4B71792C78400D8A814 /* coq-8.4pl2-standard-libs-for-coq4ios.7z */; };
+		594CC0CA179773B7003EFC50 /* libcoqrun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5937F4B51792AE6D00D8A814 /* libcoqrun.a */; };
+		594CC0CB179773B7003EFC50 /* libgcc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 594CC0BB179772DC003EFC50 /* libgcc.a */; };
+		594CC0CC179773B7003EFC50 /* libasmrun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 594CC0BD17977305003EFC50 /* libasmrun.a */; };
+		594CC0CD179773B7003EFC50 /* libbigarray.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 594CC0BE17977305003EFC50 /* libbigarray.a */; };
+		594CC0CE179773B7003EFC50 /* libcamlstr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 594CC0BF17977305003EFC50 /* libcamlstr.a */; };
+		594CC0CF179773B7003EFC50 /* libnums.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 594CC0C017977305003EFC50 /* libnums.a */; };
+		594CC0D0179773B7003EFC50 /* libthreadsnat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 594CC0C117977305003EFC50 /* libthreadsnat.a */; };
+		594CC0D1179773B7003EFC50 /* libunix.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 594CC0C217977305003EFC50 /* libunix.a */; };
 		5953E66116CB8F930013CD34 /* CQColoredTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5953E66016CB8F930013CD34 /* CQColoredTextView.m */; };
 		5953E66316CB90FB0013CD34 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5953E66216CB90FB0013CD34 /* CoreText.framework */; };
 		595428B616D4A5B30084CFA4 /* CQKeyboardAccessories-portlait.xib in Resources */ = {isa = PBXBuildFile; fileRef = 595428B516D4A5B30084CFA4 /* CQKeyboardAccessories-portlait.xib */; };
 		596F606E1776E1BE002AFDAF /* coqlib.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 596F606D1776E1BE002AFDAF /* coqlib.o */; };
-		596F60701776E1D5002AFDAF /* libasmrun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 596F606F1776E1D5002AFDAF /* libasmrun.a */; };
-		596F60791777B224002AFDAF /* libgcc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 596F60781777B224002AFDAF /* libgcc.a */; };
-		596F607B1777B3CE002AFDAF /* libunix.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 596F607A1777B3CE002AFDAF /* libunix.a */; };
-		596F607D1777B3E0002AFDAF /* libbigarray.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 596F607C1777B3E0002AFDAF /* libbigarray.a */; };
-		596F607F1777B3F2002AFDAF /* libcamlstr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 596F607E1777B3F2002AFDAF /* libcamlstr.a */; };
-		596F60811777B3FE002AFDAF /* libnums.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 596F60801777B3FE002AFDAF /* libnums.a */; };
-		596F60831777B42A002AFDAF /* libthreadsnat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 596F60821777B42A002AFDAF /* libthreadsnat.a */; };
 		5996424416C7BA9E00121EDE /* CQDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5996424116C7BA9E00121EDE /* CQDetailViewController.m */; };
 		5996424516C7BA9E00121EDE /* CQMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5996424316C7BA9E00121EDE /* CQMasterViewController.m */; };
 		5996424A16C7BAC300121EDE /* CQDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5996424616C7BAC300121EDE /* CQDetailViewController.xib */; };
@@ -72,18 +72,19 @@
 		591C349A16BFD04A007BA5E9 /* CQWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQWrapper.m; sourceTree = "<group>"; };
 		5937F4B51792AE6D00D8A814 /* libcoqrun.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcoqrun.a; path = "../../coq-src/kernel/byterun/libcoqrun.a"; sourceTree = "<group>"; };
 		5937F4B71792C78400D8A814 /* coq-8.4pl2-standard-libs-for-coq4ios.7z */ = {isa = PBXFileReference; lastKnownFileType = file; name = "coq-8.4pl2-standard-libs-for-coq4ios.7z"; path = "../../coq-8.4pl2-standard-libs-for-coq4ios.7z"; sourceTree = "<group>"; };
+		594CC0BB179772DC003EFC50 /* libgcc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgcc.a; path = "usr/llvm-gcc-4.2/lib/gcc/i686-apple-darwin11/4.2.1/libgcc.a"; sourceTree = DEVELOPER_DIR; };
+		594CC0BD17977305003EFC50 /* libasmrun.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libasmrun.a; path = ../../../../../../usr/local/ocamlxsim/lib/ocaml/libasmrun.a; sourceTree = "<group>"; };
+		594CC0BE17977305003EFC50 /* libbigarray.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbigarray.a; path = ../../../../../../usr/local/ocamlxsim/lib/ocaml/libbigarray.a; sourceTree = "<group>"; };
+		594CC0BF17977305003EFC50 /* libcamlstr.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcamlstr.a; path = ../../../../../../usr/local/ocamlxsim/lib/ocaml/libcamlstr.a; sourceTree = "<group>"; };
+		594CC0C017977305003EFC50 /* libnums.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnums.a; path = ../../../../../../usr/local/ocamlxsim/lib/ocaml/libnums.a; sourceTree = "<group>"; };
+		594CC0C117977305003EFC50 /* libthreadsnat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libthreadsnat.a; path = ../../../../../../usr/local/ocamlxsim/lib/ocaml/libthreadsnat.a; sourceTree = "<group>"; };
+		594CC0C217977305003EFC50 /* libunix.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libunix.a; path = ../../../../../../usr/local/ocamlxsim/lib/ocaml/libunix.a; sourceTree = "<group>"; };
+		594CC0D2179773B7003EFC50 /* Coq4iPad.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Coq4iPad.xcodeproj; sourceTree = "<group>"; };
 		5953E65F16CB8F930013CD34 /* CQColoredTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQColoredTextView.h; sourceTree = "<group>"; };
 		5953E66016CB8F930013CD34 /* CQColoredTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQColoredTextView.m; sourceTree = "<group>"; };
 		5953E66216CB90FB0013CD34 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		595428B516D4A5B30084CFA4 /* CQKeyboardAccessories-portlait.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CQKeyboardAccessories-portlait.xib"; sourceTree = "<group>"; };
 		596F606D1776E1BE002AFDAF /* coqlib.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = coqlib.o; path = ../../coqlib.o; sourceTree = "<group>"; };
-		596F606F1776E1D5002AFDAF /* libasmrun.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libasmrun.a; path = /usr/local/ocamlxarm/v7/lib/ocaml/libasmrun.a; sourceTree = "<absolute>"; };
-		596F60781777B224002AFDAF /* libgcc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgcc.a; path = "Platforms/iPhoneOS.platform/Developer/usr/llvm-gcc-4.2/lib/gcc/arm-apple-darwin10/4.2.1/libgcc.a"; sourceTree = DEVELOPER_DIR; };
-		596F607A1777B3CE002AFDAF /* libunix.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libunix.a; path = /usr/local/ocamlxarm/v7/lib/ocaml/libunix.a; sourceTree = "<absolute>"; };
-		596F607C1777B3E0002AFDAF /* libbigarray.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbigarray.a; path = /usr/local/ocamlxarm/v7/lib/ocaml/libbigarray.a; sourceTree = "<absolute>"; };
-		596F607E1777B3F2002AFDAF /* libcamlstr.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcamlstr.a; path = /usr/local/ocamlxarm/v7/lib/ocaml/libcamlstr.a; sourceTree = "<absolute>"; };
-		596F60801777B3FE002AFDAF /* libnums.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnums.a; path = /usr/local/ocamlxarm/v7/lib/ocaml/libnums.a; sourceTree = "<absolute>"; };
-		596F60821777B42A002AFDAF /* libthreadsnat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libthreadsnat.a; path = /usr/local/ocamlxarm/v7/lib/ocaml/libthreadsnat.a; sourceTree = "<absolute>"; };
 		5996424016C7BA9D00121EDE /* CQDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQDetailViewController.h; sourceTree = "<group>"; };
 		5996424116C7BA9E00121EDE /* CQDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQDetailViewController.m; sourceTree = "<group>"; };
 		5996424216C7BA9E00121EDE /* CQMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQMasterViewController.h; sourceTree = "<group>"; };
@@ -124,15 +125,15 @@
 				59F8A7F816BDE9E00096665F /* Foundation.framework in Frameworks */,
 				59F8A7FA16BDE9E00096665F /* CoreGraphics.framework in Frameworks */,
 				59F8A7FC16BDE9E00096665F /* CoreData.framework in Frameworks */,
+				594CC0CA179773B7003EFC50 /* libcoqrun.a in Frameworks */,
+				594CC0CB179773B7003EFC50 /* libgcc.a in Frameworks */,
+				594CC0CC179773B7003EFC50 /* libasmrun.a in Frameworks */,
+				594CC0CD179773B7003EFC50 /* libbigarray.a in Frameworks */,
+				594CC0CE179773B7003EFC50 /* libcamlstr.a in Frameworks */,
+				594CC0CF179773B7003EFC50 /* libnums.a in Frameworks */,
+				594CC0D0179773B7003EFC50 /* libthreadsnat.a in Frameworks */,
+				594CC0D1179773B7003EFC50 /* libunix.a in Frameworks */,
 				596F606E1776E1BE002AFDAF /* coqlib.o in Frameworks */,
-				596F60701776E1D5002AFDAF /* libasmrun.a in Frameworks */,
-				596F60791777B224002AFDAF /* libgcc.a in Frameworks */,
-				596F607B1777B3CE002AFDAF /* libunix.a in Frameworks */,
-				596F607D1777B3E0002AFDAF /* libbigarray.a in Frameworks */,
-				596F607F1777B3F2002AFDAF /* libcamlstr.a in Frameworks */,
-				596F60811777B3FE002AFDAF /* libnums.a in Frameworks */,
-				596F60831777B42A002AFDAF /* libthreadsnat.a in Frameworks */,
-				5937F4B61792AE6D00D8A814 /* libcoqrun.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,19 +152,31 @@
 			name = "bridge-objc-caml";
 			sourceTree = "<group>";
 		};
-		596F60841777B47B002AFDAF /* ocaml */ = {
+		594CC0B817977279003EFC50 /* ocaml-xsim */ = {
 			isa = PBXGroup;
 			children = (
-				596F60781777B224002AFDAF /* libgcc.a */,
-				596F606F1776E1D5002AFDAF /* libasmrun.a */,
-				596F60821777B42A002AFDAF /* libthreadsnat.a */,
-				596F60801777B3FE002AFDAF /* libnums.a */,
-				596F607E1777B3F2002AFDAF /* libcamlstr.a */,
-				596F607C1777B3E0002AFDAF /* libbigarray.a */,
-				596F607A1777B3CE002AFDAF /* libunix.a */,
+				594CC0BB179772DC003EFC50 /* libgcc.a */,
+				594CC0BD17977305003EFC50 /* libasmrun.a */,
+				594CC0BE17977305003EFC50 /* libbigarray.a */,
+				594CC0BF17977305003EFC50 /* libcamlstr.a */,
+				594CC0C017977305003EFC50 /* libnums.a */,
+				594CC0C117977305003EFC50 /* libthreadsnat.a */,
+				594CC0C217977305003EFC50 /* libunix.a */,
+			);
+			name = "ocaml-xsim";
+			sourceTree = "<group>";
+		};
+		594CC0C917977337003EFC50 /* coq */ = {
+			isa = PBXGroup;
+			children = (
 				5937F4B51792AE6D00D8A814 /* libcoqrun.a */,
 			);
-			name = ocaml;
+			name = coq;
+			sourceTree = "<group>";
+		};
+		594CC0D3179773B7003EFC50 /* Products */ = {
+			isa = PBXGroup;
+			name = Products;
 			sourceTree = "<group>";
 		};
 		59F5344B16CEEE2C004216E8 /* Products */ = {
@@ -178,6 +191,7 @@
 		59F8A7E916BDE9E00096665F = {
 			isa = PBXGroup;
 			children = (
+				594CC0D2179773B7003EFC50 /* Coq4iPad.xcodeproj */,
 				59F8A7FD16BDE9E00096665F /* Coq4iPad */,
 				59F8A7F416BDE9E00096665F /* Frameworks */,
 				59F8A7F316BDE9E00096665F /* Products */,
@@ -208,7 +222,8 @@
 		59F8A7FD16BDE9E00096665F /* Coq4iPad */ = {
 			isa = PBXGroup;
 			children = (
-				596F60841777B47B002AFDAF /* ocaml */,
+				594CC0C917977337003EFC50 /* coq */,
+				594CC0B817977279003EFC50 /* ocaml-xsim */,
 				591C348816BF767C007BA5E9 /* bridge-objc-caml */,
 				59F8A80616BDE9E00096665F /* CQAppDelegate.h */,
 				59F8A80716BDE9E00096665F /* CQAppDelegate.m */,
@@ -291,6 +306,10 @@
 			productRefGroup = 59F8A7F316BDE9E00096665F /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 594CC0D3179773B7003EFC50 /* Products */;
+					ProjectRef = 594CC0D2179773B7003EFC50 /* Coq4iPad.xcodeproj */;
+				},
 				{
 					ProductGroup = 59F5344B16CEEE2C004216E8 /* Products */;
 					ProjectRef = 59F5344A16CEEE2C004216E8 /* lzmaSDK.xcodeproj */;
@@ -475,9 +494,9 @@
 				INFOPLIST_FILE = "Coq4iPad/Coq4iPad-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/usr/local/ocamlxarm/v7/lib/ocaml,
-					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/llvm-gcc-4.2/lib/gcc/arm-apple-darwin10/4.2.1\"",
 					"\"$(SRCROOT)/../coq-src/kernel/byterun\"",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/usr/llvm-gcc-4.2/lib/gcc/i686-apple-darwin11/4.2.1\"",
+					/usr/local/ocamlxsim/lib/ocaml,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -492,9 +511,9 @@
 				INFOPLIST_FILE = "Coq4iPad/Coq4iPad-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/usr/local/ocamlxarm/v7/lib/ocaml,
-					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/llvm-gcc-4.2/lib/gcc/arm-apple-darwin10/4.2.1\"",
 					"\"$(SRCROOT)/../coq-src/kernel/byterun\"",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/usr/llvm-gcc-4.2/lib/gcc/i686-apple-darwin11/4.2.1\"",
+					/usr/local/ocamlxsim/lib/ocaml,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
