@@ -1,0 +1,40 @@
+# usage:
+#   cd coq-src && make -f ../Makefile.coqcross
+#
+
+.PHONY: all dummy buildcmx install
+
+all: buildcmx
+dummy: ;
+
+#
+# check status
+#
+ifeq ($(realpath Makefile),)
+%:: dummy
+	@echo "Please run in coq source directory, like 'cd coq-src && make -f ../Makefile.coqcross'" >&2; exit 1
+else
+  ifeq ($(realpath bin/coqdep_boot),)
+%:: dummy
+	@echo "Please run 'export PATH=<host_ocaml_dir>:\$$PATH; make bin/coqdep_boot' first" >&2; exit 1
+  endif
+endif
+
+
+include Makefile
+
+#
+# build
+#
+buildcmx: $(LINKCMX) $(LIBCOQRUN) tools/coqdep_common.cmx
+	@echo done.
+
+#
+# install
+#
+install:
+	@if [ -z "$(INSTALL_CMX_DIR)" ]; then \
+	  echo "Please specify INSTALL_CMX_DIR, like 'make INSTALL_CMX_DIR:=<cmx_install_dir> install'" >&2; exit 1; \
+	fi
+	mkdir -p $(INSTALL_CMX_DIR)
+	cp -f `find . -name '*.cm[it]' -or -name '*.cmxa' -or -name '*.a' -or -name 'coq_config.*' -or -name 'coqdep_*'` $(INSTALL_CMX_DIR)

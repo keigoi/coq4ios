@@ -1,0 +1,47 @@
+.PHONY: all xarm xsim install clean
+
+include Makefile.config
+
+OCAMLXSIMBIN=$(OCAMLXSIM)/bin
+OCAMLXARMBIN=$(OCAMLXARM)/bin
+
+# compiler & linker flags
+OCAMLFLAGS += -rectypes # some Coq sources require -rectypes
+OCAML_NATIVE_LINK_FLAGS = -linkall
+BYTE_ENABLED = false
+NATIVE_ENABLED = true
+
+# build for iOS device (xarm)
+section
+  vmount(-l, src, obj-armv7)
+  OCAMLC = $(OCAMLXARMBIN)/ocamlc  # not use ocamlc.opt (which is not part of OCamlXARM/OCamlXSIM)
+  OCAMLOPT = $(OCAMLXARMBIN)/ocamlopt
+  OCAMLOPTLINK = $(OCAMLXARMBIN)/ocamlopt
+  OCAMLMKLIB = $(OCAMLXARMBIN)/ocamlmklib
+  .SUBDIRS: obj-armv7
+
+# build for simulator (xsim)
+section
+  vmount(-l, src, obj-i386)
+  OCAMLC = $(OCAMLXSIMBIN)/ocamlc
+  OCAMLOPT = $(OCAMLXSIMBIN)/ocamlopt
+  OCAMLOPTLINK = $(OCAMLXSIMBIN)/ocamlopt
+  OCAMLMKLIB = $(OCAMLXSIMBIN)/ocamlmklib
+  .SUBDIRS: obj-i386
+
+ocaml/armv7/caml/config.h:
+	mkdir -p ocaml
+	ln -s -F $(OCAMLXARM)/lib/ocaml ocaml/armv7
+
+ocaml/i386/caml/config.h:
+	mkdir -p ocaml
+	ln -s -F $(OCAMLXSIM)/lib/ocaml ocaml/i386
+
+xarm: ocaml/armv7/caml/config.h obj-armv7/libcoqios.a
+
+xsim: ocaml/i386/caml/config.h obj-i386/libcoqios.a
+
+all: xarm xsim
+	@echo done.
+
+.DEFAULT: all

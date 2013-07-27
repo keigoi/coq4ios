@@ -1,78 +1,67 @@
 .PHONY: all install clean
 
-# Coq top directory which contains .cmxa files build by OCamlXARM
-COQTOPDIR = coq-src
-COQPLUGINDIR = $(COQTOPDIR)/plugins
+# Coq top directory which contains .cmxa files build by OCamlXARM/OCamlXSIM
+COQTOPDIR = ../coq-src
 
 # Output file
-COQLIB = coqlib.o
+COQLIB = libcoqios.a
 
 # Our OCaml sources plus a part of coqdep we use
-FILES[] = main pathmap \
-  $(COQTOPDIR)/tools/coqdep_lexer $(COQTOPDIR)/tools/coqdep_common
+FILES[] = main # pathmap \
+  # $(COQTOPDIR)/tools/coqdep_lexer $(COQTOPDIR)/tools/coqdep_common
+
 
 ################
 
-# OCaml
-OCAMLOPT = ocamlopt # not use ocamlopt.opt (which is not part of OCamlXARM)
-OCAMLOPTLINK = ocamlopt
-OCAMLFLAGS += -rectypes # some Coq sources require -rectypes
-OCAML_NATIVE_LINK_FLAGS = -linkall
-BYTE_ENABLED = false
-NATIVE_ENABLED = true
-
 # Required libraries
-OCAMLINCLUDES += \
-  +camlp5 \
-  $(COQTOPDIR)/kernel $(COQTOPDIR)/parsing $(COQTOPDIR)/library $(COQTOPDIR)/interp \
-  $(COQTOPDIR)/tactics $(COQTOPDIR)/proofs $(COQTOPDIR)/pretyping \
-  $(COQTOPDIR)/lib $(COQTOPDIR)/toplevel $(COQTOPDIR)/kernel/byterun \
-  $(COQTOPDIR)/tools $(COQTOPDIR)/config
-
+OCAMLINCLUDES += +camlp5 +coqlib
 OCAML_OTHER_LIBS += str nums unix \
   gramlib \
   lib kernel library pretyping interp proofs parsing tactics toplevel highparsing hightactics
 
 # statically linked Coq plugin cmxa
 COQPLUGINLIBS = \
-  $(COQPLUGINDIR)/cc/cc_plugin  \
-  $(COQPLUGINDIR)/decl_mode/decl_mode_plugin \
-  $(COQPLUGINDIR)/extraction/extraction_plugin \
-  $(COQPLUGINDIR)/quote/quote_plugin \
-  $(COQPLUGINDIR)/ring/ring_plugin \
-  $(COQPLUGINDIR)/field/field_plugin \
-  $(COQPLUGINDIR)/firstorder/ground_plugin \
-  $(COQPLUGINDIR)/fourier/fourier_plugin \
-  $(COQPLUGINDIR)/funind/recdef_plugin \
-  $(COQPLUGINDIR)/micromega/micromega_plugin \
-  $(COQPLUGINDIR)/nsatz/nsatz_plugin \
-  $(COQPLUGINDIR)/omega/omega_plugin \
-  $(COQPLUGINDIR)/romega/romega_plugin \
-  $(COQPLUGINDIR)/rtauto/rtauto_plugin \
-  $(COQPLUGINDIR)/setoid_ring/newring_plugin \
-  $(COQPLUGINDIR)/subtac/subtac_plugin \
-  $(COQPLUGINDIR)/syntax/ascii_syntax_plugin \
-  $(COQPLUGINDIR)/syntax/nat_syntax_plugin \
-  $(COQPLUGINDIR)/syntax/numbers_syntax_plugin \
-  $(COQPLUGINDIR)/syntax/r_syntax_plugin \
-  $(COQPLUGINDIR)/syntax/string_syntax_plugin \
-  $(COQPLUGINDIR)/syntax/z_syntax_plugin \
-  $(COQPLUGINDIR)/xml/xml_plugin
+  cc_plugin  \
+  decl_mode_plugin \
+  extraction_plugin \
+  quote_plugin \
+  ring_plugin \
+  field_plugin \
+  ground_plugin \
+  fourier_plugin \
+  recdef_plugin \
+  micromega_plugin \
+  nsatz_plugin \
+  omega_plugin \
+  romega_plugin \
+  rtauto_plugin \
+  newring_plugin \
+  subtac_plugin \
+  ascii_syntax_plugin \
+  nat_syntax_plugin \
+  numbers_syntax_plugin \
+  r_syntax_plugin \
+  string_syntax_plugin \
+  z_syntax_plugin \
+  xml_plugin
 
 # Custom build that (1) uses -output-obj and (2) links Coq plugin .cmxa after main.cmx
-CMXFILES  = $(addsuffix .cmx, $(FILES))
+CMXFILES = $(addsuffix .cmx, $(FILES))
 CMXA_OTHER_FILES = $(addsuffix .cmxa, $(OCAML_OTHER_LIBS))
 COQ_CMXA_EXTRA_FILES = $(addsuffix .cmxa, $(COQPLUGINLIBS))
 
-$(COQLIB): $(CMXFILES)
+coqios.o: $(CMXFILES)
         $(OCAMLFIND) $(OCAMLOPTLINK) $(LAZY_OCAMLFINDFLAGS) $(PREFIXED_OCAMLPACKS) $(OCAMLFLAGS) $(OCAMLOPTFLAGS)\
                 $(PREFIXED_OCAMLINCLUDES) $(OCAML_NATIVE_LINK_FLAGS)\
-                coq-src/config/coq_config.cmx \
+                coq_config.cmx \
                 -output-obj \
                 -o $@ $(CMXA_OTHER_FILES) $(OCamlLinkSort $(CMXFILES)) $(COQ_CMXA_EXTRA_FILES) $(OCAML_LINK_FLAGS)
 
-.DEFAULT: $(COQLIB)
+$(COQLIB): coqios.o
+	/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/ar rc $@ $^
+
+.DEFAULT:
 
 clean:
-    rm -f coqlib.o *.cm[xti] *.cmti *.cmxa *.annot *.o
+    rm -f $(COQLIB) *.cm[xti] *.cmti *.cmxa *.annot *.o
 
