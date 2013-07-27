@@ -7,13 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		591A93D717A3B0BE00BB22D7 /* libasmrun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 591A93D117A3B0BE00BB22D7 /* libasmrun.a */; };
-		591A93D817A3B0BE00BB22D7 /* libbigarray.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 591A93D217A3B0BE00BB22D7 /* libbigarray.a */; };
-		591A93D917A3B0BE00BB22D7 /* libcamlstr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 591A93D317A3B0BE00BB22D7 /* libcamlstr.a */; };
-		591A93DA17A3B0BE00BB22D7 /* libnums.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 591A93D417A3B0BE00BB22D7 /* libnums.a */; };
-		591A93DB17A3B0BE00BB22D7 /* libthreadsnat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 591A93D517A3B0BE00BB22D7 /* libthreadsnat.a */; };
-		591A93DC17A3B0BE00BB22D7 /* libunix.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 591A93D617A3B0BE00BB22D7 /* libunix.a */; };
-		591A93DF17A3B0EF00BB22D7 /* libcoqrun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 591A93DE17A3B0EF00BB22D7 /* libcoqrun.a */; };
 		591A93E117A3B10400BB22D7 /* libcoqios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 591A93E017A3B10400BB22D7 /* libcoqios.a */; };
 		591A93E517A3B22200BB22D7 /* libgcc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 591A93E417A3B22200BB22D7 /* libgcc.a */; };
 		591C349216BFC66A007BA5E9 /* CQUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C349116BFC667007BA5E9 /* CQUtil.m */; };
@@ -24,6 +17,14 @@
 		5953E66116CB8F930013CD34 /* CQColoredTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5953E66016CB8F930013CD34 /* CQColoredTextView.m */; };
 		5953E66316CB90FB0013CD34 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5953E66216CB90FB0013CD34 /* CoreText.framework */; };
 		595428B616D4A5B30084CFA4 /* CQKeyboardAccessories-portlait.xib in Resources */ = {isa = PBXBuildFile; fileRef = 595428B516D4A5B30084CFA4 /* CQKeyboardAccessories-portlait.xib */; };
+		59648B4B17A492340019C176 /* libasmrun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59648B4417A492340019C176 /* libasmrun.a */; };
+		59648B4C17A492340019C176 /* libasmrun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59648B4517A492340019C176 /* libasmrun.a */; };
+		59648B4D17A492340019C176 /* libbigarray.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59648B4617A492340019C176 /* libbigarray.a */; };
+		59648B4E17A492340019C176 /* libcamlstr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59648B4717A492340019C176 /* libcamlstr.a */; };
+		59648B4F17A492340019C176 /* libnums.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59648B4817A492340019C176 /* libnums.a */; };
+		59648B5017A492340019C176 /* libthreadsnat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59648B4917A492340019C176 /* libthreadsnat.a */; };
+		59648B5117A492340019C176 /* libunix.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59648B4A17A492340019C176 /* libunix.a */; };
+		59648B5317A492460019C176 /* libcoqrun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59648B5217A492460019C176 /* libcoqrun.a */; };
 		5996424416C7BA9E00121EDE /* CQDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5996424116C7BA9E00121EDE /* CQDetailViewController.m */; };
 		5996424516C7BA9E00121EDE /* CQMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5996424316C7BA9E00121EDE /* CQMasterViewController.m */; };
 		5996424A16C7BAC300121EDE /* CQDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5996424616C7BAC300121EDE /* CQDetailViewController.xib */; };
@@ -63,13 +64,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		591A93D117A3B0BE00BB22D7 /* libasmrun.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libasmrun.a; path = ../../../../../../usr/local/ocamlxarm/v7/lib/ocaml/libasmrun.a; sourceTree = "<group>"; };
-		591A93D217A3B0BE00BB22D7 /* libbigarray.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbigarray.a; path = ../../../../../../usr/local/ocamlxarm/v7/lib/ocaml/libbigarray.a; sourceTree = "<group>"; };
-		591A93D317A3B0BE00BB22D7 /* libcamlstr.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcamlstr.a; path = ../../../../../../usr/local/ocamlxarm/v7/lib/ocaml/libcamlstr.a; sourceTree = "<group>"; };
-		591A93D417A3B0BE00BB22D7 /* libnums.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnums.a; path = ../../../../../../usr/local/ocamlxarm/v7/lib/ocaml/libnums.a; sourceTree = "<group>"; };
-		591A93D517A3B0BE00BB22D7 /* libthreadsnat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libthreadsnat.a; path = ../../../../../../usr/local/ocamlxarm/v7/lib/ocaml/libthreadsnat.a; sourceTree = "<group>"; };
-		591A93D617A3B0BE00BB22D7 /* libunix.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libunix.a; path = ../../../../../../usr/local/ocamlxarm/v7/lib/ocaml/libunix.a; sourceTree = "<group>"; };
-		591A93DE17A3B0EF00BB22D7 /* libcoqrun.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcoqrun.a; path = ../../../../../../usr/local/ocamlxarm/v7/lib/ocaml/coqlib/libcoqrun.a; sourceTree = "<group>"; };
 		591A93E017A3B10400BB22D7 /* libcoqios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcoqios.a; path = "../../obj-armv7/libcoqios.a"; sourceTree = "<group>"; };
 		591A93E417A3B22200BB22D7 /* libgcc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgcc.a; path = "Platforms/iPhoneOS.platform/Developer/usr/llvm-gcc-4.2/lib/gcc/arm-apple-darwin10/4.2.1/libgcc.a"; sourceTree = DEVELOPER_DIR; };
 		591C349016BFC665007BA5E9 /* CQUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQUtil.h; sourceTree = "<group>"; };
@@ -84,6 +78,14 @@
 		5953E66016CB8F930013CD34 /* CQColoredTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQColoredTextView.m; sourceTree = "<group>"; };
 		5953E66216CB90FB0013CD34 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		595428B516D4A5B30084CFA4 /* CQKeyboardAccessories-portlait.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CQKeyboardAccessories-portlait.xib"; sourceTree = "<group>"; };
+		59648B4417A492340019C176 /* libasmrun.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libasmrun.a; path = ../../ocaml/armv7/libasmrun.a; sourceTree = "<group>"; };
+		59648B4517A492340019C176 /* libasmrun.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libasmrun.a; path = ../../ocaml/armv7/libasmrun.a; sourceTree = "<group>"; };
+		59648B4617A492340019C176 /* libbigarray.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbigarray.a; path = ../../ocaml/armv7/libbigarray.a; sourceTree = "<group>"; };
+		59648B4717A492340019C176 /* libcamlstr.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcamlstr.a; path = ../../ocaml/armv7/libcamlstr.a; sourceTree = "<group>"; };
+		59648B4817A492340019C176 /* libnums.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnums.a; path = ../../ocaml/armv7/libnums.a; sourceTree = "<group>"; };
+		59648B4917A492340019C176 /* libthreadsnat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libthreadsnat.a; path = ../../ocaml/armv7/libthreadsnat.a; sourceTree = "<group>"; };
+		59648B4A17A492340019C176 /* libunix.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libunix.a; path = ../../ocaml/armv7/libunix.a; sourceTree = "<group>"; };
+		59648B5217A492460019C176 /* libcoqrun.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcoqrun.a; path = ../../ocaml/armv7/coqlib/libcoqrun.a; sourceTree = "<group>"; };
 		5996424016C7BA9D00121EDE /* CQDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQDetailViewController.h; sourceTree = "<group>"; };
 		5996424116C7BA9E00121EDE /* CQDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQDetailViewController.m; sourceTree = "<group>"; };
 		5996424216C7BA9E00121EDE /* CQMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQMasterViewController.h; sourceTree = "<group>"; };
@@ -124,15 +126,16 @@
 				59F8A7F816BDE9E00096665F /* Foundation.framework in Frameworks */,
 				59F8A7FA16BDE9E00096665F /* CoreGraphics.framework in Frameworks */,
 				59F8A7FC16BDE9E00096665F /* CoreData.framework in Frameworks */,
-				591A93D717A3B0BE00BB22D7 /* libasmrun.a in Frameworks */,
-				591A93D817A3B0BE00BB22D7 /* libbigarray.a in Frameworks */,
-				591A93D917A3B0BE00BB22D7 /* libcamlstr.a in Frameworks */,
-				591A93DA17A3B0BE00BB22D7 /* libnums.a in Frameworks */,
-				591A93DB17A3B0BE00BB22D7 /* libthreadsnat.a in Frameworks */,
-				591A93DC17A3B0BE00BB22D7 /* libunix.a in Frameworks */,
-				591A93DF17A3B0EF00BB22D7 /* libcoqrun.a in Frameworks */,
 				591A93E117A3B10400BB22D7 /* libcoqios.a in Frameworks */,
 				591A93E517A3B22200BB22D7 /* libgcc.a in Frameworks */,
+				59648B4B17A492340019C176 /* libasmrun.a in Frameworks */,
+				59648B4C17A492340019C176 /* libasmrun.a in Frameworks */,
+				59648B4D17A492340019C176 /* libbigarray.a in Frameworks */,
+				59648B4E17A492340019C176 /* libcamlstr.a in Frameworks */,
+				59648B4F17A492340019C176 /* libnums.a in Frameworks */,
+				59648B5017A492340019C176 /* libthreadsnat.a in Frameworks */,
+				59648B5117A492340019C176 /* libunix.a in Frameworks */,
+				59648B5317A492460019C176 /* libcoqrun.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,13 +145,14 @@
 		591A93D017A3B08100BB22D7 /* libocaml */ = {
 			isa = PBXGroup;
 			children = (
-				591A93D117A3B0BE00BB22D7 /* libasmrun.a */,
-				591A93D217A3B0BE00BB22D7 /* libbigarray.a */,
-				591A93D317A3B0BE00BB22D7 /* libcamlstr.a */,
-				591A93D417A3B0BE00BB22D7 /* libnums.a */,
-				591A93D517A3B0BE00BB22D7 /* libthreadsnat.a */,
-				591A93D617A3B0BE00BB22D7 /* libunix.a */,
 				591A93E417A3B22200BB22D7 /* libgcc.a */,
+				59648B4417A492340019C176 /* libasmrun.a */,
+				59648B4517A492340019C176 /* libasmrun.a */,
+				59648B4617A492340019C176 /* libbigarray.a */,
+				59648B4717A492340019C176 /* libcamlstr.a */,
+				59648B4817A492340019C176 /* libnums.a */,
+				59648B4917A492340019C176 /* libthreadsnat.a */,
+				59648B4A17A492340019C176 /* libunix.a */,
 			);
 			name = libocaml;
 			sourceTree = "<group>";
@@ -156,7 +160,7 @@
 		591A93DD17A3B0CD00BB22D7 /* libcoq */ = {
 			isa = PBXGroup;
 			children = (
-				591A93DE17A3B0EF00BB22D7 /* libcoqrun.a */,
+				59648B5217A492460019C176 /* libcoqrun.a */,
 				591A93E017A3B10400BB22D7 /* libcoqios.a */,
 			);
 			name = libcoq;
