@@ -13,7 +13,7 @@ Often it even won't compile. Feel free to contact me if so.
 
 ### Prerequisites 2: OCaml on iOS
 
-- Available from [my github clone](https://github.com/keigoi/ocaml-ios-psellos/). 
+- Available from [my clone repo](https://github.com/keigoi/ocaml-ios-psellos/) of [original OCaml on iOS](http://psellos.com/ocaml/). 
   - [OCaml on iOS](https://github.com/keigoi/ocaml-ios-psellos/releases/tag/4.00.1+xarm-3.1.8-v7+ios-sdk-6.1) 
     (if you have your own iPad)
   - [OCaml on iOS Simulator](https://github.com/keigoi/ocaml-ios-psellos/releases/tag/4.00.1+xsim-3.1.7+ios-sdk-6.1) 
