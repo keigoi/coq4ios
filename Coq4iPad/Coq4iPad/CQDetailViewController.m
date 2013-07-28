@@ -337,8 +337,11 @@
     
     original = original ?: @"";
     NSMutableAttributedString* text = [[NSMutableAttributedString alloc] initWithString:original];
-    NSRange coloringRange = {.location=0, .length=MIN([self lastPos], text.length)};
+    NSRange coloringRange = {.location=0, .length=[self lastPos]};
     [text addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:coloringRange];
+    int pos = MIN([self lastPos]+1, text.length);
+    NSRange noColorRange = {.location=pos, .length=text.length-pos};
+    [text addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:noColorRange];
     NSRange wholeRange = {.location=0, .length=text.length};
     [text addAttribute:NSFontAttributeName value:systemFont range:wholeRange];
     
