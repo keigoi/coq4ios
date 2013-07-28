@@ -201,6 +201,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self openDocument:self.files[indexPath.row]];
+    [self.tableView reloadData];
 }
 
 @end
