@@ -385,6 +385,8 @@
     UIButton* button = sender;
     NSString* text = [button.titleLabel.text stringByAppendingString:@" "];
     [self setConsoleText:[self.console.text stringByAppendingString:text]];
+    NSRange selection = {.location=self.console.text.length, .length=0};
+    self.console.selectedRange = selection;
 }
 
 #pragma mark keybord show/hide event handling
