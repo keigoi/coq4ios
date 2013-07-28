@@ -1,5 +1,5 @@
 #Coq4iOS
-Coq4iOS is a prototypic implementation of Coq interactive environment on iPad.
+Coq4iOS is a prototypic implementation of [Coq](http://coq.inria.fr/) interactive environment on iPad.
 
 Note that this software is still under heavy (re)construction. 
 I just put them here now, because it may interest some future developers.
@@ -123,9 +123,9 @@ This step will make `coq-8.4pl2-standard-libs-for-coq4ios.7z` at the project roo
 
 This step prepares all files required by the next Xcode-build step.
 
-- OCaml-part of Coq4iOS library
+- OCaml-part of Coq4iOS (built from ``src/*.ml``)
   - `obj-(armv7|i386)/libcoqios.a`
-- OCaml's header files & runtime libraries
+- OCaml's header files & runtime libraries (symbolic links)
   - `ocaml/(armv7|i386)/caml/*.h`
   - `ocaml/(armv7|i386)/lib*.a`
   - `ocaml/(armv7|i386)/coqlib/libcoqrun.a`
