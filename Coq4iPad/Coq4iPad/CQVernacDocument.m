@@ -11,7 +11,7 @@
 @implementation CQVernacDocument
 - (BOOL)loadFromContents:(id)contents ofType:(NSString *)typeName error:(NSError **)outError
 {
-    if ([contents length] > 0) {
+    if ([contents isKindOfClass:[NSData class]] && [contents length] > 0) {
         self.codeText = [[NSString alloc] initWithData:(NSData *)contents encoding:NSUTF8StringEncoding];
     } else {
         self.codeText = @"";

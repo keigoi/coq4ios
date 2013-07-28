@@ -188,7 +188,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSString * path = [[CQUtil docDir] stringByAppendingPathComponent:self.files[indexPath.row]];
         NSError* error;
-        [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+        [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
         if(nil==error) {
             [self refresh];
         } else {
