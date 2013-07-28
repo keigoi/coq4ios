@@ -8,7 +8,6 @@
 
 #import "CQDetailViewController.h"
 #import "CQVernacDocument.h"
-#import "CQColoredTextView.h"
 #import "CQWrapper.h"
 #import "CQUtil.h"
 #import "LZMAExtractor.h"
@@ -50,7 +49,11 @@
 {
     NSRange lastRange = {.location=0, .length=0};
     lastRange = self.backStack.count>0 ? ((BackInfo*)self.backStack.lastObject).range : lastRange;
-    return lastRange.location + lastRange.length;
+    int pos = lastRange.location + lastRange.length;
+    if(pos < self.console.text.length && 0x0A==[self.console.text characterAtIndex:pos]) {
+        pos++;
+    }
+    return pos;
 }
 
 #pragma mark - initialization & finalization
@@ -72,7 +75,7 @@
 
     if (self.document) {
         self.title = self.document.fileURL.lastPathComponent;
-        self.console.text = self.document.codeText;
+        [self setConsoleText:self.document.codeText];
     }
 }
 
@@ -130,11 +133,6 @@
     // status bar
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showInfo:)];
     self.navigationItem.rightBarButtonItem = addButton;
-    
-    // console (editor view)
-    self.console.coloringFun = ^(NSMutableAttributedString* str){
-        [self coloringOf:str];
-    };
     
     [self configureView];
 
@@ -258,14 +256,14 @@
                 [self.backStack addObject:[BackInfo range:newRange status:result]];
                 // insert newline if we are in bottom
                 if(self.lastPos==self.console.text.length) {
-                    self.console.text = [self.console.text stringByAppendingString:@"\n"];
+                    [self setConsoleText:[self.console.text stringByAppendingString:@"\n"]];
                 }
-                [self.console setNeedsDisplay];
             } else {
                 self.status.text =
                     [self.status.text stringByAppendingString:
                         [result stringByAppendingFormat:@"\n"]];
             }
+            [self refreshConsoleText];
         }];
     }];    
 }
@@ -280,7 +278,7 @@
                 [self.backStack removeObjectsInRange:range];
             }
             self.status.text = self.backStack.count>0 ? ((BackInfo*)self.backStack.lastObject).status : @"BackStack is empty.";
-            [self.console setNeedsDisplay];
+            [self refreshConsoleText];
         }];
     }
 }
@@ -290,7 +288,7 @@
     [CQWrapper resetInitial:^{
         [self.backStack removeAllObjects];
         self.status.text = @"";
-        [self.console setNeedsDisplay];
+        [self refreshConsoleText];
     }];
 }
 
@@ -298,7 +296,7 @@
 - (void)undoCodeText:(NSString*)codeText
 {
     self.document.codeText = codeText;
-    self.console.text = codeText;
+    [self setConsoleText:codeText];
 }
 
 
@@ -333,11 +331,32 @@
 	return YES;
 }
 
-
-- (void) coloringOf:(NSMutableAttributedString*)original
+- (void) setConsoleText:(NSString*)original
 {
-    NSRange coloringRange = {.location=0, .length=MIN([self lastPos], original.length)};
-    [original addAttribute:(NSString*)kCTForegroundColorAttributeName value:(id)[UIColor blueColor].CGColor range:coloringRange];
+    UIFont* systemFont = [UIFont systemFontOfSize:[UIFont systemFontSize]];
+    
+    original = original ?: @"";
+    NSMutableAttributedString* text = [[NSMutableAttributedString alloc] initWithString:original];
+    NSRange coloringRange = {.location=0, .length=MIN([self lastPos], text.length)};
+    [text addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:coloringRange];
+    NSRange wholeRange = {.location=0, .length=text.length};
+    [text addAttribute:NSFontAttributeName value:systemFont range:wholeRange];
+    
+    // FIXME: tedious bookkeeping!
+    NSRange selection = self.console.selectedRange;
+    self.console.scrollEnabled = NO;
+    self.console.attributedText = text;
+    self.console.scrollEnabled = YES;
+    selection.location = MIN(selection.location, original.length);
+    selection.length = 0;
+    self.console.selectedRange = selection;
+    
+    self.console.typingAttributes = @{NSFontAttributeName:systemFont, NSForegroundColorAttributeName:[UIColor blackColor]};
+}
+
+- (void) refreshConsoleText
+{
+    [self setConsoleText:self.console.text];
 }
 
 #pragma mark Coq wrapper delegate
@@ -362,7 +381,7 @@
 {
     UIButton* button = sender;
     NSString* text = [button.titleLabel.text stringByAppendingString:@" "];
-    self.console.text = [self.console.text stringByAppendingString:text];
+    [self setConsoleText:[self.console.text stringByAppendingString:text]];
 }
 
 #pragma mark keybord show/hide event handling

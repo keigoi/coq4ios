@@ -14,7 +14,6 @@
 		591C349816BFCC25007BA5E9 /* CQ_convert.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C349716BFCC25007BA5E9 /* CQ_convert.m */; };
 		591C349B16BFD04A007BA5E9 /* CQWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C349A16BFD04A007BA5E9 /* CQWrapper.m */; };
 		5937F4B81792C78400D8A814 /* coq-8.4pl2-standard-libs-for-coq4ios.7z in Resources */ = {isa = PBXBuildFile; fileRef = 5937F4B71792C78400D8A814 /* coq-8.4pl2-standard-libs-for-coq4ios.7z */; };
-		5953E66116CB8F930013CD34 /* CQColoredTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5953E66016CB8F930013CD34 /* CQColoredTextView.m */; };
 		5953E66316CB90FB0013CD34 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5953E66216CB90FB0013CD34 /* CoreText.framework */; };
 		595428B616D4A5B30084CFA4 /* CQKeyboardAccessories-portlait.xib in Resources */ = {isa = PBXBuildFile; fileRef = 595428B516D4A5B30084CFA4 /* CQKeyboardAccessories-portlait.xib */; };
 		59648B4B17A492340019C176 /* libasmrun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59648B4417A492340019C176 /* libasmrun.a */; };
@@ -74,8 +73,6 @@
 		591C349916BFD04A007BA5E9 /* CQWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQWrapper.h; sourceTree = "<group>"; };
 		591C349A16BFD04A007BA5E9 /* CQWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQWrapper.m; sourceTree = "<group>"; };
 		5937F4B71792C78400D8A814 /* coq-8.4pl2-standard-libs-for-coq4ios.7z */ = {isa = PBXFileReference; lastKnownFileType = file; name = "coq-8.4pl2-standard-libs-for-coq4ios.7z"; path = "../../coq-8.4pl2-standard-libs-for-coq4ios.7z"; sourceTree = "<group>"; };
-		5953E65F16CB8F930013CD34 /* CQColoredTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQColoredTextView.h; sourceTree = "<group>"; };
-		5953E66016CB8F930013CD34 /* CQColoredTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQColoredTextView.m; sourceTree = "<group>"; };
 		5953E66216CB90FB0013CD34 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		595428B516D4A5B30084CFA4 /* CQKeyboardAccessories-portlait.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CQKeyboardAccessories-portlait.xib"; sourceTree = "<group>"; };
 		59648B4417A492340019C176 /* libasmrun.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libasmrun.a; path = ../../ocaml/armv7/libasmrun.a; sourceTree = "<group>"; };
@@ -142,10 +139,9 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		591A93D017A3B08100BB22D7 /* libocaml */ = {
+		591A93D017A3B08100BB22D7 /* OCaml runtime */ = {
 			isa = PBXGroup;
 			children = (
-				591A93E417A3B22200BB22D7 /* libgcc.a */,
 				59648B4417A492340019C176 /* libasmrun.a */,
 				59648B4517A492340019C176 /* libasmrun.a */,
 				59648B4617A492340019C176 /* libbigarray.a */,
@@ -154,19 +150,20 @@
 				59648B4917A492340019C176 /* libthreadsnat.a */,
 				59648B4A17A492340019C176 /* libunix.a */,
 			);
-			name = libocaml;
+			name = "OCaml runtime";
 			sourceTree = "<group>";
 		};
-		591A93DD17A3B0CD00BB22D7 /* libcoq */ = {
+		591A93DD17A3B0CD00BB22D7 /* Coq and Coq4iOS (OCaml part) */ = {
 			isa = PBXGroup;
 			children = (
 				59648B5217A492460019C176 /* libcoqrun.a */,
 				591A93E017A3B10400BB22D7 /* libcoqios.a */,
+				5937F4B71792C78400D8A814 /* coq-8.4pl2-standard-libs-for-coq4ios.7z */,
 			);
-			name = libcoq;
+			name = "Coq and Coq4iOS (OCaml part)";
 			sourceTree = "<group>";
 		};
-		591C348816BF767C007BA5E9 /* bridge-objc-caml */ = {
+		591C348816BF767C007BA5E9 /* ObjC-OCaml bridge */ = {
 			isa = PBXGroup;
 			children = (
 				591C349916BFD04A007BA5E9 /* CQWrapper.h */,
@@ -175,7 +172,41 @@
 				591C349616BFCC25007BA5E9 /* CQ_convert.h */,
 				591C349716BFCC25007BA5E9 /* CQ_convert.m */,
 			);
-			name = "bridge-objc-caml";
+			name = "ObjC-OCaml bridge";
+			sourceTree = "<group>";
+		};
+		59AD5C1217A52C120014E806 /* Documents */ = {
+			isa = PBXGroup;
+			children = (
+				59C9BCAF16CF738D0019F1C6 /* CQVernacDocument.h */,
+				59C9BCB016CF738D0019F1C6 /* CQVernacDocument.m */,
+			);
+			name = Documents;
+			sourceTree = "<group>";
+		};
+		59AD5C1517A5399B0014E806 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5996424216C7BA9E00121EDE /* CQMasterViewController.h */,
+				5996424316C7BA9E00121EDE /* CQMasterViewController.m */,
+				5996424816C7BAC300121EDE /* CQMasterViewController.xib */,
+				5996424016C7BA9D00121EDE /* CQDetailViewController.h */,
+				5996424116C7BA9E00121EDE /* CQDetailViewController.m */,
+				5996424616C7BAC300121EDE /* CQDetailViewController.xib */,
+				595428B516D4A5B30084CFA4 /* CQKeyboardAccessories-portlait.xib */,
+				59F8A81516BDE9E00096665F /* CQVersionInfoViewController.h */,
+				59F8A81616BDE9E00096665F /* CQVersionInfoViewController.m */,
+				59F8A81B16BDE9E00096665F /* CQVersionInfoViewController.xib */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		59AD5C1617A53A400014E806 /* compatibility */ = {
+			isa = PBXGroup;
+			children = (
+				591A93E417A3B22200BB22D7 /* libgcc.a */,
+			);
+			name = compatibility;
 			sourceTree = "<group>";
 		};
 		59F5344B16CEEE2C004216E8 /* Products */ = {
@@ -220,27 +251,16 @@
 		59F8A7FD16BDE9E00096665F /* Coq4iPad */ = {
 			isa = PBXGroup;
 			children = (
-				591A93D017A3B08100BB22D7 /* libocaml */,
-				591A93DD17A3B0CD00BB22D7 /* libcoq */,
-				591C348816BF767C007BA5E9 /* bridge-objc-caml */,
 				59F8A80616BDE9E00096665F /* CQAppDelegate.h */,
 				59F8A80716BDE9E00096665F /* CQAppDelegate.m */,
-				59C9BCAF16CF738D0019F1C6 /* CQVernacDocument.h */,
-				59C9BCB016CF738D0019F1C6 /* CQVernacDocument.m */,
-				59F8A81516BDE9E00096665F /* CQVersionInfoViewController.h */,
-				59F8A81616BDE9E00096665F /* CQVersionInfoViewController.m */,
-				59F8A81B16BDE9E00096665F /* CQVersionInfoViewController.xib */,
-				5996424216C7BA9E00121EDE /* CQMasterViewController.h */,
-				5996424316C7BA9E00121EDE /* CQMasterViewController.m */,
-				5996424816C7BAC300121EDE /* CQMasterViewController.xib */,
-				5996424016C7BA9D00121EDE /* CQDetailViewController.h */,
-				5996424116C7BA9E00121EDE /* CQDetailViewController.m */,
-				5996424616C7BAC300121EDE /* CQDetailViewController.xib */,
-				595428B516D4A5B30084CFA4 /* CQKeyboardAccessories-portlait.xib */,
 				591C349016BFC665007BA5E9 /* CQUtil.h */,
 				591C349116BFC667007BA5E9 /* CQUtil.m */,
-				5953E65F16CB8F930013CD34 /* CQColoredTextView.h */,
-				5953E66016CB8F930013CD34 /* CQColoredTextView.m */,
+				591C348816BF767C007BA5E9 /* ObjC-OCaml bridge */,
+				59AD5C1217A52C120014E806 /* Documents */,
+				59AD5C1517A5399B0014E806 /* View Controllers */,
+				591A93D017A3B08100BB22D7 /* OCaml runtime */,
+				591A93DD17A3B0CD00BB22D7 /* Coq and Coq4iOS (OCaml part) */,
+				59AD5C1617A53A400014E806 /* compatibility */,
 				59F8A7FE16BDE9E00096665F /* Supporting Files */,
 			);
 			path = Coq4iPad;
@@ -249,7 +269,6 @@
 		59F8A7FE16BDE9E00096665F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				5937F4B71792C78400D8A814 /* coq-8.4pl2-standard-libs-for-coq4ios.7z */,
 				59F8A7FF16BDE9E00096665F /* Coq4iPad-Info.plist */,
 				59F8A80016BDE9E00096665F /* InfoPlist.strings */,
 				59F8A80316BDE9E00096665F /* main.m */,
@@ -366,7 +385,6 @@
 				591C349B16BFD04A007BA5E9 /* CQWrapper.m in Sources */,
 				5996424416C7BA9E00121EDE /* CQDetailViewController.m in Sources */,
 				5996424516C7BA9E00121EDE /* CQMasterViewController.m in Sources */,
-				5953E66116CB8F930013CD34 /* CQColoredTextView.m in Sources */,
 				59C9BCB116CF738D0019F1C6 /* CQVernacDocument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

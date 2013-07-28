@@ -11,7 +11,6 @@
 #import "CQWrapper.h"
 
 @class CQVernacDocument;
-@class CQColoredTextView;
 
 @interface CQDetailViewController
     : UIViewController <
@@ -29,7 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIButton* evalButton;
 @property (weak, nonatomic) IBOutlet UIButton* backButton;
 @property (weak, nonatomic) IBOutlet UITextView* status;
-@property (weak, nonatomic) IBOutlet CQColoredTextView* console;
+@property (weak, nonatomic) IBOutlet UITextView* console;
 
 // input accessory view components
 @property (weak, nonatomic) IBOutlet UIView* inputAccessoryView;
