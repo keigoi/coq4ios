@@ -69,6 +69,7 @@
 						<string key="NSFrame">{{20, 54}, {280, 474}}</string>
 						<reference key="NSSuperview" ref="249263867"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -209,7 +210,7 @@ dGV4dCBjb21lcyBoZXJlPz8</string>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
-				<string key="-1.CustomClassName">CQFlipsideViewController</string>
+				<string key="-1.CustomClassName">CQVersionInfoViewController</string>
 				<string key="-1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -228,7 +229,7 @@ dGV4dCBjb21lcyBoZXJlPz8</string>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
-					<string key="className">CQFlipsideViewController</string>
+					<string key="className">CQVersionInfoViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<string key="NS.key.0">done:</string>
@@ -243,7 +244,7 @@ dGV4dCBjb21lcyBoZXJlPz8</string>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/CQFlipsideViewController.h</string>
+						<string key="minorKey">./Classes/CQVersionInfoViewController.h</string>
 					</object>
 				</object>
 			</array>

@@ -1,18 +1,18 @@
 //
-//  CQFlipsideViewController.m
+//  CQVersionInfoViewController.m
 //  Coq4iPad
 //
 //  Created by Keigo IMAI on 2/3/13.
 //  Copyright (c) 2013 Keigo IMAI. All rights reserved.
 //
 
-#import "CQFlipsideViewController.h"
+#import "CQVersionInfoViewController.h"
 
-@interface CQFlipsideViewController ()
+@interface CQVersionInfoViewController ()
 
 @end
 
-@implementation CQFlipsideViewController
+@implementation CQVersionInfoViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

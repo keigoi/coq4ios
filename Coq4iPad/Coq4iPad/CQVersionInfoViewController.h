@@ -1,5 +1,5 @@
 //
-//  CQFlipsideViewController.h
+//  CQVersionInfoViewController.h
 //  Coq4iPad
 //
 //  Created by Keigo IMAI on 2/3/13.
@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class CQFlipsideViewController;
+@class CQVersionInfoViewController;
 
 @protocol CQFlipsideViewControllerDelegate
-- (void)flipsideViewControllerDidFinish:(CQFlipsideViewController *)controller;
+- (void)flipsideViewControllerDidFinish:(CQVersionInfoViewController *)controller;
 @end
 
-@interface CQFlipsideViewController : UIViewController
+@interface CQVersionInfoViewController : UIViewController
 
 @property (weak, nonatomic) id <CQFlipsideViewControllerDelegate> delegate;
 

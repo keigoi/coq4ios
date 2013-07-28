@@ -42,8 +42,8 @@
 		59F8A80A16BDE9E00096665F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 59F8A80916BDE9E00096665F /* Default.png */; };
 		59F8A80C16BDE9E00096665F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59F8A80B16BDE9E00096665F /* Default@2x.png */; };
 		59F8A80E16BDE9E00096665F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59F8A80D16BDE9E00096665F /* Default-568h@2x.png */; };
-		59F8A81716BDE9E00096665F /* CQFlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59F8A81616BDE9E00096665F /* CQFlipsideViewController.m */; };
-		59F8A81D16BDE9E00096665F /* CQFlipsideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59F8A81B16BDE9E00096665F /* CQFlipsideViewController.xib */; };
+		59F8A81716BDE9E00096665F /* CQVersionInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59F8A81616BDE9E00096665F /* CQVersionInfoViewController.m */; };
+		59F8A81D16BDE9E00096665F /* CQVersionInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59F8A81B16BDE9E00096665F /* CQVersionInfoViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,9 +110,9 @@
 		59F8A80916BDE9E00096665F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		59F8A80B16BDE9E00096665F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		59F8A80D16BDE9E00096665F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		59F8A81516BDE9E00096665F /* CQFlipsideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CQFlipsideViewController.h; sourceTree = "<group>"; };
-		59F8A81616BDE9E00096665F /* CQFlipsideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CQFlipsideViewController.m; sourceTree = "<group>"; };
-		59F8A81C16BDE9E00096665F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CQFlipsideViewController.xib; sourceTree = "<group>"; };
+		59F8A81516BDE9E00096665F /* CQVersionInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CQVersionInfoViewController.h; sourceTree = "<group>"; };
+		59F8A81616BDE9E00096665F /* CQVersionInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CQVersionInfoViewController.m; sourceTree = "<group>"; };
+		59F8A81C16BDE9E00096665F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CQVersionInfoViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,9 +227,9 @@
 				59F8A80716BDE9E00096665F /* CQAppDelegate.m */,
 				59C9BCAF16CF738D0019F1C6 /* CQVernacDocument.h */,
 				59C9BCB016CF738D0019F1C6 /* CQVernacDocument.m */,
-				59F8A81516BDE9E00096665F /* CQFlipsideViewController.h */,
-				59F8A81616BDE9E00096665F /* CQFlipsideViewController.m */,
-				59F8A81B16BDE9E00096665F /* CQFlipsideViewController.xib */,
+				59F8A81516BDE9E00096665F /* CQVersionInfoViewController.h */,
+				59F8A81616BDE9E00096665F /* CQVersionInfoViewController.m */,
+				59F8A81B16BDE9E00096665F /* CQVersionInfoViewController.xib */,
 				5996424216C7BA9E00121EDE /* CQMasterViewController.h */,
 				5996424316C7BA9E00121EDE /* CQMasterViewController.m */,
 				5996424816C7BAC300121EDE /* CQMasterViewController.xib */,
@@ -341,7 +341,7 @@
 				59F8A80A16BDE9E00096665F /* Default.png in Resources */,
 				59F8A80C16BDE9E00096665F /* Default@2x.png in Resources */,
 				59F8A80E16BDE9E00096665F /* Default-568h@2x.png in Resources */,
-				59F8A81D16BDE9E00096665F /* CQFlipsideViewController.xib in Resources */,
+				59F8A81D16BDE9E00096665F /* CQVersionInfoViewController.xib in Resources */,
 				5996424A16C7BAC300121EDE /* CQDetailViewController.xib in Resources */,
 				5996424B16C7BAC300121EDE /* CQMasterViewController.xib in Resources */,
 				59C9BCB316CF95740019F1C6 /* InitialVernacConsoleContent.v in Resources */,
@@ -359,7 +359,7 @@
 			files = (
 				59F8A80416BDE9E00096665F /* main.m in Sources */,
 				59F8A80816BDE9E00096665F /* CQAppDelegate.m in Sources */,
-				59F8A81716BDE9E00096665F /* CQFlipsideViewController.m in Sources */,
+				59F8A81716BDE9E00096665F /* CQVersionInfoViewController.m in Sources */,
 				591C349216BFC66A007BA5E9 /* CQUtil.m in Sources */,
 				591C349416BFCB8B007BA5E9 /* CQ_stubs.m in Sources */,
 				591C349816BFCC25007BA5E9 /* CQ_convert.m in Sources */,
@@ -398,12 +398,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		59F8A81B16BDE9E00096665F /* CQFlipsideViewController.xib */ = {
+		59F8A81B16BDE9E00096665F /* CQVersionInfoViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				59F8A81C16BDE9E00096665F /* en */,
 			);
-			name = CQFlipsideViewController.xib;
+			name = CQVersionInfoViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

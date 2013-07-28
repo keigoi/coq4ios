@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CQFlipsideViewController.h"
+#import "CQVersionInfoViewController.h"
 #import "CQWrapper.h"
 
 @class CQVernacDocument;

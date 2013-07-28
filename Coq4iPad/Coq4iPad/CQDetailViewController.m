@@ -198,7 +198,7 @@
 
 #pragma mark - Flipside View Controller
 
-- (void)flipsideViewControllerDidFinish:(CQFlipsideViewController *)controller
+- (void)flipsideViewControllerDidFinish:(CQVersionInfoViewController *)controller
 {
     [self.flipsidePopoverController dismissPopoverAnimated:YES];
 }
@@ -206,7 +206,7 @@
 - (IBAction)showInfo:(id)sender
 {
     if (!self.flipsidePopoverController) {
-        CQFlipsideViewController *controller = [[CQFlipsideViewController alloc] initWithNibName:@"CQFlipsideViewController" bundle:nil];
+        CQVersionInfoViewController *controller = [[CQVersionInfoViewController alloc] initWithNibName:@"CQVersionInfoViewController" bundle:nil];
         controller.delegate = self;
         
         self.flipsidePopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
