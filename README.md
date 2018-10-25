@@ -1,3 +1,8 @@
+# Moved
+
+moved to https://github.com/keigoi/Coq4iOS2
+
+
 #Coq4iOS
 Coq4iOS is a prototypic implementation of [Coq](http://coq.inria.fr/) interactive environment on iPad.
 
